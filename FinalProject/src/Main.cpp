@@ -33,15 +33,15 @@ int main()
 
 	}*/
 
-	Low_Stat_Shell vitality{ "Vitality Description Here", "VIT", 65536, -65536 };
-	Low_Stat_Shell strength{ "Strength Description Here", "STR", 65536, -65536 };
-	Low_Stat_Shell agility{ "Agility Description Here", "AGI", 65536, -65536 };
-	Low_Stat_Shell dexterity{ "Dexterity Description Here", "DEX", 65536, -65536 };
-	Low_Stat_Shell technique{ "Tech Description Here", "TEC", 65536, -65536 };
-	Low_Stat_Shell intelligence{ "Int Description Here", "INT", 65536, -65536 };
-	Low_Stat_Shell wisdom{ "Wisdom Description Here", "WIS", 65536, -65536 };
-	Low_Stat_Shell focus{ "Focus Description Here", "FCS", 65536, -65536 };
-	Low_Stat_Shell luck{ "luck Description Here", "LUC", 65536, -65536 };
+	Low_Stat_Shell vitality{ "Vitality Description Here", "VIT", 65535, -65535 };
+	Low_Stat_Shell strength{ "Strength Description Here", "STR", 65535, -65535 };
+	Low_Stat_Shell agility{ "Agility Description Here", "AGI", 65535, -65535 };
+	Low_Stat_Shell dexterity{ "Dexterity Description Here", "DEX", 65535, -65535 };
+	Low_Stat_Shell technique{ "Tech Description Here", "TEC", 65535, -65535 };
+	Low_Stat_Shell intelligence{ "Int Description Here", "INT", 65535, -65535 };
+	Low_Stat_Shell wisdom{ "Wisdom Description Here", "WIS", 65535, -65535 };
+	Low_Stat_Shell focus{ "Focus Description Here", "FCS", 65535, -65535 };
+	Low_Stat_Shell luck{ "luck Description Here", "LUC", 65535, -65535 };
 
 
 	Low_Statistics character_vitality{ &vitality, 0.90f, 9 };
