@@ -19,7 +19,7 @@
 //	{ "Necromancer", 12 },
 //}
 
-
+// change to a class/struct containing all info (growth rates and etc)? Character -> Class -> Statistics
 static const std::string CHARACTER_CLASSES[13]{ "NullClass", "Guardian", "Warrior", "Swordsman", "Brawler", "Assassin", "Scout", "Archer", "Sorcerer", "Wizard", "Sage", "Priest", "Necromancer" };
 
 
@@ -49,8 +49,9 @@ private:
 	High_Level_Stats m_high_level_stats;
 	High_Level_Elemental_Stats m_elemental_attack;
 	High_Level_Elemental_Stats m_elemental_defense;
-	int m_experience;
 	// End of Statistics
+	int m_experience;
+	
 	
 public:
 	// Getters
