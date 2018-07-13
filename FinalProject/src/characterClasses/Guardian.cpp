@@ -1,8 +1,13 @@
 #include "Guardian.h"
+#include "CharacterClass.h"
+
+Guardian::~Guardian()
+{
+
+}
 
 
-
-Guardian::Guardian(std::string name, Low_Statistics* inital_stats)
+Guardian::Guardian(std::string name, Low_Statistics inital_stats)
 	: CharacterClass(name, inital_stats)
 {
 

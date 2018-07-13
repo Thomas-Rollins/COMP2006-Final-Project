@@ -1,4 +1,8 @@
 #include "Agility.h"
+Agility::~Agility() 
+{
+	
+};
 
 const std::string Agility::m_NAME = "Agility";
 const char* Agility::m_ALIAS = "AGI";

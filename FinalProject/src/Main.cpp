@@ -60,7 +60,7 @@ class_temp_template read_classJSON()
 	return class_template;
 }
 
-void init_statistics(class_temp_template* class_template)
+Low_Statistics init_statistics(class_temp_template* class_template)
 {
 	Low_Statistics low_statistics
 	{
@@ -74,16 +74,20 @@ void init_statistics(class_temp_template* class_template)
 		Vitality{ class_template->base_vitality, class_template->base_vitality, class_template->growth_vitality },
 		Wisdom{ class_template->base_wisdom, class_template->base_wisdom, class_template->growth_wisdom },
 	};
-
-	Guardian guardian{"Player 1", &low_statistics};
+	return low_statistics;
 }
 
 
 int main()
 {
+	{
+		Guardian* new_guardian = new Guardian{ "Player 1", init_statistics(&read_classJSON()) };
 
-	init_statistics(&read_classJSON());
+		Log(new_guardian->get_low_stats().agility.get_current_value());
 
+		delete new_guardian;
+	}
+	
 	std::cout << "Press Enter to Exit." << std::endl;
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

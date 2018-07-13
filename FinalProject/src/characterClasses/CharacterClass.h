@@ -33,14 +33,14 @@ class CharacterClass
 {
 public:
 	//Constructors
-	CharacterClass();
-	CharacterClass(std::string name, Low_Statistics* inital_stats);
+	CharacterClass() = delete;
+	CharacterClass(std::string name, Low_Statistics inital_stats);
 
 	//Destructors
-	
+	~CharacterClass();
 
 	//Accessors
-	Low_Statistics* get_low_stats() const { return m_low_stats; }
+	Low_Statistics get_low_stats() const { return m_low_stats; }
 
 	//Mutators
 
@@ -48,9 +48,9 @@ private:
 	//members
 	std::string m_name;
 
-	Low_Statistics* m_low_stats;
-	High_Level_Stats* m_high_stats;
-	Elemental_Stats* m_elemental_stats;
+	Low_Statistics m_low_stats;
+	High_Level_Stats m_high_stats;
+	Elemental_Stats m_elemental_stats;
 	
 };
 

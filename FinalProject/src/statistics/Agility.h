@@ -8,6 +8,9 @@ public:
 	//Constructors
 	Agility(int base_value, int current_value, float growth_value);		
 
+	//Desctructors
+	virtual ~Agility();
+
 	//Accessors
 	const std::string get_name() const { return m_NAME; }
 	const char* get_alias() const { return m_ALIAS; }

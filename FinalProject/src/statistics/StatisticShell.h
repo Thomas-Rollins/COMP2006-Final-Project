@@ -18,6 +18,9 @@ public:
 	//Constructors
 	
 	StatisticShell(int base_value, int current_value, float growth_value);
+	
+	//Deconstructors
+	virtual ~StatisticShell();
 
 	//Accessors
 	const int get_base_value() { return m_base_value; }

@@ -6,13 +6,15 @@
 #include "abilities/Abilities.h"
 
 
-class Guardian : protected CharacterClass
+class Guardian : public CharacterClass
 {
 public:
-	Guardian(std::string name, Low_Statistics* inital_stats);
+	virtual ~Guardian();
+
+	Guardian(std::string name, Low_Statistics inital_stats);
 
 
 private:
-	std::vector<Abilities> abilities;
+	std::vector<Abilities> m_abilities;
 };
 
