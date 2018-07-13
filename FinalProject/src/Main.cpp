@@ -1,87 +1,88 @@
 #include <iostream>
-#include <string>
 #include <fstream>
+#include <string>
 
+//DEBUG LOGGING
+#include "logging/Log.h"
 
 #include "../include/jsoncpp/json/json.h"
 
+#include "statistics/Vitality.h"
+#include "characterClasses/CharacterClass.h"
+#include "characterClasses/Guardian.h"
 
-#include "Character.h"
-#include "logging/Log.h"
+
+
+class_temp_template read_classJSON()
+{
+	class_temp_template class_template;
 
 
 
+	Json::Value obj;
+
+	std::ifstream guardian("data/classes/Guardian.json", std::ifstream::binary);
+	guardian >> obj;
+	std::cout << "Class: " << obj["name"].asString() << std::endl;
+
+	const Json::Value& base_stats = obj["stats"];
+	
+	class_template.base_agility = int(base_stats[0]["base"].asUInt());
+	class_template.base_dexterity = int(base_stats[1]["base"].asUInt());
+	class_template.base_focus = int(base_stats[2]["base"].asUInt());
+	class_template.base_intelligence = int(base_stats[3]["base"].asUInt());
+	class_template.base_luck = int(base_stats[4]["base"].asUInt());
+	class_template.base_strength = int(base_stats[5]["base"].asUInt());
+	class_template.base_technique = int(base_stats[6]["base"].asUInt());
+	class_template.base_vitality = int(base_stats[7]["base"].asUInt());
+	class_template.base_wisdom = int(base_stats[8]["base"].asUInt());
+
+	class_template.growth_agility = (base_stats[0]["growth_rate"].asFloat());
+	class_template.growth_dexterity = (base_stats[1]["growth_rate"].asFloat());
+	class_template.growth_focus = (base_stats[2]["growth_rate"].asFloat());
+	class_template.growth_intelligence = (base_stats[3]["growth_rate"].asFloat());
+	class_template.growth_luck = (base_stats[4]["growth_rate"].asFloat());
+	class_template.growth_strength =(base_stats[5]["growth_rate"].asFloat());
+	class_template.growth_technique = (base_stats[6]["growth_rate"].asFloat());
+	class_template.growth_vitality = (base_stats[7]["growth_rate"].asFloat());
+	class_template.growth_wisdom = (base_stats[8]["growth_rate"].asFloat());
+
+
+
+	for (unsigned int i = 0; i < base_stats.size(); i++)
+	{
+		std::cout << "\tname: " << base_stats[i]["name"].asString() << std::endl;
+		std::cout << "\tbase value: " << base_stats[i]["base"].asUInt() << std::endl;
+		std::cout << "\tgrowth value: " << base_stats[i]["growth_rate"].asFloat() << std::endl;
+		std::cout << std::endl;
+	}
+
+	return class_template;
+}
+
+void init_statistics(class_temp_template* class_template)
+{
+	Low_Statistics low_statistics
+	{
+		Agility{ class_template->base_agility, class_template->base_agility, class_template->growth_agility },
+		Dexterity{class_template->base_dexterity, class_template->base_dexterity, class_template->growth_dexterity },
+		Focus{ class_template->base_focus, class_template->base_focus, class_template->growth_focus },
+		Intelligence{ class_template->base_intelligence, class_template->base_intelligence, class_template->growth_intelligence },
+		Luck{ class_template->base_luck, class_template->base_luck, class_template->growth_luck },
+		Strength{ class_template->base_strength, class_template->base_strength , class_template->growth_strength },
+		Technique{ class_template->base_technique, class_template->base_technique, class_template->growth_technique },
+		Vitality{ class_template->base_vitality, class_template->base_vitality, class_template->growth_vitality },
+		Wisdom{ class_template->base_wisdom, class_template->base_wisdom, class_template->growth_wisdom },
+	};
+
+	Guardian guardian{"Player 1", &low_statistics};
+}
 
 
 int main()
 {
-	{
-	/*{
-		Json::Value obj;
 
-		std::ifstream alice("data/alice.json", std::ifstream::binary);
-		alice >> obj;
-		std::cout << "Book: " << obj["book"].asString() << std::endl;
-		std::cout << "Year: " << obj["year"].asUInt() << std::endl;
-		const Json::Value& characters = obj["characters"];
-		for (unsigned int i = 0; i < characters.size(); i++)
-		{
-			std::cout << "    name: " << characters[i]["name"].asString();
-			std::cout << " chapter: " << characters[i]["chapter"].asUInt();
-			std::cout << std::endl;
-		}
-
-	}*/
-
-	Low_Stat_Shell vitality{ "Vitality Description Here", "VIT", 65535, -65535 };
-	Low_Stat_Shell strength{ "Strength Description Here", "STR", 65535, -65535 };
-	Low_Stat_Shell agility{ "Agility Description Here", "AGI", 65535, -65535 };
-	Low_Stat_Shell dexterity{ "Dexterity Description Here", "DEX", 65535, -65535 };
-	Low_Stat_Shell technique{ "Tech Description Here", "TEC", 65535, -65535 };
-	Low_Stat_Shell intelligence{ "Int Description Here", "INT", 65535, -65535 };
-	Low_Stat_Shell wisdom{ "Wisdom Description Here", "WIS", 65535, -65535 };
-	Low_Stat_Shell focus{ "Focus Description Here", "FCS", 65535, -65535 };
-	Low_Stat_Shell luck{ "luck Description Here", "LUC", 65535, -65535 };
-
-
-	Low_Statistics character_vitality{ &vitality, 0.90f, 9 };
-	Low_Statistics character_strength{ &strength, 0.91f, 8 };
-	Low_Statistics character_agility{ &agility, 0.92f, 7 };
-	Low_Statistics character_dexterity{ &dexterity, 0.93f, 6 };
-	Low_Statistics character_technique{ &technique, 0.94f, 5 };
-	Low_Statistics character_intelligence{ &intelligence, 0.95f, 4 };
-	Low_Statistics character_wisdom{ &wisdom, 0.96f, 3 };
-	Low_Statistics character_focus{ &focus, 0.97f, 2 };
-	Low_Statistics character_luck{ &luck, 0.98f, 1 };
-
-	Low_Statistics* stats_ary[9]{ &character_vitality, &character_strength, &character_agility,
-	&character_dexterity, &character_technique, &character_intelligence, &character_wisdom,
-	&character_luck };
-
-	Low_Level_Stats character_stats{ character_vitality, character_strength, character_agility, character_dexterity, character_technique, character_intelligence, character_wisdom, character_focus, character_luck };
-
-
-	Character newCharacter{ "Thomas", 5, character_stats };
-
-	for (int i = 0; i < 8; i++)
-	{
-		Log("******************************");
-		Log(stats_ary[i]->statistic->DESCRIPTION);
-		Log(stats_ary[i]->statistic->ALIAS);
-		Log(stats_ary[i]->statistic->MAX_VALUE);
-		Log(stats_ary[i]->statistic->MIN_VALUE);
-		Log(stats_ary[i]->growth_value);
-		Log(stats_ary[i]->value);
-		Log("******************************");
-		Log("");
-	}
-
-	Log(newCharacter.get_base_agility());
-	Log(newCharacter.get_current_experience());
-	Log(newCharacter.get_character_name());
-	Log(newCharacter.get_character_class_string());
-
-}
+	init_statistics(&read_classJSON());
 
 	std::cout << "Press Enter to Exit." << std::endl;
 	std::cin.clear();

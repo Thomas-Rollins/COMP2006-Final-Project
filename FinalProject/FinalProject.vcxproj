@@ -130,16 +130,44 @@
   <ItemGroup>
     <ClCompile Include="include\jsoncpp\jsoncpp.cpp" />
     <ClCompile Include="src\Character.cpp" />
+    <ClCompile Include="src\characterClasses\CharacterClass.cpp" />
+    <ClCompile Include="src\characterClasses\Guardian.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Statistics.cpp" />
+    <ClCompile Include="src\statistics\Agility.cpp" />
+    <ClCompile Include="src\statistics\Dexterity.cpp" />
+    <ClCompile Include="src\statistics\Focus.cpp" />
+    <ClCompile Include="src\statistics\Intelligence.cpp" />
+    <ClCompile Include="src\statistics\Luck.cpp" />
+    <ClCompile Include="src\statistics\StatisticShell.cpp" />
+    <ClCompile Include="src\statistics\Technique.cpp" />
+    <ClCompile Include="src\statistics\Vitality.cpp" />
+    <ClCompile Include="src\statistics\Strength.cpp" />
+    <ClCompile Include="src\statistics\Wisdom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\jsoncpp\json\json-forwards.h" />
     <ClInclude Include="include\jsoncpp\json\json.h" />
     <ClInclude Include="src\Character.h" />
+    <ClInclude Include="src\characterClasses\abilities\Abilities.h" />
+    <ClInclude Include="src\characterClasses\CharacterClass.h" />
+    <ClInclude Include="src\characterClasses\Guardian.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\Statistics.h" />
+    <ClInclude Include="src\statistics\Agility.h" />
+    <ClInclude Include="src\statistics\Dexterity.h" />
+    <ClInclude Include="src\statistics\Focus.h" />
+    <ClInclude Include="src\statistics\Intelligence.h" />
+    <ClInclude Include="src\statistics\Luck.h" />
+    <ClInclude Include="src\statistics\StatisticShell.h" />
+    <ClInclude Include="src\statistics\Technique.h" />
+    <ClInclude Include="src\statistics\Vitality.h" />
+    <ClInclude Include="src\statistics\Strength.h" />
+    <ClInclude Include="src\statistics\Wisdom.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\classes\Guardian.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
