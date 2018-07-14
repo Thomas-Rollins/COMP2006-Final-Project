@@ -1,0 +1,15 @@
+{
+  "name":"Assassin",
+  "stats":
+  [
+    {"name":"Agility", "base":10, "growth_rate": 2.00 },
+    {"name":"dexterity", "base":10, "growth_rate": 1.60},
+    {"name":"focus", "base":10, "growth_rate": 0.60 },
+    {"name":"intelligence", "base":10, "growth_rate": 0.50 },
+    {"name":"luck", "base":10, "growth_rate": 1.00 },
+    {"name":"strength", "base":10, "growth_rate": 1.30 },
+    {"name":"technique", "base":10, "growth_rate": 1.60 },
+    {"name":"vitality", "base":10, "growth_rate": 0.85 },
+    {"name":"wisdom", "base":10, "growth_rate": 0.50 }
+  ]
+}

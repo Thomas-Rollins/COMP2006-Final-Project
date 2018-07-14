@@ -77,6 +77,14 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>NativeMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -106,6 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>All</AssemblerOutput>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -121,6 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>All</AssemblerOutput>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -167,7 +177,18 @@
     <ClInclude Include="src\statistics\Wisdom.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\classes\Archer.json" />
+    <None Include="data\classes\Assassin.json" />
+    <None Include="data\classes\Brawler.json" />
     <None Include="data\classes\Guardian.json" />
+    <None Include="data\classes\Magic_Swordsman.json" />
+    <None Include="data\classes\Necromancer.json" />
+    <None Include="data\classes\Priest.json" />
+    <None Include="data\classes\Sage.json" />
+    <None Include="data\classes\Scout.json" />
+    <None Include="data\classes\Swordsman.json" />
+    <None Include="data\classes\Warrior.json" />
+    <None Include="data\classes\Wizard.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

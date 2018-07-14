@@ -1,0 +1,15 @@
+{
+  "name":"Guardian",
+  "stats":
+  [
+    {"name":"Agility", "base":10, "growth_rate": 1.00 },
+    {"name":"dexterity", "base":10, "growth_rate": 0.80},
+    {"name":"focus", "base":10, "growth_rate": 1.20 },
+    {"name":"intelligence", "base":10, "growth_rate": 1.50 },
+    {"name":"luck", "base":10, "growth_rate": 1.00 },
+    {"name":"strength", "base":10, "growth_rate": 0.50 },
+    {"name":"technique", "base":10, "growth_rate": 1.30 },
+    {"name":"vitality", "base":10, "growth_rate": 1.00 },
+    {"name":"wisdom", "base":10, "growth_rate": 2.00 }
+  ]
+}

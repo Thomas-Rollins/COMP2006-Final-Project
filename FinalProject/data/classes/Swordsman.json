@@ -1,0 +1,15 @@
+{
+  "name":"Swordsman",
+  "stats":
+  [
+    {"name":"Agility", "base":10, "growth_rate": 1.60 },
+    {"name":"dexterity", "base":10, "growth_rate": 1.10},
+    {"name":"focus", "base":10, "growth_rate": 1.00 },
+    {"name":"intelligence", "base":10, "growth_rate": 0.50 },
+    {"name":"luck", "base":10, "growth_rate": 1.00 },
+    {"name":"strength", "base":10, "growth_rate": 1.60 },
+    {"name":"technique", "base":10, "growth_rate": 1.05 },
+    {"name":"vitality", "base":10, "growth_rate": 1.50 },
+    {"name":"wisdom", "base":10, "growth_rate": 0.50 }
+  ]
+}

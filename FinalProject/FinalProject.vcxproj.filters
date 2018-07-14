@@ -127,6 +127,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\classes\Archer.json" />
+    <None Include="data\classes\Brawler.json" />
     <None Include="data\classes\Guardian.json" />
+    <None Include="data\classes\Magic_Swordsman.json" />
+    <None Include="data\classes\Priest.json" />
+    <None Include="data\classes\Necromancer.json" />
+    <None Include="data\classes\Sage.json" />
+    <None Include="data\classes\Scout.json" />
+    <None Include="data\classes\Swordsman.json" />
+    <None Include="data\classes\Warrior.json" />
+    <None Include="data\classes\Wizard.json" />
+    <None Include="data\classes\Assassin.json" />
   </ItemGroup>
 </Project>

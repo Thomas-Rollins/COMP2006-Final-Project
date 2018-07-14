@@ -1,0 +1,15 @@
+{
+  "name":"Magic Swordsman",
+  "stats":
+  [
+    {"name":"Agility", "base":10, "growth_rate": 1.40 },
+    {"name":"dexterity", "base":10, "growth_rate": 1.00},
+    {"name":"focus", "base":10, "growth_rate": 1.00 },
+    {"name":"intelligence", "base":10, "growth_rate": 1.40 },
+    {"name":"luck", "base":10, "growth_rate": 1.00 },
+    {"name":"strength", "base":10, "growth_rate": 1.40 },
+    {"name":"technique", "base":10, "growth_rate": 1.00 },
+    {"name":"vitality", "base":10, "growth_rate": 1.15 },
+    {"name":"wisdom", "base":10, "growth_rate": 1.00 }
+  ]
+}

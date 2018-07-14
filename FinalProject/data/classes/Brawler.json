@@ -1,0 +1,15 @@
+{
+  "name":"Brawler",
+  "stats":
+  [
+    {"name":"Agility", "base":10, "growth_rate": 1.70 },
+    {"name":"dexterity", "base":10, "growth_rate": 1.20},
+    {"name":"focus", "base":10, "growth_rate": 0.50 },
+    {"name":"intelligence", "base":10, "growth_rate": 0.60 },
+    {"name":"luck", "base":10, "growth_rate": 1.00 },
+    {"name":"strength", "base":10, "growth_rate": 1.55 },
+    {"name":"technique", "base":10, "growth_rate": 0.80 },
+    {"name":"vitality", "base":10, "growth_rate": 1.80 },
+    {"name":"wisdom", "base":10, "growth_rate": 0.60 }
+  ]
+}

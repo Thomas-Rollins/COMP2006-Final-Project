@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <exception>
+
 
 //DEBUG LOGGING
 #include "logging/Log.h"
@@ -8,21 +10,30 @@
 #include "../include/jsoncpp/json/json.h"
 
 #include "statistics/Vitality.h"
+#include "Character.h"
 #include "characterClasses/CharacterClass.h"
 #include "characterClasses/Guardian.h"
 
 
 
-class_temp_template read_classJSON()
+class_temp_template read_classJSON(std::string class_name)
 {
 	class_temp_template class_template;
 
-
-
 	Json::Value obj;
-
-	std::ifstream guardian("data/classes/Guardian.json", std::ifstream::binary);
-	guardian >> obj;
+	try
+	{
+		std::ifstream guardian("data/classes/" + class_name + ".json", std::ifstream::binary);
+		guardian >> obj;
+	}
+	
+	catch (std::exception* e)
+	{
+		std::cout << "File not Found:" << std::endl;
+		std::cout << e->what();
+	}
+	
+	
 	std::cout << "Class: " << obj["name"].asString() << std::endl;
 
 	const Json::Value& base_stats = obj["stats"];
@@ -60,6 +71,10 @@ class_temp_template read_classJSON()
 	return class_template;
 }
 
+/**
+ * Converts the struct from the read_JSON() method to a Low_Statistics struct for adding
+ * to a CharacterClass
+ */
 Low_Statistics init_statistics(class_temp_template* class_template)
 {
 	Low_Statistics low_statistics
@@ -77,14 +92,74 @@ Low_Statistics init_statistics(class_temp_template* class_template)
 	return low_statistics;
 }
 
+/**
+ * #TODO: Change structure to allow the creation of the class at the first switch to prevent
+ * repetition
+ */
+std::string setClass(int class_id)
+{
+	std::string class_name;
+
+	switch (class_id)
+	{
+	case 1:
+		class_name = "Archer";
+		break;
+	case 2:
+		class_name = "Assassin";
+		break;
+	case 3:
+		class_name = "Brawler";
+		break;
+	case 4:
+		class_name = "Guardian";
+		break;
+	case 5:
+		class_name = "Magic_Swordsman";
+		break;
+	case 6:
+		class_name = "Necromancer";
+		break;
+	case 7:
+		class_name = "Priest";
+		break;
+	case 8:
+		class_name = "Sage";
+		break;
+	case 9:
+		class_name = "Scout";
+		break;
+	case 10:
+		class_name = "Swordsman";
+		break;
+	case 11:
+		class_name = "Warrior";
+		break;
+	case 12:
+		class_name = "Wizard";
+		break;
+	default:
+		class_name = "NullClass";
+		break;
+	}
+
+	return class_name;
+}
+
+
 
 int main()
 {
+	int class_id = guardian_id;
+
 	{
-		Guardian* new_guardian = new Guardian{ "Player 1", init_statistics(&read_classJSON()) };
+		Guardian* new_guardian = new Guardian{ "Player 1", init_statistics(
+			&read_classJSON(
+				setClass(class_id))
+		) };
 
 		Log(new_guardian->get_low_stats().agility.get_current_value());
-
+	
 		delete new_guardian;
 	}
 	
