@@ -30,7 +30,7 @@ struct class_temp_template
 
 enum class_id : int
 {
-	archer_id = 1, assassin_id = 2, brawler_id = 3, guardian_id = 4,
+	null_class_id = 0, archer_id = 1, assassin_id = 2, brawler_id = 3, guardian_id = 4,
 	magic_swordsman_id = 5, necromancer_id = 6, preist_id = 7, sage_id = 8, 
 	scout_id = 9, swordsman_id = 10, warrior_id = 11, wizard_id = 12
 };

@@ -15,59 +15,49 @@
 #include "characterClasses/Guardian.h"
 
 
-
 class_temp_template read_classJSON(std::string class_name)
 {
-	class_temp_template class_template;
+	class_temp_template class_template{};
 
 	Json::Value obj;
-	try
-	{
-		std::ifstream guardian("data/classes/" + class_name + ".json", std::ifstream::binary);
-		guardian >> obj;
-	}
-	
-	catch (std::exception* e)
+	std::ifstream character_class_file("data/classes/" + class_name + ".json", std::ifstream::binary);
+	if (character_class_file.fail())
 	{
 		std::cout << "File not Found:" << std::endl;
-		std::cout << e->what();
 	}
-	
-	
-	std::cout << "Class: " << obj["name"].asString() << std::endl;
-
-	const Json::Value& base_stats = obj["stats"];
-	
-	class_template.base_agility = int(base_stats[0]["base"].asUInt());
-	class_template.base_dexterity = int(base_stats[1]["base"].asUInt());
-	class_template.base_focus = int(base_stats[2]["base"].asUInt());
-	class_template.base_intelligence = int(base_stats[3]["base"].asUInt());
-	class_template.base_luck = int(base_stats[4]["base"].asUInt());
-	class_template.base_strength = int(base_stats[5]["base"].asUInt());
-	class_template.base_technique = int(base_stats[6]["base"].asUInt());
-	class_template.base_vitality = int(base_stats[7]["base"].asUInt());
-	class_template.base_wisdom = int(base_stats[8]["base"].asUInt());
-
-	class_template.growth_agility = (base_stats[0]["growth_rate"].asFloat());
-	class_template.growth_dexterity = (base_stats[1]["growth_rate"].asFloat());
-	class_template.growth_focus = (base_stats[2]["growth_rate"].asFloat());
-	class_template.growth_intelligence = (base_stats[3]["growth_rate"].asFloat());
-	class_template.growth_luck = (base_stats[4]["growth_rate"].asFloat());
-	class_template.growth_strength =(base_stats[5]["growth_rate"].asFloat());
-	class_template.growth_technique = (base_stats[6]["growth_rate"].asFloat());
-	class_template.growth_vitality = (base_stats[7]["growth_rate"].asFloat());
-	class_template.growth_wisdom = (base_stats[8]["growth_rate"].asFloat());
-
-
-
-	for (unsigned int i = 0; i < base_stats.size(); i++)
+	else
 	{
-		std::cout << "\tname: " << base_stats[i]["name"].asString() << std::endl;
-		std::cout << "\tbase value: " << base_stats[i]["base"].asUInt() << std::endl;
-		std::cout << "\tgrowth value: " << base_stats[i]["growth_rate"].asFloat() << std::endl;
-		std::cout << std::endl;
-	}
+		character_class_file >> obj;
+		std::cout << "Class: " << obj["name"].asString() << std::endl;
+		const Json::Value& base_stats = obj["stats"];
+		class_template.base_agility = int(base_stats[0]["base"].asUInt());
+		class_template.base_dexterity = int(base_stats[1]["base"].asUInt());
+		class_template.base_focus = int(base_stats[2]["base"].asUInt());
+		class_template.base_intelligence = int(base_stats[3]["base"].asUInt());
+		class_template.base_luck = int(base_stats[4]["base"].asUInt());
+		class_template.base_strength = int(base_stats[5]["base"].asUInt());
+		class_template.base_technique = int(base_stats[6]["base"].asUInt());
+		class_template.base_vitality = int(base_stats[7]["base"].asUInt());
+		class_template.base_wisdom = int(base_stats[8]["base"].asUInt());
 
+		class_template.growth_agility = (base_stats[0]["growth_rate"].asFloat());
+		class_template.growth_dexterity = (base_stats[1]["growth_rate"].asFloat());
+		class_template.growth_focus = (base_stats[2]["growth_rate"].asFloat());
+		class_template.growth_intelligence = (base_stats[3]["growth_rate"].asFloat());
+		class_template.growth_luck = (base_stats[4]["growth_rate"].asFloat());
+		class_template.growth_strength = (base_stats[5]["growth_rate"].asFloat());
+		class_template.growth_technique = (base_stats[6]["growth_rate"].asFloat());
+		class_template.growth_vitality = (base_stats[7]["growth_rate"].asFloat());
+		class_template.growth_wisdom = (base_stats[8]["growth_rate"].asFloat());
+
+		for (unsigned int i = 0; i < base_stats.size(); i++)
+		{
+			std::cout << "\tname: " << base_stats[i]["name"].asString() << std::endl;
+			std::cout << "\tbase value: " << base_stats[i]["base"].asUInt() << std::endl;
+			std::cout << "\tgrowth value: " << base_stats[i]["growth_rate"].asFloat() << std::endl;
+			std::cout << std::endl;
+		}
+	}	
 	return class_template;
 }
 
@@ -145,8 +135,6 @@ std::string setClass(int class_id)
 
 	return class_name;
 }
-
-
 
 int main()
 {
