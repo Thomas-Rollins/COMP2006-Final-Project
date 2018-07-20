@@ -1,10 +1,12 @@
 #pragma once
 #include "c:\Dev\ForeverLost\FinalProject\FinalProject\src\characterClasses\CharacterClass.h"
-class Guardian :
+class Assassin :
 	public CharacterClass
 {
 public:
-	Guardian(const std::string &name);
-	~Guardian();
+	Assassin(const std::string &name);
+	~Assassin();
+
+	
 };
 

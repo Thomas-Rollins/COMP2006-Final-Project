@@ -138,43 +138,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\jsoncpp\jsoncpp.cpp" />
     <ClCompile Include="src\Character.cpp" />
-    <ClCompile Include="src\characterClasses\CharacterClass.cpp" />
+    <ClCompile Include="src\ClassStatistics.cpp" />
+    <ClCompile Include="src\characterClasses\Archer.cpp" />
+    <ClCompile Include="src\characterClasses\Assassin.cpp" />
+    <ClCompile Include="src\characterClasses\Brawler.cpp" />
     <ClCompile Include="src\characterClasses\Guardian.cpp" />
+    <ClCompile Include="src\characterClasses\MagicSwordsman.cpp" />
+    <ClCompile Include="src\characterClasses\Necromancer.cpp" />
+    <ClCompile Include="src\characterClasses\Priest.cpp" />
+    <ClCompile Include="src\characterClasses\Sage.cpp" />
+    <ClCompile Include="src\characterClasses\Scout.cpp" />
+    <ClCompile Include="src\characterClasses\CharacterClass.cpp" />
+    <ClCompile Include="include\jsoncpp\jsoncpp.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Statistics.cpp" />
-    <ClCompile Include="src\statistics\Agility.cpp" />
-    <ClCompile Include="src\statistics\Dexterity.cpp" />
-    <ClCompile Include="src\statistics\Focus.cpp" />
-    <ClCompile Include="src\statistics\Intelligence.cpp" />
-    <ClCompile Include="src\statistics\Luck.cpp" />
-    <ClCompile Include="src\statistics\StatisticShell.cpp" />
-    <ClCompile Include="src\statistics\Technique.cpp" />
-    <ClCompile Include="src\statistics\Vitality.cpp" />
-    <ClCompile Include="src\statistics\Strength.cpp" />
-    <ClCompile Include="src\statistics\Wisdom.cpp" />
+    <ClCompile Include="src\characterClasses\Swordsman.cpp" />
+    <ClCompile Include="src\characterClasses\Warrior.cpp" />
+    <ClCompile Include="src\characterClasses\Wizard.cpp" />
+    <ClCompile Include="src\NPC.cpp" />
+    <ClCompile Include="src\PlaybleCharacter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Character.h" />
+    <ClInclude Include="src\ClassStatistics.h" />
+    <ClInclude Include="src\characterClasses\Archer.h" />
+    <ClInclude Include="src\characterClasses\Assassin.h" />
+    <ClInclude Include="src\characterClasses\Brawler.h" />
+    <ClInclude Include="src\characterClasses\Guardian.h" />
+    <ClInclude Include="src\characterClasses\MagicSwordsman.h" />
+    <ClInclude Include="src\characterClasses\Necromancer.h" />
+    <ClInclude Include="src\characterClasses\Priest.h" />
+    <ClInclude Include="src\characterClasses\Sage.h" />
+    <ClInclude Include="src\characterClasses\Scout.h" />
+    <ClInclude Include="src\characterClasses\CharacterClass.h" />
     <ClInclude Include="include\jsoncpp\json\json-forwards.h" />
     <ClInclude Include="include\jsoncpp\json\json.h" />
-    <ClInclude Include="src\Character.h" />
     <ClInclude Include="src\characterClasses\abilities\Abilities.h" />
-    <ClInclude Include="src\characterClasses\CharacterClass.h" />
-    <ClInclude Include="src\characterClasses\Guardian.h" />
     <ClInclude Include="src\logging\Log.h" />
-    <ClInclude Include="src\Statistics.h" />
-    <ClInclude Include="src\statistics\Agility.h" />
-    <ClInclude Include="src\statistics\Dexterity.h" />
-    <ClInclude Include="src\statistics\Focus.h" />
-    <ClInclude Include="src\statistics\Intelligence.h" />
-    <ClInclude Include="src\statistics\Luck.h" />
-    <ClInclude Include="src\statistics\StatisticShell.h" />
-    <ClInclude Include="src\statistics\Technique.h" />
-    <ClInclude Include="src\statistics\Vitality.h" />
-    <ClInclude Include="src\statistics\Strength.h" />
-    <ClInclude Include="src\statistics\Wisdom.h" />
+    <ClInclude Include="src\characterClasses\Swordsman.h" />
+    <ClInclude Include="src\characterClasses\Warrior.h" />
+    <ClInclude Include="src\characterClasses\Wizard.h" />
+    <ClInclude Include="src\NPC.h" />
+    <ClInclude Include="src\PlayableCharacter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\classes\Archer.json" />

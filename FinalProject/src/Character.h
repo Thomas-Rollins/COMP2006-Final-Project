@@ -1,19 +1,27 @@
 #pragma once
+//C includes
+#include <string>
 
+//Intra Includes
+#include "ClassStatistics.h"
 
-#include "characterClasses/CharacterClass.h"
 
 class Character
 {
 public:
-	Character(CharacterClass character_class, std::string name);
+	//Constructor
+	Character(const std::string &name);
+	//Virtual Destructor
+	virtual ~Character();
+	//Pure virtual Functions
+	
+
+	
 
 private:
-	CharacterClass m_character_class;
-	std::string m_name;
-	
+	const std::string m_name;
 	int m_level;
-	double m_experience;
+	
+	ClassStatistics* m_character_stats;
 
-	void set_name(std::string name);
 };
