@@ -19,7 +19,7 @@ int main()
 
 	std::vector<Character*> characters;
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10000; i++)
 	{
 		int rand_class = (int)(random_float(1, 12));
 		Character* new_character = new Character("Test Name", rand_class);
