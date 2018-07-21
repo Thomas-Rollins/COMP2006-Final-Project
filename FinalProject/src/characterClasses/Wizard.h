@@ -4,7 +4,14 @@ class Wizard :
 	public CharacterClass
 {
 public:
-	Wizard(const std::string &name);
+	Wizard(const int &level);
+
 	~Wizard();
+
+	const std::string get_class_name() const { return m_class_name; }
+
+private:
+	static const std::string m_class_name;
+	static const std::string m_class_description;
 };
 

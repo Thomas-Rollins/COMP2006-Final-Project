@@ -9,7 +9,7 @@ class NPC : public Character
 {
 public:
 	//Constructor
-	NPC(const std::string &name);
+	NPC(const std::string &name, const int &level, const int class_id);
 
 	//Destructor
 	~NPC();

@@ -3,8 +3,8 @@
 #include <iostream>
 
 //Constructor
-PlaybleCharacter::PlaybleCharacter(const std::string &name)
-	: Character(name)
+PlaybleCharacter::PlaybleCharacter(const std::string &name, const int class_id)
+	: Character(name, class_id)
 {
 
 }

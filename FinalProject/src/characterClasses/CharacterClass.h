@@ -3,8 +3,8 @@
 #include <string>
 
 //Intra Includes
-#include "../Character.h"
 #include "../ClassStatistics.h"
+
 
 enum Class_id : int
 {
@@ -13,19 +13,20 @@ enum Class_id : int
 	scout_id = 9, swordsman_id = 10, warrior_id = 11, wizard_id = 12
 };
 
-class CharacterClass : public Character
+class CharacterClass
 {
 public:
-	static CharacterClass* make_character(const int &class_id, const std::string &name);
+	static CharacterClass* make_character_class(const int &class_id);
 	
-	CharacterClass(const std::string &name);
+	CharacterClass(const int &level);
+
 	virtual ~CharacterClass();
 
-
+	virtual const std::string get_class_name() const;
+	
 
 private:
-	const std::string m_class_name;
-	const std::string m_class_description;
+	
 	
 
 };

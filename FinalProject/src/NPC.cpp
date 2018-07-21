@@ -3,8 +3,8 @@
 #include <iostream>
 
 //Constructor
-NPC::NPC(const std::string &name)
-	: Character(name)
+NPC::NPC(const std::string &name, const int &level, const int class_id)
+	: Character(name, class_id)
 {
 
 }

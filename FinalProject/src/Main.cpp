@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 
-#include "characterClasses/CharacterClass.h"
+#include "Character.h"
 
 // random number generator that returns a random float
 float random_float(const float &from, const float &to)
@@ -17,25 +17,24 @@ int main()
 {
 	srand(static_cast <unsigned> (time(nullptr)));
 
-	std::vector<CharacterClass*> characters;
+	std::vector<Character*> characters;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		int rand_class = (int)(random_float(1, 12));
+		Character* new_character = new Character("Test Name", rand_class);
 
-		characters.push_back(CharacterClass::make_character(i, (std::string)"Char name"));
-		
-		
+		characters.push_back(new_character);
+
 	}
 
 	for (auto character : characters)
 	{
-		std::cout << typeid(*(character)).name() << std::endl;
+		std::cout << character->get_character_class()->get_class_name() << std::endl;
 		delete (character);
 		std::cout << std::endl;
 	}
 	characters.clear();
-	
 	std::cin.get();
 	return(0);
 }

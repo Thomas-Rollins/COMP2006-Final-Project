@@ -9,10 +9,10 @@ class PlaybleCharacter : public Character
 {
 public:
 	//Constructor
-	PlaybleCharacter(const std::string &name);
+	PlaybleCharacter(const std::string &name, const int class_id);
 
 	//Destructor
-	 ~PlaybleCharacter();
+	virtual ~PlaybleCharacter();
 
 	//Interface methods of parent
 	void character_action();
