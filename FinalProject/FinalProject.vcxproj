@@ -151,6 +151,7 @@
     <ClCompile Include="src\characterClasses\Scout.cpp" />
     <ClCompile Include="src\characterClasses\CharacterClass.cpp" />
     <ClCompile Include="include\jsoncpp\jsoncpp.cpp" />
+    <ClCompile Include="src\Custom_Exception.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\characterClasses\Swordsman.cpp" />

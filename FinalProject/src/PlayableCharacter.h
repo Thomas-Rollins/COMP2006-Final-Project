@@ -13,18 +13,23 @@ public:
 
 	//Destructor
 	virtual ~PlaybleCharacter();
-
-	//Interface methods of parent
-	void character_action();
 	
+	//Flag checks
 	bool experience_req_met();
-	void level_up(bool);
-	void add_experience(const int& experience);
 
-	
 	//Accessors
 	double get_next_level_experience() { return m_exp_required_for_next_level; }
 	double get_current_experience() { return m_experience; }
+	ClassStatistics* get_character_stats() { return Character::get_character_stats(); }
+
+	//Mutators
+	void set_next_level_experience();
+	void level_up();
+	void initialize_character_stats();
+	void set_base_stats();
+	void level_base_stats();
+	void add_experience(const double& experience);
+	void character_action();
 
 private:
 	double m_experience;

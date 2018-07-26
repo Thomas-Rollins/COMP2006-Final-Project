@@ -8,9 +8,9 @@
 
 enum Class_id : int
 {
-	null_class_id = 0, archer_id = 1, assassin_id = 2, brawler_id = 3, guardian_id = 4,
-	magic_swordsman_id = 5, necromancer_id = 6, priest_id = 7, sage_id = 8,
-	scout_id = 9, swordsman_id = 10, warrior_id = 11, wizard_id = 12
+	null_class_id, archer_id, assassin_id, brawler_id, guardian_id,
+	magic_swordsman_id, necromancer_id, priest_id, sage_id,
+	scout_id, swordsman_id, warrior_id, wizard_id
 };
 
 class CharacterClass
@@ -22,8 +22,9 @@ public:
 
 	virtual ~CharacterClass();
 
-	virtual const std::string get_class_name() const;
+	virtual const std::string get_class_name() const = 0;
 	
+	virtual const Class_id get_class_id() const = 0;
 
 private:
 	

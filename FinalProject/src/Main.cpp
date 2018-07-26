@@ -6,11 +6,12 @@
 #include <string>
 
 #include "Character.h"
+#include "Custom_Exception.cpp"
 
 // random number generator that returns a random float
-float random_float(const float &from, const float &to)
+int random_int(const int &from, const int &to)
 {
-	return from + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (to - from)));
+	return rand() % to + from;
 };
 
 int main()
@@ -19,10 +20,16 @@ int main()
 
 	std::vector<Character*> characters;
 
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 1000; i++)
 	{
-		int rand_class = (int)(random_float(1, 12));
-		Character* new_character = new Character("Test Name", rand_class);
+		std::cout << round((4 * (pow(i + 1, 3))) / 5) << std::endl;
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		int rand_class = (int)(random_int(1, 12));
+		bool rand_type = (bool)(random_int(1, 10) % 2);
+		Character* new_character = Character::make_character(rand_type, rand_class, "Name", i+1);
 
 		characters.push_back(new_character);
 
@@ -30,7 +37,24 @@ int main()
 
 	for (auto character : characters)
 	{
+		double rand_exp = (double)random_int(100000000, 800000000);
+		try {
+			character->add_experience(rand_exp);
+		}
+		catch (NotImplemented e)
+		{
+
+		}
+		
+		
+		
+
 		std::cout << character->get_character_class()->get_class_name() << std::endl;
+		std::cout << "Level: " << character->get_character_level() << std::endl;
+		std::cout << "Current xp: " << character->get_current_experience() << std::endl;
+		std::cout << "Exp for next Level: " << character->get_next_level_experience() << std::endl;
+		character->print_stats();
+
 		delete (character);
 		std::cout << std::endl;
 	}
