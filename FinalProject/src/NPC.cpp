@@ -94,7 +94,8 @@ void NPC::initialize_character_stats()
 	std::ifstream character_class_file("data/classes/"+ class_name +".json", std::ifstream::binary);
 	if (character_class_file.fail())
 	{
-		std::cout << "File not Found:" << std::endl;
+		std::cerr << "File not Found: " << "data/classes/" << class_name << ".json" << std::endl;
+		exit(1);
 	}
 	else
 	{
