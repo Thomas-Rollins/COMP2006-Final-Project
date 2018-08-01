@@ -1,45 +1,74 @@
 #include "ClassStatistics.h"
 
-const std::string* ClassStatistics::LOW_STAT_DESCRIPTIONS[] =
+const std::string* ClassStatistics::LOW_STAT_DESCRIPTIONS[NUM_OF_LOW_STATS][STAT_DESC_ATTRIBUTES] =
 {
-	LOW_STAT_DESCRIPTIONS[agility_id]		= (std::string*)	"Agility Description Here",
-	LOW_STAT_DESCRIPTIONS[dexterity_id]		= (std::string*)	"Dexterity Description Here",
-	LOW_STAT_DESCRIPTIONS[focus_id]			= (std::string*)	"Focus Description Here",
-	LOW_STAT_DESCRIPTIONS[intelligence_id]	= (std::string*)	"Intelligence Description Here",
-	LOW_STAT_DESCRIPTIONS[luck_id]			= (std::string*)	"Luck Description Here",
-	LOW_STAT_DESCRIPTIONS[strength_id]		= (std::string*)	"Strength Description Here" ,
-	LOW_STAT_DESCRIPTIONS[technique_id]		= (std::string*)	"Technique Description Here",
-	LOW_STAT_DESCRIPTIONS[vitality_id]		= (std::string*)	"Vitality Description Here",
-	LOW_STAT_DESCRIPTIONS[wisdom_id]		= (std::string*)	"Wisdom Description Here"
+	{ (std::string*)	"Agility Description Here",			(std::string*) "AGI" },
+	{ (std::string*)	"Dexterity Description Here",		(std::string*) "DEX" },
+	{ (std::string*)	"Focus Description Here",			(std::string*) "FCS" },
+	{ (std::string*)	"Intelligence Description Here",	(std::string*) "INT" },
+	{ (std::string*)	"Luck Description Here",			(std::string*) "LUK" },
+	{ (std::string*)	"Strength Description Here" ,		(std::string*) "STR" },
+	{ (std::string*)	"Technique Description Here",		(std::string*) "TEC" },
+	{ (std::string*)	"Vitality Description Here",		(std::string*) "VIT" },
+	{ (std::string*)	"Wisdom Description Here",			(std::string*) "WIS" }
 };
 	//max value for any high_level stat: 9 999 999 999
-const double ClassStatistics::HIGH_STAT_MAX_VALUE = 9999999999;
+const float ClassStatistics::HIGH_STAT_MAX_VALUE = 9999999999.000f;
 
-const std::string* ClassStatistics::HIGH_STAT_DESCRIPTIONS[] =
+const std::string* ClassStatistics::HIGH_STAT_DESCRIPTIONS[NUM_OF_HIGH_LEVEL_STATS][STAT_DESC_ATTRIBUTES] =
 {
-	HIGH_STAT_DESCRIPTIONS[health_id]		= (std::string*)	"Represents the life force. When this hits 0 you die.",
-	HIGH_STAT_DESCRIPTIONS[mana_id]			= (std::string*)	"Represents the ability to use magic. Without it you cannot use any magic based abilities.",
-	HIGH_STAT_DESCRIPTIONS[skill_points_id] = (std::string*)	"Represents the ability to activate skills. Most skills require skill points to activate. Skill points increase during battle when you take or deal damage.",
-	HIGH_STAT_DESCRIPTIONS[physical_atk_id] = (std::string*)	"Represents the ability to deal physical damage.",
-	HIGH_STAT_DESCRIPTIONS[def_id]			= (std::string*)	"Represents the ability to resist physical damage.",
-	HIGH_STAT_DESCRIPTIONS[magic_atk_id]	= (std::string*)	"Represents the ability to deal magic damage.",
-	HIGH_STAT_DESCRIPTIONS[mind_id]			= (std::string*)	"Represents the ability to resist magic damage.",
-	HIGH_STAT_DESCRIPTIONS[accuracy_id]		= (std::string*)	"Represents the likeliness of your attacks landing. This effects both Physical and Magical attacks.",
-	HIGH_STAT_DESCRIPTIONS[evasion_id]		= (std::string*)	"Represents the ability to dodge both physical and magical attacks.",
-	HIGH_STAT_DESCRIPTIONS[critical_id]		= (std::string*)	"Represents the ability exploit the target's weak points dealing massive damage."
+	{ 
+		(std::string*)	"Represents the life force. When this hits 0 you die.",
+		(std::string*)	"HP" 
+	},
+	{
+		(std::string*)	"Represents the ability to use magic. Without it you cannot use any magic based abilities.",
+		(std::string*)	"MP" 
+	},
+	{
+		(std::string*)	"Represents the ability to activate skills. Most skills require skill points to activate. Skill points increase during battle when you take or deal damage.",
+		(std::string*)	"SP"
+	},
+	{
+		(std::string*)	"Represents the ability to deal physical damage.",
+		(std::string*)	"ATK"
+	},
+	{
+		(std::string*)	"Represents the ability to resist physical damage.",
+		(std::string*)	"DEF"
+	},
+	{
+		(std::string*)	"Represents the ability to deal magic damage.",
+		(std::string*)	"MGK"
+	},
+	{
+		(std::string*)	"Represents the ability to resist magic damage.",
+		(std::string*)	"MND"
+	},
+	{
+		(std::string*)	"Represents the likeliness of your attacks landing. This effects both Physical and Magical attacks.",
+		(std::string*)  "ACC"
+	},
+	{
+		(std::string*)	"Represents the ability to dodge both physical and magical attacks.",
+		(std::string*)	"EVD"
+	},
+	{	(std::string*)	"Represents the ability exploit the target's weak points dealing massive damage.",
+		(std::string*)	"CRT"
+	}
 };
 
 const float ClassStatistics::ELEMENTAL_STAT_MAX_VALUE = 500.00f;
-const std::string* ClassStatistics::ELEMENTAL_STAT_DESCRIPTIONS[] =
+const std::string* ClassStatistics::ELEMENTAL_STAT_DESCRIPTIONS[NUM_OF_ELEMENTAL_STATS][STAT_DESC_ATTRIBUTES] =
 {
-	ELEMENTAL_STAT_DESCRIPTIONS[fire_id]		= (std::string*) "Represents your ability to utilize and resist the element of fire.",
-	ELEMENTAL_STAT_DESCRIPTIONS[wind_id]		= (std::string*) "Represents your ability to utilize and resist the element of wind.",
-	ELEMENTAL_STAT_DESCRIPTIONS[earth_id]		= (std::string*) "Represents your ability to utilize and resist the element of earth.",
-	ELEMENTAL_STAT_DESCRIPTIONS[water_id]		= (std::string*) "Represents your ability to utilize and resist the element of water.",
-	ELEMENTAL_STAT_DESCRIPTIONS[lightning_id]	= (std::string*) "Represents your ability to utilize and resist the element of lightning.",
-	ELEMENTAL_STAT_DESCRIPTIONS[holy_id]		= (std::string*) "Represents your ability to utilize and resist the holy element.",
-	ELEMENTAL_STAT_DESCRIPTIONS[dark_id]		= (std::string*) "Represents your ability to utilize and resist the dark elemen.t",
-	ELEMENTAL_STAT_DESCRIPTIONS[void_id]		= (std::string*) "Represents your ability to utilize and resist element-less magic."
+	{ (std::string*) "Represents your ability to utilize and resist the element of fire.",		(std::string*) "FIRE"	},
+	{ (std::string*) "Represents your ability to utilize and resist the element of wind.",		(std::string*) "WIND"	},
+	{ (std::string*) "Represents your ability to utilize and resist the element of earth.",		(std::string*) "EARTH"	},
+	{ (std::string*) "Represents your ability to utilize and resist the element of water.",		(std::string*) "WATER"	},
+	{ (std::string*) "Represents your ability to utilize and resist the element of lightning.", (std::string*) "LTNG"	},
+	{ (std::string*) "Represents your ability to utilize and resist the holy element.",			(std::string*) "HOLY"	},
+	{ (std::string*) "Represents your ability to utilize and resist the dark elemen.t",			(std::string*) "DARK"	},
+	{ (std::string*) "Represents your ability to utilize and resist element-less magic.",		(std::string*) "VOID"	}
 };
 
 ClassStatistics::ClassStatistics() 
@@ -49,7 +78,7 @@ ClassStatistics::ClassStatistics()
 
 ClassStatistics::~ClassStatistics() {}
 
-
+// Low Level
 const int ClassStatistics::get_base_value(Low_Stats_ID const &stat_id) const
 {
 	return (int)m_low_level_stats[stat_id][base_value_id];
@@ -63,6 +92,17 @@ const int ClassStatistics::get_current_value(Low_Stats_ID const &stat_id) const
 const float ClassStatistics::get_growth_value(Low_Stats_ID const &stat_id) const
 {
 	return m_low_level_stats[stat_id][growth_value_id]; 
+}
+
+//High Level
+const float ClassStatistics::get_base_value(High_Stats_ID const &stat_id) const
+{
+	return m_high_level_stats[stat_id][base_value_id];
+}
+
+const float ClassStatistics::get_current_value(High_Stats_ID const &stat_id) const
+{
+	return m_high_level_stats[stat_id][current_value_id];
 }
 
 void ClassStatistics::set_base_value(Low_Stats_ID const &stat_id, const int &base_value)

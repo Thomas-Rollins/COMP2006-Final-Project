@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
 
+enum Description_Attribute_ID : const int 
+{
+	desc_id, short_form_id
+};
+
 /**
  * This enum MUST be sequential
  */
@@ -41,6 +46,9 @@ public:
 	const int get_current_value(Low_Stats_ID const &stat_id) const;
 	const float get_growth_value(Low_Stats_ID const &stat_id) const;
 	
+	const float get_base_value(High_Stats_ID const &stat_id) const;
+	const float get_current_value(High_Stats_ID const &stat_id) const;
+	
 	//Incrementors
 	void increment_base_value(Low_Stats_ID const &stat_id, const int &value);
 	void increment_current_value(Low_Stats_ID const &stat_id, const int &value);
@@ -52,6 +60,7 @@ public:
 	void set_growth_value(Low_Stats_ID const &stat_id, const float &growth_value);
 
 	//Static consts
+	static const int STAT_DESC_ATTRIBUTES = 2;
 		//Low stats
 	static const int NUM_OF_LOW_STATS = 9;
 	static const int NUM_OF_LOW_STAT_ATTRIBUTES = 3;
@@ -71,17 +80,17 @@ private:
 	//static consts
 	// Low Level
 	static const int LOW_STAT_MAX_VALUE = 65535;
-	static const std::string* LOW_STAT_DESCRIPTIONS[NUM_OF_LOW_STATS];
+	static const std::string* LOW_STAT_DESCRIPTIONS[NUM_OF_LOW_STATS][STAT_DESC_ATTRIBUTES];
 	float m_low_level_stats[NUM_OF_LOW_STATS][NUM_OF_LOW_STAT_ATTRIBUTES];
 
 	//High Level
-	static const double HIGH_STAT_MAX_VALUE;
-	static const std::string* HIGH_STAT_DESCRIPTIONS[NUM_OF_HIGH_LEVEL_STATS];
+	static const float HIGH_STAT_MAX_VALUE;
+	static const std::string* HIGH_STAT_DESCRIPTIONS[NUM_OF_HIGH_LEVEL_STATS][STAT_DESC_ATTRIBUTES];
 	float m_high_level_stats[NUM_OF_HIGH_LEVEL_STATS][NUM_OF_HIGH_STAT_ATTRIBUTES];
 
 	//Elemental
 	static const float ELEMENTAL_STAT_MAX_VALUE;
-	static const std::string* ELEMENTAL_STAT_DESCRIPTIONS[NUM_OF_ELEMENTAL_STATS];
+	static const std::string* ELEMENTAL_STAT_DESCRIPTIONS[NUM_OF_ELEMENTAL_STATS][STAT_DESC_ATTRIBUTES];
 	float m_elemental_stats[NUM_OF_ELEMENTAL_STATS][NUM_OF_ELEMENTAL_STAT_ATTRIBUTES];
 
 
