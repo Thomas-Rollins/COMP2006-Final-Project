@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <cstdlib>
 #include <ctime>
 #include <vector>
@@ -33,7 +32,6 @@ int main()
 		Character* new_character = Character::make_character(rand_type, rand_class, "Name", i+1);
 
 		characters.push_back(new_character);
-
 	}
 
 	for (auto character : characters)
@@ -44,7 +42,6 @@ int main()
 		}
 		catch (NotImplemented e) {}		
 		
-
 		std::cout << character->get_character_class()->get_class_name() << std::endl;
 		std::cout << "Level: " << character->get_character_level() << std::endl;
 		std::cout << "Current xp: " << character->get_current_experience() << std::endl;
@@ -54,6 +51,7 @@ int main()
 		delete (character);
 		std::cout << std::endl;
 	}
+
 	characters.clear();
 	std::cin.get();
 	return(0);
