@@ -1,15 +1,111 @@
 {
   "name":"Swordsman",
-  "stats":
-  [
-    {"name":"Agility", "base":10, "growth_rate": 1.60 },
-    {"name":"dexterity", "base":10, "growth_rate": 1.10},
-    {"name":"focus", "base":10, "growth_rate": 1.00 },
-    {"name":"intelligence", "base":10, "growth_rate": 0.50 },
-    {"name":"luck", "base":10, "growth_rate": 1.00 },
-    {"name":"strength", "base":10, "growth_rate": 1.60 },
-    {"name":"technique", "base":10, "growth_rate": 1.05 },
-    {"name":"vitality", "base":10, "growth_rate": 1.50 },
-    {"name":"wisdom", "base":10, "growth_rate": 0.50 }
+  "stats": [
+    {
+      "name": "Agility",
+      "base": 10,
+      "growth_rate": 1.60
+    },
+    {
+      "name": "dexterity",
+      "base": 10,
+      "growth_rate": 1.10
+    },
+    {
+      "name": "focus",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "intelligence",
+      "base": 10,
+      "growth_rate": 0.50
+    },
+    {
+      "name": "luck",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "strength",
+      "base": 10,
+      "growth_rate": 1.60
+    },
+    {
+      "name": "technique",
+      "base": 10,
+      "growth_rate": 1.05
+    },
+    {
+      "name": "vitality",
+      "base": 10,
+      "growth_rate": 1.50
+    },
+    {
+      "name": "wisdom",
+      "base": 10,
+      "growth_rate": 0.50
+    }
+  ],
+  "abilities": [
+    {
+      "name": "attack",
+      "description": "A basic single-target attack.",
+      "base_damange": 1,
+      "sp_cost": 0,
+      "targets": 1,
+      "level_req": 0
+    },
+    {
+      "name": "Heavy Strike",
+      "description": "A heavy strike dealing 150% base damage",
+      "base_damange": 1.5,
+      "sp_cost": 15,
+      "targets": 1,
+      "level_req": 2
+    },
+    {
+      "name": "Whirlwind Strike",
+      "description": "A basic multi-target attack. Strikes up to three targets.",
+      "base_damange": 0.8,
+      "sp_cost": 30,
+      "targets": 3,
+      "level_req": 5
+    }
+  ],
+  "passives": [
+    {
+      "name": "Sword Mastery",
+      "description": "Increases the damange delt by abilities by 20%",
+      "damage_mod": 1.2,
+      "stat_mod": [
+        {
+          "id": 0,
+          "base_mod": 0,
+          "percent_mod": 0.0
+        }
+      ],
+      "affects": "skills",
+      "level_req": 10
+    },
+    {
+      "name": "Conditioning",
+      "description": "Increases base Agility and Strength by 5%.",
+      "damage_mod": 0,
+      "affects": "stats",
+      "stat_mod": [
+        {
+          "id": 0,
+          "base_mod": 0,
+          "percent_mod": 5.0
+        },
+        {
+          "id": 1,
+          "base_mod": 0,
+          "percent_mod": 5.0
+        }
+      ],
+      "level_req": 15
+    }
   ]
 }
