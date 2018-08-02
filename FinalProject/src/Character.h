@@ -39,7 +39,8 @@ public:
 	//mutators
 	void set_character_level(const int &level);
 	
-	virtual void print_stats();
+	virtual void print_low_stats();
+	virtual void print_high_stats();
 
 private:
 	const std::string m_name;

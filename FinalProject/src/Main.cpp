@@ -4,8 +4,10 @@
 #include <vector>
 #include <string>
 
+
 #include "Character.h"
 #include "Custom_Exception.cpp"
+
 
 // random number generator that returns a random float
 int random_int(const int &from, const int &to)
@@ -19,17 +21,17 @@ int main()
 
 	std::vector<Character*> characters;
 
-	for (int i = 0; i < 256; i++)
+	/*for (int i = 0; i < 256; i++)
 	{
 		std::cout << "Level " << i << ": ";
 		std::cout << round((4 * (pow(i + 1, 3))) / 5) << std::endl;
-	}
+	}*/
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		int rand_class = (int)(random_int(1, 12));
 		bool rand_type = (bool)(random_int(1, 10) % 2);
-		Character* new_character = Character::make_character(rand_type, rand_class, "Name", i+1);
+		Character* new_character = Character::make_character(true, 4, "Name", i+1);
 
 		characters.push_back(new_character);
 	}
@@ -46,7 +48,8 @@ int main()
 		std::cout << "Level: " << character->get_character_level() << std::endl;
 		std::cout << "Current xp: " << character->get_current_experience() << std::endl;
 		std::cout << "Exp for next Level: " << character->get_next_level_experience() << std::endl;
-		character->print_stats();
+		character->print_low_stats();
+		character->print_high_stats();
 
 		delete (character);
 		std::cout << std::endl;
@@ -56,3 +59,5 @@ int main()
 	std::cin.get();
 	return(0);
 }
+
+

@@ -123,13 +123,15 @@ void PlaybleCharacter::initialize_character_stats()
 				i_ref, (int)floor(base_stats[i_ref]["base"].asUInt())
 			);
 		}
+		this->get_character_stats()->set_high_stats();
 		this->get_character_stats()->reset_current_values();
 	}
+	
 }
 
 void PlaybleCharacter::set_base_stats()
 {
-	//#TODO: add base_stat initalization
+	//#TODO: add base_stat initialization
 
 }
 
@@ -150,7 +152,7 @@ void PlaybleCharacter::level_base_stats()
 				this->get_character_stats()->BASE_STAT_INCREASE_PER_LEVEL)
 			)
 		);
-
+		this->get_character_stats()->set_high_stats();
 		this->get_character_stats()->reset_current_values();
 	}
 }

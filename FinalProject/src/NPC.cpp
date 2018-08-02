@@ -119,6 +119,7 @@ void NPC::initialize_character_stats()
 					* STAT_MULTIPLIER)
 			);
 		}
+		this->get_character_stats()->set_high_stats();
 		this->get_character_stats()->reset_current_values();
 	}
 }

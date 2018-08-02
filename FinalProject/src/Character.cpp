@@ -54,7 +54,7 @@ void Character::set_character_level(const int &level)
 	m_level = level;
 }
 
-void Character::print_stats()
+void Character::print_low_stats()
 {
 	std::cout << "AGI: " << get_character_stats()->get_base_value(agility_id) << "\tDEX: "
 		<< get_character_stats()->get_base_value(dexterity_id) << "\tFCS: " <<
@@ -65,4 +65,19 @@ void Character::print_stats()
 		get_character_stats()->get_base_value(technique_id) << "\tVIT: " <<
 		get_character_stats()->get_base_value(vitality_id) << "\tWIS: " <<
 		get_character_stats()->get_base_value(wisdom_id) << std::endl;
+}
+
+void Character::print_high_stats()
+{
+	std::cout << "HP: " << get_character_stats()->get_base_value(health_id) << "\tMP: "
+		<< get_character_stats()->get_base_value(mana_id) << "\tSP: "
+		<< get_character_stats()->get_base_value(skill_points_id) << std::endl << "ATK: "
+		<< get_character_stats()->get_base_value(atk_id) << "\tDEF: "
+		<< get_character_stats()->get_base_value(def_id) << std::endl << "MGK: "
+		<< get_character_stats()->get_base_value(magic_id) << "\tMND: "
+		<< get_character_stats()->get_base_value(mind_id) << std::endl << "ACC: "
+		<< get_character_stats()->get_base_value(accuracy_id) << "\tEVD: "
+		<< get_character_stats()->get_base_value(evasion_id) << "\tCRT: "
+		<< get_character_stats()->get_base_value(critical_id) << "\tLUK: "
+		<< get_character_stats()->get_base_value(luck_id) << std::endl;
 }
