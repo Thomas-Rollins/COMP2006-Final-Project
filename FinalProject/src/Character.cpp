@@ -78,6 +78,5 @@ void Character::print_high_stats()
 		<< get_character_stats()->get_base_value(mind_id) << std::endl << "ACC: "
 		<< get_character_stats()->get_base_value(accuracy_id) << "\tEVD: "
 		<< get_character_stats()->get_base_value(evasion_id) << "\tCRT: "
-		<< get_character_stats()->get_base_value(critical_id) << "\tLUK: "
-		<< get_character_stats()->get_base_value(luck_id) << std::endl;
+		<< get_character_stats()->get_base_value(critical_id) << std::endl;
 }

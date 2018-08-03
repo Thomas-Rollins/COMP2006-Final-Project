@@ -1,15 +1,115 @@
 {
-  "name":"Sage",
-  "stats":
-  [
-    {"name":"Agility", "base":10, "growth_rate": 1.00 },
-    {"name":"dexterity", "base":10, "growth_rate": 0.80},
-    {"name":"focus", "base":10, "growth_rate": 1.20 },
-    {"name":"intelligence", "base":10, "growth_rate": 1.90 },
-    {"name":"luck", "base":10, "growth_rate": 1.00 },
-    {"name":"strength", "base":10, "growth_rate": 0.25 },
-    {"name":"technique", "base":10, "growth_rate": 1.40 },
-    {"name":"vitality", "base":10, "growth_rate": 0.60 },
-    {"name":"wisdom", "base":10, "growth_rate": 1.40 }
+  "name": "Sage",
+  "stats": [
+    {
+      "name": "Agility",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "dexterity",
+      "base": 10,
+      "growth_rate": 0.80
+    },
+    {
+      "name": "focus",
+      "base": 10,
+      "growth_rate": 1.20
+    },
+    {
+      "name": "intelligence",
+      "base": 10,
+      "growth_rate": 1.90
+    },
+    {
+      "name": "luck",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "strength",
+      "base": 10,
+      "growth_rate": 0.25
+    },
+    {
+      "name": "technique",
+      "base": 10,
+      "growth_rate": 1.40
+    },
+    {
+      "name": "vitality",
+      "base": 10,
+      "growth_rate": 0.60
+    },
+    {
+      "name": "wisdom",
+      "base": 10,
+      "growth_rate": 1.40
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Attack",
+      "description": "A basic single-target attack.",
+      "physical_damage": 1.0,
+      "magic_damage": 0.0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 0,
+      "targets": 1,
+      "level_req": 0,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Enchant",
+      "description": "Increase an ally's attack.",
+      "physical_damage": 0.0,
+      "magic_damage": 1.0,
+      "attack_bonus": 0.2,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 5,
+      "sp_cost": 0,
+      "targets": 1,
+      "level_req": 2,
+      "friendly": true,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Heal",
+      "description": "Heal all allies a small amount.",
+      "physical_damage": 0.0,
+      "magic_damage": 0.5,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 5,
+      "mp_cost": 30,
+      "sp_cost": 0,
+      "targets": 4,
+      "level_req": 5,
+      "friendly": true,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    }
   ]
 }

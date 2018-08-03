@@ -1,15 +1,115 @@
 {
-  "name":"Guardian",
-  "stats":
-  [
-    {"name":"Agility", "base":10, "growth_rate": 0.70 },
-    {"name":"dexterity", "base":10, "growth_rate": 0.80},
-    {"name":"focus", "base":10, "growth_rate": 1.40 },
-    {"name":"intelligence", "base":10, "growth_rate": 0.60 },
-    {"name":"luck", "base":10, "growth_rate": 1.00 },
-    {"name":"strength", "base":10, "growth_rate": 1.30 },
-    {"name":"technique", "base":10, "growth_rate": 0.90 },
-    {"name":"vitality", "base":10, "growth_rate": 2.00 },
-    {"name":"wisdom", "base":10, "growth_rate": 0.65 }
+  "name": "Guardian",
+  "stats": [
+    {
+      "name": "Agility",
+      "base": 10,
+      "growth_rate": 0.70
+    },
+    {
+      "name": "dexterity",
+      "base": 10,
+      "growth_rate": 0.80
+    },
+    {
+      "name": "focus",
+      "base": 10,
+      "growth_rate": 1.40
+    },
+    {
+      "name": "intelligence",
+      "base": 10,
+      "growth_rate": 0.60
+    },
+    {
+      "name": "luck",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "strength",
+      "base": 10,
+      "growth_rate": 1.30
+    },
+    {
+      "name": "technique",
+      "base": 10,
+      "growth_rate": 0.90
+    },
+    {
+      "name": "vitality",
+      "base": 10,
+      "growth_rate": 2.00
+    },
+    {
+      "name": "wisdom",
+      "base": 10,
+      "growth_rate": 0.65
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Attack",
+      "description": "A basic single-target attack.",
+      "physical_damage": 1.0,
+      "magic_damage": 0.0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "mp_cost": 0,
+      "sp_cost": 0,
+      "targets": 1,
+      "element": 7,
+      "level_req": 0,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Preperation",
+      "description": "Prepare yourself to shield your allies.",
+      "physical_damage": 0,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.3,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "mp_cost": 0,
+      "sp_cost": 15,
+      "targets": 4,
+      "element": 7,
+      "level_req": 2,
+      "friendly": true,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Shield Bash",
+      "description": "Bash a target with a shield. Stuns.",
+      "physical_damage": 0.5,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "mp_cost": 0,
+      "sp_cost": 40,
+      "targets": 1,
+      "element": 7,
+      "level_req": 5,
+      "friendly": false,
+      "stun": true,
+      "execute": false,
+      "restore": false
+    }
   ]
 }

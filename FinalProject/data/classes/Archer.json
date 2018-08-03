@@ -1,15 +1,115 @@
 {
-  "name":"Archer",
-  "stats":
-  [
-    {"name":"Agility", "base":10, "growth_rate": 1.75 },
-    {"name":"dexterity", "base":10, "growth_rate": 1.30},
-    {"name":"focus", "base":10, "growth_rate": 1.20 },
-    {"name":"intelligence", "base":10, "growth_rate": 0.90 },
-    {"name":"luck", "base":10, "growth_rate": 1.00 },
-    {"name":"strength", "base":10, "growth_rate": 1.10 },
-    {"name":"technique", "base":10, "growth_rate": 1.40 },
-    {"name":"vitality", "base":10, "growth_rate": 0.85 },
-    {"name":"wisdom", "base":10, "growth_rate": 0.70 }
+  "name": "Archer",
+  "stats": [
+    {
+      "name": "Agility",
+      "base": 10,
+      "growth_rate": 1.75
+    },
+    {
+      "name": "dexterity",
+      "base": 10,
+      "growth_rate": 1.30
+    },
+    {
+      "name": "focus",
+      "base": 10,
+      "growth_rate": 1.20
+    },
+    {
+      "name": "intelligence",
+      "base": 10,
+      "growth_rate": 0.90
+    },
+    {
+      "name": "luck",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "strength",
+      "base": 10,
+      "growth_rate": 1.10
+    },
+    {
+      "name": "technique",
+      "base": 10,
+      "growth_rate": 1.40
+    },
+    {
+      "name": "vitality",
+      "base": 10,
+      "growth_rate": 0.85
+    },
+    {
+      "name": "wisdom",
+      "base": 10,
+      "growth_rate": 0.70
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Attack",
+      "description": "A basic single-target attack.",
+      "physical_damage": 1.0,
+      "magic_damage": 0.0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 0,
+      "targets": 1,
+      "level_req": 0,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Snipe",
+      "description": "A heavy strike dealing 150% base damage with increased accuracy",
+      "physical_damage": 1.5,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 15,
+      "targets": 1,
+      "level_req": 2,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Barrage",
+      "description": "A basic multi-target attack. Strikes up to three targets.",
+      "physical_damage": 0.8,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 30,
+      "targets": 3,
+      "level_req": 5,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    }
   ]
 }

@@ -27,11 +27,11 @@ int main()
 		std::cout << round((4 * (pow(i + 1, 3))) / 5) << std::endl;
 	}*/
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		int rand_class = (int)(random_int(1, 12));
 		bool rand_type = (bool)(random_int(1, 10) % 2);
-		Character* new_character = Character::make_character(true, 4, "Name", i+1);
+		Character* new_character = Character::make_character(true, i+1, "Name", 100);
 
 		characters.push_back(new_character);
 	}

@@ -1,10 +1,12 @@
 #pragma once
 //C includes
 #include <string>
+#include <vector>
 
 //Intra Includes
 #include "characterClasses/CharacterClass.h"
 #include "ClassStatistics.h"
+#include "characterClasses/abilities/Ability.h"
 
 
 
@@ -33,8 +35,10 @@ public:
 
 
 	//Accessors
-	CharacterClass* get_character_class() { return m_character_class; }
-	int get_character_level() { return m_level; }
+	const std::vector<Ability*> get_abilities() const { return m_abilities; }
+	const CharacterClass* get_character_class() const { return m_character_class; }
+	
+	const int get_character_level() const { return m_level; }
 
 	//mutators
 	void set_character_level(const int &level);
@@ -45,7 +49,7 @@ public:
 private:
 	const std::string m_name;
 	int m_level;
-
+	std::vector<Ability*> m_abilities = {};
 	CharacterClass* m_character_class;
 	ClassStatistics* m_character_stats;
 

@@ -49,63 +49,67 @@
   ],
   "abilities": [
     {
-      "name": "attack",
+      "name": "Attack",
       "description": "A basic single-target attack.",
-      "base_damange": 1,
+      "physical_damage": 1,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
       "sp_cost": 0,
       "targets": 1,
-      "level_req": 0
+      "level_req": 0,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
     },
     {
       "name": "Heavy Strike",
       "description": "A heavy strike dealing 150% base damage",
-      "base_damange": 1.5,
+      "physical_damage": 1.5,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
       "sp_cost": 15,
       "targets": 1,
-      "level_req": 2
+      "level_req": 2,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
     },
     {
       "name": "Whirlwind Strike",
       "description": "A basic multi-target attack. Strikes up to three targets.",
-      "base_damange": 0.8,
+      "physical_damage": 0.8,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
       "sp_cost": 30,
       "targets": 3,
-      "level_req": 5
-    }
-  ],
-  "passives": [
-    {
-      "name": "Sword Mastery",
-      "description": "Increases the damange delt by abilities by 20%",
-      "damage_mod": 1.2,
-      "stat_mod": [
-        {
-          "id": 0,
-          "base_mod": 0,
-          "percent_mod": 0.0
-        }
-      ],
-      "affects": "skills",
-      "level_req": 10
-    },
-    {
-      "name": "Conditioning",
-      "description": "Increases base Agility and Strength by 5%.",
-      "damage_mod": 0,
-      "affects": "stats",
-      "stat_mod": [
-        {
-          "id": 0,
-          "base_mod": 0,
-          "percent_mod": 5.0
-        },
-        {
-          "id": 1,
-          "base_mod": 0,
-          "percent_mod": 5.0
-        }
-      ],
-      "level_req": 15
+      "level_req": 5,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
     }
   ]
 }

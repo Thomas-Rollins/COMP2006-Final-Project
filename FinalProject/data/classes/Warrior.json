@@ -1,15 +1,115 @@
 {
-  "name":"Warrior",
-  "stats":
-  [
-    {"name":"Agility", "base":10, "growth_rate": 1.10 },
-    {"name":"dexterity", "base":10, "growth_rate": 0.90},
-    {"name":"focus", "base":10, "growth_rate": 1.00 },
-    {"name":"intelligence", "base":10, "growth_rate": 0.60 },
-    {"name":"luck", "base":10, "growth_rate": 1.00 },
-    {"name":"strength", "base":10, "growth_rate": 1.45 },
-    {"name":"technique", "base":10, "growth_rate": 1.00 },
-    {"name":"vitality", "base":10, "growth_rate": 1.70 },
-    {"name":"wisdom", "base":10, "growth_rate": 0.75 }
+  "name": "Warrior",
+  "stats": [
+    {
+      "name": "Agility",
+      "base": 10,
+      "growth_rate": 1.10
+    },
+    {
+      "name": "dexterity",
+      "base": 10,
+      "growth_rate": 0.90
+    },
+    {
+      "name": "focus",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "intelligence",
+      "base": 10,
+      "growth_rate": 0.60
+    },
+    {
+      "name": "luck",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "strength",
+      "base": 10,
+      "growth_rate": 1.45
+    },
+    {
+      "name": "technique",
+      "base": 10,
+      "growth_rate": 1.00
+    },
+    {
+      "name": "vitality",
+      "base": 10,
+      "growth_rate": 1.70
+    },
+    {
+      "name": "wisdom",
+      "base": 10,
+      "growth_rate": 0.75
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Attack",
+      "description": "A basic single-target attack.",
+      "physical_damage": 1,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 0,
+      "targets": 1,
+      "level_req": 0,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Heavy Strike",
+      "description": "Deal heavy damage to a single target.",
+      "physical_damage": 1.8,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 15,
+      "targets": 1,
+      "level_req": 2,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
+      "name": "Charge",
+      "description": "Charge at the enemy lines dealing small damage to all targets. Stuns.",
+      "physical_damage": 0.3,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.0,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 40,
+      "targets": 1,
+      "level_req": 5,
+      "friendly": false,
+      "stun": true,
+      "execute": false,
+      "restore": false
+    }
   ]
 }

@@ -81,6 +81,9 @@
     <ClCompile Include="src\Custom_Exception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\characterClasses\abilities\Ability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\jsoncpp\json\json.h">
@@ -90,9 +93,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\logging\Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\characterClasses\abilities\Abilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\characterClasses\CharacterClass.h">
@@ -144,6 +144,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\NPC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\characterClasses\abilities\Ability.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

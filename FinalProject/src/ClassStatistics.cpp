@@ -167,7 +167,7 @@ const High_Level_Calculation_Ratios* ClassStatistics::ATK_RATIO = new High_Level
 const High_Level_Calculation_Ratios* ClassStatistics::DEF_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	0.800f,
+	2.000f,
 	// STR
 	0.080f,
 	// AGI
@@ -190,7 +190,7 @@ const High_Level_Calculation_Ratios* ClassStatistics::MGK_RATIO = new High_Level
 	// VIT
 	0.000f,
 	// STR
-	-0.055f,
+	-0.550f,
 	// AGI
 	0.000f,
 	// DEX
@@ -198,9 +198,9 @@ const High_Level_Calculation_Ratios* ClassStatistics::MGK_RATIO = new High_Level
 	// TEC
 	0.030f,
 	// INT
-	0.700f,
+	2.700f,
 	// WIS
-	0.080f,
+	0.800f,
 	// FCS
 	0.020f,
 	// LUK
@@ -219,9 +219,9 @@ const High_Level_Calculation_Ratios* ClassStatistics::MND_RATIO = new High_Level
 	// TEC
 	0.020f,
 	// INT
-	0.100f,
-	// WIS
 	0.800f,
+	// WIS
+	2.800f,
 	// FCS
 	0.010f,
 	// LUK
@@ -240,7 +240,7 @@ const High_Level_Calculation_Ratios* ClassStatistics::ACC_RATIO = new High_Level
 	// TEC
 	0.040f,
 	// INT
-	0.010f,
+	0.000f,
 	// WIS
 	0.020f,
 	// FCS
@@ -251,7 +251,7 @@ const High_Level_Calculation_Ratios* ClassStatistics::ACC_RATIO = new High_Level
 const High_Level_Calculation_Ratios* ClassStatistics::EVD_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	-0.020f,
+	-0.300f,
 	// STR
 	0.000f,
 	// AGI
