@@ -125,14 +125,36 @@ void PlaybleCharacter::initialize_character_stats()
 		}
 		this->get_character_stats()->set_high_stats();
 		this->get_character_stats()->reset_current_values();
+
+		// #TODO: deal with signed/unsigned mismatch case
+		const Json::Value& abilities = obj["abilities"];
+		for (int i = 0; i < obj.size(); i++)
+		{
+			Ability* newAbility = new Ability(
+				abilities[i]["name"].asString(),
+				abilities[i]["description"].asString(),
+				abilities[i]["physical_damage"].asFloat(),
+				abilities[i]["magic_damage"].asFloat(),
+				abilities[i]["attack_bonus"].asFloat(),
+				abilities[i]["magic_bonus"].asFloat(),
+				abilities[i]["defense_bonus"].asFloat(),
+				abilities[i]["mind_bonus"].asFloat(),
+				abilities[i]["agility_bonus"].asFloat(),
+				abilities[i]["accuracy_bonus"].asFloat(),
+				static_cast<Elemental_Stats_ID>(abilities[i]["element"].asInt()),
+				static_cast<int>(abilities[i]["mp_cost"].asInt()),
+				static_cast<int>(abilities[i]["sp_cost"].asInt()),
+				static_cast<int>(abilities[i]["targets"].asInt()),
+				static_cast<int>(abilities[i]["level_req"].asInt()),
+				abilities[i]["friendly"].asBool(),
+				abilities[i]["stun"].asBool(),
+				abilities[i]["execute"].asBool(),
+				abilities[i]["restore"].asBool()
+			);
+			this->get_abilities().push_back(newAbility);
+		}
 	}
 	
-}
-
-void PlaybleCharacter::set_base_stats()
-{
-	//#TODO: add base_stat initialization
-
 }
 
 /**

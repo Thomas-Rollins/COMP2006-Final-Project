@@ -30,7 +30,6 @@ public:
 	virtual ClassStatistics* get_character_stats() = 0;
 	
 		//Mutators
-	virtual void set_base_stats() = 0;
 	virtual void add_experience(const double& experience) = 0;
 
 

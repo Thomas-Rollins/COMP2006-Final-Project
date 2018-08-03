@@ -38,15 +38,6 @@ double NPC::get_current_experience()
 	return round((4 * (pow(get_character_level() + 1, 3))) / 5);
 }
 
-ClassStatistics* NPC::get_character_stats() 
-{
-	return Character::get_character_stats();
-}
-
-std::vector<Ability*> NPC::get_abilities()
-{
-	return Character::get_abilities();
-}
 
 void NPC::initialize_character_stats()
 {
@@ -127,7 +118,7 @@ void NPC::initialize_character_stats()
 		this->get_character_stats()->set_high_stats();
 		this->get_character_stats()->reset_current_values();
 
-		// #TODO: add ability initialization
+		// #TODO: deal with signed/unsigned mismatch case
 		const Json::Value& abilities = obj["abilities"];
 		for (int i = 0; i < obj.size(); i++)
 		{
@@ -157,11 +148,6 @@ void NPC::initialize_character_stats()
 		}
 		
 	}
-}
-
-void NPC::set_base_stats()
-{
-	//#TODO: add method to change base-stats based on actions within the game
 }
 
 void NPC::add_experience(const double& experience)
