@@ -466,7 +466,6 @@ void ClassStatistics::reset_current_values()
 
 void ClassStatistics::set_high_stats()
 {
-	this->set_base_value(luck_id, (int) floor(calculate_high_stat(LUK_RATIO)));
 	this->set_base_value(health_id, floor(calculate_high_stat(HP_RATIO)));
 	this->set_base_value(mana_id, floor(calculate_high_stat(MP_RATIO)));
 	this->set_base_value(magic_id, calculate_high_stat(MGK_RATIO));

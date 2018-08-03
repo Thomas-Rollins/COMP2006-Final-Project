@@ -23,8 +23,8 @@
     },
     {
       "name": "luck",
-      "base": 10,
-      "growth_rate": 1.00
+      "base": 5,
+      "growth_rate": 0.03
     },
     {
       "name": "strength",

@@ -108,7 +108,7 @@ void NPC::initialize_character_stats()
 			// Base Values
 			this->get_character_stats()->set_base_value(
 				i_ref, (int)floor(
-					base_stats[i_ref]["base"].asUInt() +
+					base_stats[i_ref]["base"].asInt() +
 					(floor((get_character_stats()->get_growth_value(i_ref) *
 						this->get_character_stats()->BASE_STAT_INCREASE_PER_LEVEL) *
 						(this->get_character_level() - 1)))

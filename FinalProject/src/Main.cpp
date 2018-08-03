@@ -38,11 +38,11 @@ int main()
 
 	for (auto character : characters)
 	{
-		double rand_exp = (double)random_int(1000, 800000000);
+		/*double rand_exp = (double)random_int(1000, 800000000);
 		try {
 			character->add_experience(rand_exp);
 		}
-		catch (NotImplemented e) {}		
+		catch (NotImplemented e) {}		*/
 		
 		std::cout << character->get_character_class()->get_class_name() << std::endl;
 		std::cout << "Level: " << character->get_character_level() << std::endl;
