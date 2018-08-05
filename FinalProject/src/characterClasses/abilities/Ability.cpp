@@ -1,4 +1,4 @@
-
+#include <iostream>
 
 #include "Ability.h"
 
@@ -19,4 +19,9 @@ Ability::Ability(const std::string& name, const std::string& desc, const float& 
 Ability::~Ability()
 {
 
+}
+
+void Ability::setUsable(bool usable)
+{
+	m_usable = usable;
 }

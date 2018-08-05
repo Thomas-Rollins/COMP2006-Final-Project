@@ -31,24 +31,25 @@ public:
 	
 		//Mutators
 	virtual void add_experience(const double& experience) = 0;
-
+	virtual void print_low_stats();
+	virtual void print_high_stats();
+	virtual void print_abiities();
 
 	//Accessors
 	const std::vector<Ability*> get_abilities() const { return m_abilities; }
 	const CharacterClass* get_character_class() const { return m_character_class; }
-	
+	const std::string get_name() const { return m_name; }
 	const int get_character_level() const { return m_level; }
 
 	//mutators
 	void set_character_level(const int &level);
-	
-	virtual void print_low_stats();
-	virtual void print_high_stats();
+	void addAbility(Ability* newAbility);
+	void updateAbility_State();
 
 private:
 	const std::string m_name;
 	int m_level;
-	std::vector<Ability*> m_abilities = {};
+	std::vector<Ability*> m_abilities;
 	CharacterClass* m_character_class;
 	ClassStatistics* m_character_stats;
 

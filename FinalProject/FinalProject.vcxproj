@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Battle.cpp" />
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\characterClasses\abilities\Ability.cpp" />
     <ClCompile Include="src\ClassStatistics.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="src\PlaybleCharacter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Battle.h" />
     <ClInclude Include="src\Character.h" />
     <ClInclude Include="src\ClassStatistics.h" />
     <ClInclude Include="src\characterClasses\Archer.h" />

@@ -4,6 +4,7 @@
 #include "PlayableCharacter.h"
 
 #include <iostream>
+#include <algorithm>
 
 
 Character* Character::make_character(bool npc, const int &class_id, const std::string &name, const int &level)
@@ -41,6 +42,14 @@ Character::~Character()
 {
 	delete m_character_stats;
 	delete m_character_class;
+
+	//deletes the pointers contained in the array
+	for (auto&& ability : m_abilities)
+	{
+		delete(ability);
+	}
+	m_abilities.clear();
+
 	std::cout << "Character Entity Deleted" << std::endl;
 }
 
@@ -52,6 +61,27 @@ ClassStatistics* Character::get_character_stats()
 void Character::set_character_level(const int &level)
 {
 	m_level = level;
+}
+
+void Character::addAbility(Ability* newAbility)
+{
+	m_abilities.push_back(newAbility);
+}
+
+void Character::updateAbility_State()
+{
+	for (auto&& ability : get_abilities())
+	{
+		if (this->get_character_level() < ability->get_level_requirement() ||
+			this->get_character_stats()->get_current_value(mana_id) < ability->get_mp_cost() || this->get_character_stats()->get_current_value(skill_points_id) <
+			ability->get_sp_cost())
+		{
+			ability->setUsable(false);
+		}
+		else
+			ability->setUsable(true);
+	}
+	
 }
 
 void Character::print_low_stats()
@@ -79,4 +109,29 @@ void Character::print_high_stats()
 		<< get_character_stats()->get_base_value(accuracy_id) << "\t\tEVD: "
 		<< get_character_stats()->get_base_value(evasion_id) << "\t\tCRT: "
 		<< get_character_stats()->get_base_value(critical_id) << std::endl;
+}
+
+void Character::print_abiities()
+{
+	std::cout << "Abilities:" << std::endl;
+	
+	// auto&& retains const-ness and the rvalue-ness of the result of the itererator dereference
+	for (auto&& ability : get_abilities())
+	{
+		std::cout << ability->get_name() << std::endl << ability->get_description() << std::endl
+			<< "phys damage: " << ability->get_physical_damage() << "\tMagic dmg: " <<
+			ability->get_magic_damage() << "\tAtt Bonus: " << ability->get_attack_bonus() <<
+			"\tMagic Bonus: " << ability->get_magic_bonus() << "\tDef Bonus: " <<
+			ability->get_defense_bonus() << "\tMind Bonus: " << ability->get_mind_bonus() <<
+			"\tMagic Bonus: " << ability->get_magic_bonus() << "\tDef Bonus: " <<
+			ability->get_defense_bonus() << "\tMind Bonus: " << ability->get_mind_bonus() <<
+			"\tAgility Bonus: " << ability->get_agility_bonus() << "\tAcc Bonus: " <<
+			ability->get_accuracy_bonus() << "\tElement: " << ability->get_element() <<
+			"\tMP cost: " << ability->get_mp_cost() << "\tSP Cost: " <<
+			ability->get_sp_cost() << "\tTargets: " << ability->get_num_of_targets() <<
+			"\tLevel Req: " << ability->get_level_requirement() << "\tFriendly: " <<
+			ability->isFriendly() << "\tStuns : " << ability->isStun() <<
+			"\tExecute: " << ability->isExecute() << "\tRestore: " << ability->isRestore() <<
+			"\tUsable: " << ability->isUsable() << std::endl;
+	}
 }

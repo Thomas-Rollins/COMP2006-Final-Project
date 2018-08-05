@@ -84,6 +84,9 @@
     <ClCompile Include="src\characterClasses\abilities\Ability.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Battle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\jsoncpp\json\json.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\characterClasses\abilities\Ability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Battle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

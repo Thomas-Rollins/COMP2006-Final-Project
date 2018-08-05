@@ -33,6 +33,9 @@ public:
 	const bool isRestore() const { return m_restore; }
 	bool isUsable() const { return m_usable; }
 
+	//mutators
+	void setUsable(bool usable);
+
 private:
 	const std::string m_name;
 	const std::string m_description;

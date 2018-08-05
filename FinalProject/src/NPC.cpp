@@ -119,6 +119,7 @@ void NPC::initialize_character_stats()
 		this->get_character_stats()->reset_current_values();
 
 		// #TODO: deal with signed/unsigned mismatch case
+		this->get_abilities().reserve(5);
 		const Json::Value& abilities = obj["abilities"];
 		for (int i = 0; i < obj.size(); i++)
 		{
@@ -144,9 +145,10 @@ void NPC::initialize_character_stats()
 				abilities[i]["execute"].asBool(),
 				abilities[i]["restore"].asBool()
 			);
-			this->get_abilities().push_back(newAbility);
+			this->addAbility(newAbility);
 		}
-		
+		//updates the isUsable state.
+		this->updateAbility_State();	
 	}
 }
 

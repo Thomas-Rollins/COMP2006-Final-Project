@@ -20,7 +20,7 @@ public:
 	double get_current_experience();
 	ClassStatistics* get_character_stats() { return Character::get_character_stats(); }
 	std::vector<Ability*> get_abilities() {	return Character::get_abilities(); }
-
+	
 		//Mutators
 	void character_action();
 
