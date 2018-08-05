@@ -1,5 +1,5 @@
 #pragma once
-#include "c:\Dev\ForeverLost\FinalProject\FinalProject\src\characterClasses\CharacterClass.h"
+#include "CharacterClass.h"
 class Brawler :
 	public CharacterClass
 {
