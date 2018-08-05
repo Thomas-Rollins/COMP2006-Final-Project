@@ -7,6 +7,7 @@
 #include "characterClasses/CharacterClass.h"
 #include "ClassStatistics.h"
 #include "characterClasses/abilities/Ability.h"
+#include "Utilities.h"
 
 
 
@@ -22,6 +23,9 @@ public:
 
 	//Statics
 	static Character* make_character(bool npc, const int &class_id, const std::string &name, const int &level);
+
+	void operator+(const int health);
+	void operator-(const int health);
 
 	// Pure Virtuals
 		//Accessors
@@ -40,6 +44,7 @@ public:
 	const CharacterClass* get_character_class() const { return m_character_class; }
 	const std::string get_name() const { return m_name; }
 	const int get_character_level() const { return m_level; }
+	const Ability* get_action(const bool friendly);
 
 	//mutators
 	void set_character_level(const int &level);

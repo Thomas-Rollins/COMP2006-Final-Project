@@ -22,20 +22,26 @@ int main()
 
 	//std::vector<Character*> characters;
 
-	/*for (int i = 0; i < 256; i++)
-	{
-		std::cout << "Level " << i << ": ";
-		std::cout << round((4 * (pow(i + 1, 3))) / 5) << std::endl;
-	}*/
+	//for (int i = 0; i < 256; i++)
+	//{
+	//	std::cout << "Level " << i << ": ";
+	//	std::cout << round((4 * (pow(i + 1, 3))) / 5) << std::endl;
+	//}
 
-	/*for (int i = 0; i < 12; i++)
-	{
-		int rand_class = (int)(random_int(1, 12));
-		bool rand_type = (bool)(random_int(1, 10) % 2);
-		Character* new_character = Character::make_character(true, i+1, "Name", 100);
+	//for (int i = 0; i < 12; i++)
+	//{
+	//	int rand_class = (int)(random_int(1, 12));
+	//	bool rand_type = (bool)(random_int(1, 10) % 2);
+	//	Character* new_character = Character::make_character(true, i+1, "Name", 100);
 
-		characters.push_back(new_character);
-	}*/
+	//	characters.push_back(new_character);
+	//}
+
+	//for (auto&& character : characters)
+	//{
+	//	character->print_abiities();
+	//}
+
 	std::vector<Character*> team_1, team_2;
 	team_1.reserve(4);
 	team_2.reserve(4);

@@ -83,10 +83,13 @@ public:
 	//Mutators
 		// Low Level
 	void set_base_value(Low_Stats_ID const &stat_id, const int &base_value);
+
+	void set_current_value(Low_Stats_ID const &stat_id);
 	void set_current_value(Low_Stats_ID const&stat_id, const int &current_value);
 	void set_growth_value(Low_Stats_ID const &stat_id, const float &growth_value);
 		// High Level
 	void set_base_value(High_Stats_ID const &stat_id, const float &base_value);
+	void set_current_value(High_Stats_ID const &stat_id);
 	void set_current_value(High_Stats_ID const&stat_id, const float &current_value);
 		// Elemental
 	void set_base_value(Elemental_Stats_ID const &stat_id, const float &base_value);

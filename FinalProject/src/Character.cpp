@@ -1,7 +1,7 @@
 #include "Character.h"
-#include "characterClasses/CharacterClass.h"
 #include "NPC.h"
 #include "PlayableCharacter.h"
+
 
 #include <iostream>
 #include <algorithm>
@@ -53,6 +53,19 @@ Character::~Character()
 	std::cout << "Character Entity Deleted" << std::endl;
 }
 
+// overloaded operators ...added cause friends aren't happening.
+void Character::operator+(const int health)
+{
+	float current = (float) m_character_stats->get_current_value(health_id);
+	m_character_stats->set_current_value(health_id, current + health);
+}
+
+void Character::operator-(const int health)
+{
+	float current = (float) m_character_stats->get_current_value(health_id);
+	m_character_stats->set_current_value(health_id, current - health);
+}
+
 ClassStatistics* Character::get_character_stats()
 {
 	return m_character_stats;
@@ -82,6 +95,43 @@ void Character::updateAbility_State()
 			ability->setUsable(true);
 	}
 	
+}
+
+const Ability* Character::get_action(const bool friendly)
+{
+	std::vector<Ability*> usable_abilities = m_abilities;
+
+	//sorts the abilities by m_usable (usable ones first)
+	std::sort(usable_abilities.begin(), usable_abilities.end(), [](Ability* ability_1, Ability* ability_2)
+	{
+		return ability_1->isUsable() > ability_2->isUsable();
+	});
+
+	// removes all unusable abilities
+	for (auto&& ability : usable_abilities)
+	{
+		if (!ability->isUsable())
+		{
+			usable_abilities.pop_back();
+		}
+	}
+
+	std::vector<std::string> options;
+	for (auto&& ability : usable_abilities)
+	{
+		// populates the vector of options with the ability name and MP/SP costs
+		if (ability->isUsable())
+		{
+			std::cout << std::endl << ability->get_mp_cost() << "\t" << ability->get_sp_cost() << std::endl;
+			std::string option = ability->get_name() + "\tMP: ";
+			option.append(std::to_string(ability->get_mp_cost()) + "\tSP: ");
+			option.append(std::to_string(ability->get_sp_cost()));
+
+			options.push_back(option);
+		}
+	}
+	std::cout << "Which ability would you like to use?" << std::endl;
+	return usable_abilities.at(Utilities::draw_menu(options) - 1);
 }
 
 void Character::print_low_stats()

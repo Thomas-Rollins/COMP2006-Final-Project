@@ -161,6 +161,7 @@
     <ClCompile Include="src\characterClasses\Wizard.cpp" />
     <ClCompile Include="src\NPC.cpp" />
     <ClCompile Include="src\PlaybleCharacter.cpp" />
+    <ClCompile Include="src\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Battle.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="src\characterClasses\Wizard.h" />
     <ClInclude Include="src\NPC.h" />
     <ClInclude Include="src\PlayableCharacter.h" />
+    <ClInclude Include="src\Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\classes\Archer.json" />
