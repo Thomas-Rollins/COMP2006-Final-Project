@@ -10,10 +10,57 @@
 #include "Battle.h"
 
 
+std::string get_npc_name(const int class_id)
+{
+	switch (class_id)
+	{
+	case archer_id:
+		return "NPC Archer";
+		break;
+	case assassin_id:
+		return "NPC Assassin";
+		break;
+	case brawler_id:
+		return "NPC Brawler";
+		break;
+	case guardian_id:
+		return "NPC Guardian";
+		break;
+	case magic_swordsman_id:
+		return "NPC Magic_Swordsman";
+		break;
+	case necromancer_id:
+		return "NPC Necromancer";
+		break;
+	case priest_id:
+		return "NPC Priest";
+		break;
+	case sage_id:
+		return "NPC Sage";
+		break;
+	case scout_id:
+		return "NPC Scout";
+		break;
+	case swordsman_id:
+		return "NPC Swordsman";
+		break;
+	case warrior_id:
+		return  "NPC Warrior";
+		break;
+	case wizard_id:
+		return "NPC Wizard";
+		break;
+	default:
+		return "NPC NullClass";
+		break;
+
+	}
+}
+
 int main()
 {
 	srand(static_cast <unsigned> (time(nullptr)));
-
+	
 	std::vector<Character*> characters;
 
 	//for (int i = 0; i < 256; i++)
@@ -39,6 +86,47 @@ int main()
 	std::vector<Character*> team_1, team_2;
 	team_1.reserve(4);
 	team_2.reserve(4);
+
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	std::cout << "Player " << i+1 << " out of 4 creation." << std::endl;
+	//	std::string name;
+	//	Class_id class_id;
+	//	Utilities::get_input("Please enter your name:\t", name);
+	//	std::cout << "Please select your class" << std::endl;
+	//	std::vector<std::string> options = {
+	//		"Archer", "Assassin", "Brawler", "Guardian", "Magic Swordsman", "Necromancer", "Priest", "Sage", "Scout", "Swordsman", "Warrior", "Wizard"
+	//	};
+	//	class_id = static_cast<Class_id>(Utilities::draw_menu(options));
+	//	std::cout << std::endl;
+	//	team_1.push_back(Character::make_character(false, class_id, name, 5));
+	//}
+
+	//int npc_class_id_1, npc_class_id_2, npc_class_id_3, npc_class_id_4;
+	//npc_class_id_1 = Utilities::random_int(1, 12);
+	//npc_class_id_2 = Utilities::random_int(1, 12);
+	//npc_class_id_3 = Utilities::random_int(1, 12);
+	//npc_class_id_4 = Utilities::random_int(1, 12);
+
+	//while (npc_class_id_2 == npc_class_id_1)
+	//{
+	//	npc_class_id_2 = Utilities::random_int(1, 12);
+	//}
+	//while (npc_class_id_3 == npc_class_id_2 || npc_class_id_3 == npc_class_id_1)
+	//{
+	//	npc_class_id_3 = Utilities::random_int(1, 12);
+	//}
+	//while (npc_class_id_4 == npc_class_id_1 || npc_class_id_4 == npc_class_id_2 || npc_class_id_4 == npc_class_id_3)
+	//{
+	//	npc_class_id_4 = Utilities::random_int(1, 12);
+	//}
+	//team_2.push_back(Character::make_character(true, npc_class_id_1, get_npc_name(npc_class_id_1), 5));
+	//team_2.push_back(Character::make_character(true, npc_class_id_2, get_npc_name(npc_class_id_2), 5));
+	//team_2.push_back(Character::make_character(true, npc_class_id_3, get_npc_name(npc_class_id_3), 5));
+	//team_2.push_back(Character::make_character(true, npc_class_id_4, get_npc_name(npc_class_id_4), 5));
+	
+		
+
 
 	// All npcs
 	Character* new_character1 = Character::make_character(true, archer_id, "Player 1", 25);

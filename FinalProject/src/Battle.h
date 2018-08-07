@@ -30,6 +30,7 @@ private:
 	float get_elemental_dmg_modifer(const Ability* ability, Character* target);
 	bool isCritAttack();
 	Character* get_target();
+	void give_sp(const Character* actor);
 	void remove_dead();
 	bool team_dead(std::vector<Character*> team);
 	

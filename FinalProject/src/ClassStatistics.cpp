@@ -388,7 +388,10 @@ void ClassStatistics::set_growth_value(Low_Stats_ID const &stat_id, const float 
 void ClassStatistics::set_base_value(High_Stats_ID const &stat_id, const float &base_value)
 {
 	if (stat_id == skill_points_id)
-		m_high_level_stats[skill_points_id][base_value_id] = 0.f;
+	{
+		if (base_value >= SP_MAX_VALUE)
+			m_high_level_stats[skill_points_id][base_value_id] = SP_MAX_VALUE;
+	}
 	else if (base_value <= HIGH_STAT_MAX_VALUE)
 		m_high_level_stats[stat_id][base_value_id] = base_value;
 	else
@@ -465,7 +468,10 @@ void ClassStatistics::reset_current_values(const bool heal)
 	{
 		High_Stats_ID i_ref = static_cast<High_Stats_ID> (i);
 		float value = this->get_base_value(i_ref);
-		this->set_current_value(i_ref, value);
+		if (i_ref == skill_points_id) 
+			this->set_current_value(i_ref, 0.f);		
+		else
+			this->set_current_value(i_ref, value);
 	}
 	
 	if (heal)
@@ -495,7 +501,7 @@ void ClassStatistics::set_high_stats()
 	this->set_base_value(health_id, floor(calculate_high_stat(HP_RATIO)));
 	this->set_base_value(mana_id, floor(calculate_high_stat(MP_RATIO)));
 	this->set_base_value(magic_id, calculate_high_stat(MGK_RATIO));
-	this->set_base_value(skill_points_id, 0);
+	this->set_base_value(skill_points_id, 100);
 	this->set_base_value(atk_id, calculate_high_stat(ATK_RATIO));
 	this->set_base_value(def_id, calculate_high_stat(DEF_RATIO));
 	this->set_base_value(magic_id, calculate_high_stat(MGK_RATIO));

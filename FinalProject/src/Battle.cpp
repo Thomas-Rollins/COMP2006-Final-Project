@@ -9,7 +9,6 @@
 #include "PlayableCharacter.h"
 
 
-
 Battle::Battle(std::vector<Character*> team_1, std::vector<Character*> team_2)
 	: m_team_1(team_1), m_team_2(team_2)
 {
@@ -74,7 +73,17 @@ Battle::Battle(std::vector<Character*> team_1, std::vector<Character*> team_2)
 		std::cout << std::endl;
 	} while ((m_team_2.size() > 0) && (m_team_1.size() > 0));
 
-	std::cout << "A team has died";
+	if (m_team_1.size() == 0)
+	{
+		std::cout << std::endl << std::endl << std::endl << "Your entire party has died...." << std::endl <<
+			"\tGame Over." << std::endl;
+	}
+	if (m_team_2.size() == 0)
+	{
+		std::cout << std::endl << std::endl << std::endl << "Congratulations! You have won the match." << std::endl;
+		
+	}
+	
 }
 
 
@@ -112,6 +121,15 @@ Character* Battle::get_target()
 		std::string option = character->get_name() + "\tHP: ";
 		option.append(std::to_string( (int) character->get_character_stats()->get_current_value(health_id))
 			+ "/" + std::to_string( (int) character->get_character_stats()->get_base_value(health_id)));
+
+		option.append("\tMP: ");
+		option.append(std::to_string((int)character->get_character_stats()->get_current_value(mana_id))
+			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(mana_id)));
+
+		option.append("\tSP: ");
+		option.append(std::to_string((int)character->get_character_stats()->get_current_value(skill_points_id))
+			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(skill_points_id)));
+
 		options.push_back(option);
 	}
 	for (auto&& character : m_team_1)
@@ -119,10 +137,19 @@ Character* Battle::get_target()
 		std::string option = character->get_name() + "\tHP: ";
 		option.append(std::to_string( (int) character->get_character_stats()->get_current_value(health_id))
 			+ "/" + std::to_string( (int) character->get_character_stats()->get_base_value(health_id)));
+
+		option.append("\tMP: ");
+		option.append(std::to_string((int)character->get_character_stats()->get_current_value(mana_id))
+			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(mana_id)));
+
+		option.append("\tSP: ");
+		option.append(std::to_string((int)character->get_character_stats()->get_current_value(skill_points_id))
+			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(skill_points_id)));
+
 		options.push_back(option);
 	}
 
-	std::cout << "Who would you like to target?" << std::endl;
+	std::cout << m_turn_order.at(0)->get_name() << " who would you like to target?" << std::endl;
 
 	int choice = Utilities::draw_menu(options);
 	int team_1_size = m_team_1.size();
@@ -164,6 +191,7 @@ void Battle::execute_action(const Ability* ability, Character* target)
 	float actor_atk, actor_magic, actor_acc, actor_crit;
 	int debuff = -1;
 	const bool friendly = ability->isFriendly();
+	int sp_gen = 5;
 
 	actor_atk = actor->get_character_stats()->get_current_value(atk_id);
 	actor_magic = actor->get_character_stats()->get_current_value(magic_id);
@@ -233,14 +261,36 @@ void Battle::execute_action(const Ability* ability, Character* target)
 	
 
 	//updates target high stats after any possible changes
-	if ((target->get_character_stats()->get_current_value(health_id) - damage) 
-		> target->get_character_stats()->get_base_value(health_id))
+	if (ability->isFriendly())
 	{
-		target->get_character_stats()->set_current_value(health_id, 
-			target->get_character_stats()->get_base_value(health_id));
+		if ((target->get_character_stats()->get_current_value(health_id) - damage)
+		> target->get_character_stats()->get_base_value(health_id))
+		{
+			target->get_character_stats()->set_current_value(health_id,
+				target->get_character_stats()->get_base_value(health_id));
+		}
+		target->get_character_stats()->set_current_value(health_id,
+			target->get_character_stats()->get_current_value(health_id) - damage);		
 	}
-	target->get_character_stats()->set_current_value(health_id,
-		target->get_character_stats()->get_current_value(health_id) - damage);
+	else
+	{
+		target->get_character_stats()->set_current_value(health_id,
+			target->get_character_stats()->get_current_value(health_id) - damage);
+	}
+	//sp generation
+	float percent_difference = abs(target->get_character_stats()->get_base_value(health_id) - damage) / abs(target->get_character_stats()->get_base_value(health_id));
+	sp_gen += (int)floor(sp_gen + (percent_difference * 10));
+	std::cout << "SP Gen: " << sp_gen;
+
+	actor->get_character_stats()->set_current_value(mana_id,
+		actor->get_character_stats()->get_current_value(mana_id) - ability->get_mp_cost());
+	actor->get_character_stats()->set_current_value(skill_points_id,
+		actor->get_character_stats()->get_current_value(skill_points_id) - ability->get_sp_cost() + sp_gen
+	);
+	target->get_character_stats()->set_current_value(skill_points_id, 
+		target->get_character_stats()->get_current_value(skill_points_id) + (sp_gen * 3 / 5)
+	);
+
 
 	// gets the missing health/MP before a stat update to maintain it.
 	float missing_health = (target->get_character_stats()->get_current_value(health_id)
@@ -262,14 +312,17 @@ void Battle::execute_action(const Ability* ability, Character* target)
 	target->get_character_stats()->set_current_value(mana_id,
 		target->get_character_stats()->get_current_value(mana_id) - missing_mp);
 
-	
 
-	std::cout << "Damage: " << damage << std::endl;
-	std::cout << "actor attack: " << actor_atk << std::endl;
-	std::cout << "target def: " << phys_resistance << std::endl;
-	std::cout << "Difference: " << actor_atk - phys_resistance << std::endl;
-	
-
+	if (friendly)
+	{
+		std::cout << actor->get_name() << " used " << ability->get_name() << " on " <<
+			target->get_name() << " and healed " << (int)floor(damage) * -1 << "health." << std::endl;
+	}
+	else
+	{
+		std::cout << actor->get_name() << " used " << ability->get_name() << " on " <<
+			target->get_name() << " and dealt " << (int)floor(damage) << " damage." << std::endl;
+	}
 }
 
 float Battle::get_modifiers(const Ability* ability)
@@ -398,6 +451,7 @@ bool Battle::isCritAttack()
 	return Utilities::random_float(0.f, 1.f) < chance;
 }
 
+
 /**
  * This method completely removes the dead making reviving not possible.
  * Not to be used with team_dead(std::vector<Character*> team)
@@ -425,9 +479,8 @@ void Battle::remove_dead()
 			{
 				m_turn_order.erase(std::remove(m_turn_order.begin(), m_turn_order.end(), member),
 					m_turn_order.end());
-				std::cout << turn_member << "member: " << member << std::endl;
 			}
-			std::cout << m_team_1.back()->get_name() << " has died permanently and left the team.";
+			std::cout << m_team_1.back()->get_name() << " has died permanently and left the team." << std::endl;
 			m_team_1.pop_back();
 		}
 	}
@@ -440,9 +493,8 @@ void Battle::remove_dead()
 			{
 				m_turn_order.erase(std::remove(m_turn_order.begin(), m_turn_order.end(), member),
 					m_turn_order.end());
-				std::cout << turn_member << "member: " << member << std::endl;
 			}
-			std::cout << m_team_2.back()->get_name() << " has died permanently and left the team.";
+			std::cout << m_team_2.back()->get_name() << " has died permanently and left the team." << std::endl;
 			m_team_2.pop_back();
 		}
 	}
