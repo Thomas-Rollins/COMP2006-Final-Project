@@ -27,7 +27,7 @@ public:
 	const int get_num_of_targets() const { return m_num_of_targets; }
 	const int get_level_requirement() const { return m_level_requirement; }
 	const Elemental_Stats_ID get_element() const { return m_element; }
-	const bool isFriendly() { return m_friendly; }
+	const bool isFriendly() const { return m_friendly; }
 	const bool isStun() const { return m_stun; }
 	const bool isExecute() const { return m_execute; }
 	const bool isRestore() const { return m_restore; }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+#include <algorithm>
 
 #include "PlayableCharacter.h"
 #include "../include/jsoncpp/json/json.h"
@@ -124,7 +125,17 @@ void PlaybleCharacter::initialize_character_stats()
 			);
 		}
 		this->get_character_stats()->set_high_stats();
-		this->get_character_stats()->reset_current_values();
+		
+		//Initializes the affinities
+		const Json::Value& affinity = obj["affinities"];
+		for (int i = 0; i < obj["affinities"].size(); i++)
+		{
+			this->get_character_stats()->set_base_value(
+				static_cast<Elemental_Stats_ID>(affinity[i]["id"].asInt()),
+				affinity[i]["value"].asFloat()
+			);
+		}
+		this->get_character_stats()->reset_current_values(true);
 
 		// #TODO: deal with signed/unsigned mismatch case
 		const Json::Value& abilities = obj["abilities"];
@@ -168,13 +179,50 @@ void PlaybleCharacter::level_base_stats()
 		Low_Stats_ID i_ref = static_cast<Low_Stats_ID> (i); //cast to an Low_Stats_ID Enum type
 
 		this->get_character_stats()->set_base_value(i_ref,
-			this->get_character_stats()->get_base_value(i_ref) + 
+			this->get_character_stats()->get_base_value(i_ref) +
 			(int)floor(
-			(this->get_character_stats()->get_growth_value(i_ref) * 
+			(this->get_character_stats()->get_growth_value(i_ref) *
 				this->get_character_stats()->BASE_STAT_INCREASE_PER_LEVEL)
 			)
 		);
 		this->get_character_stats()->set_high_stats();
-		this->get_character_stats()->reset_current_values();
+		this->get_character_stats()->reset_current_values(true);
 	}
+}
+
+const Ability* PlaybleCharacter::get_action(const bool friendly)
+{
+	std::vector<Ability*> usable_abilities = this->get_abilities();
+
+	//sorts the abilities by m_usable (usable ones first)
+	std::sort(usable_abilities.begin(), usable_abilities.end(), [](Ability* ability_1, Ability* ability_2)
+	{
+		return ability_1->isUsable() > ability_2->isUsable();
+	});
+
+	// removes all unusable abilities
+	for (auto&& ability : usable_abilities)
+	{
+		if (!ability->isUsable())
+		{
+			usable_abilities.pop_back();
+		}
+	}
+
+	std::vector<std::string> options;
+	for (auto&& ability : usable_abilities)
+	{
+		// populates the vector of options with the ability name and MP/SP costs
+		if (ability->isUsable())
+		{
+			std::string option = ability->get_name() + "\tMP: ";
+			option.append(std::to_string(ability->get_mp_cost()) + "\tSP: ");
+			option.append(std::to_string(ability->get_sp_cost()));
+
+			options.push_back(option);
+		}
+	}
+
+	std::cout << "Which ability would you like to use?" << std::endl;
+	return usable_abilities.at(Utilities::draw_menu(options) - 1);
 }

@@ -16,6 +16,7 @@ public:
 	
 	//Flag checks
 	bool experience_req_met();
+	const Ability* get_action(const bool friendly);
 
 	//Accessors
 	double get_next_level_experience() { return m_exp_required_for_next_level; }

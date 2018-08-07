@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+#include <algorithm>
 
 #include "NPC.h"
 #include "../include/jsoncpp/json/json.h"
@@ -116,14 +117,24 @@ void NPC::initialize_character_stats()
 			);
 		}
 		this->get_character_stats()->set_high_stats();
-		this->get_character_stats()->reset_current_values();
+
+		//Initializes the affinities
+		const Json::Value& affinity = obj["affinities"];
+		for (int i = 0; i < obj["affinities"].size(); i++)
+		{
+			this->get_character_stats()->set_base_value(
+				static_cast<Elemental_Stats_ID>(affinity[i]["id"].asInt()), 
+				affinity[i]["value"].asFloat()
+			);
+		}
+		this->get_character_stats()->reset_current_values(true);
 
 		// #TODO: deal with signed/unsigned mismatch case
 		this->get_abilities().reserve(5);
 		const Json::Value& abilities = obj["abilities"];
-		for (int i = 0; i < obj.size(); i++)
+		for (int i = 0; i < obj["abilities"].size(); i++)
 		{
-			
+
 			Ability* newAbility = new Ability(
 				abilities[i]["name"].asString(),
 				abilities[i]["description"].asString(),
@@ -148,11 +159,56 @@ void NPC::initialize_character_stats()
 			this->addAbility(newAbility);
 		}
 		//updates the isUsable state.
-		this->updateAbility_State();	
+		this->updateAbility_State();
+		
 	}
+	this->print_elemental_affinities();
 }
+
+
+const Ability* NPC::get_action(const bool friendly)
+{
+	std::vector<Ability*> usable_abilities = this->get_abilities();
+
+	//sorts the abilities by m_usable (usable ones first)
+	std::sort(usable_abilities.begin(), usable_abilities.end(), [](Ability* ability_1, Ability* ability_2)
+	{
+		return ability_1->isUsable() > ability_2->isUsable();
+	});
+
+	// removes all unusable abilities
+	for (auto&& ability : usable_abilities)
+	{
+		if (!ability->isUsable())
+		{
+			usable_abilities.pop_back();
+		}
+	}
+
+	std::vector<std::string> options;
+	for (auto&& ability : usable_abilities)
+	{
+		// populates the vector of options with the ability name and MP/SP costs
+		if (ability->isUsable())
+		{
+			std::string option = ability->get_name() + "\tMP: ";
+			option.append(std::to_string(ability->get_mp_cost()) + "\tSP: ");
+			option.append(std::to_string(ability->get_sp_cost()));
+
+			options.push_back(option);
+		}
+	}
+
+	std::cout << "Which ability would you like to use?" << std::endl;
+	return usable_abilities.at(Utilities::draw_menu(options) - 1);
+
+	// Very simple NPC control for them to select an ability.
+	//return usable_abilities.at(Utilities::random_int(0, usable_abilities.size()));
+}
+
 
 void NPC::add_experience(const double& experience)
 {
 	//throw NotImplemented();
 }
+

@@ -25,7 +25,7 @@
 				break;
 			}
 
-			std::cout << "Please enter a correct value." << std::endl;
+			std::cout << "Please enter an integer." << std::endl;
 		}
 	}
 
@@ -52,6 +52,22 @@
 		std::cout << std::endl;
 
 		int choice;
+		std::string error_msg = "Your choice must be between 1 and " + std::to_string(options.size())
+			+ ".\n";
 		get_input("Please choose an option: ", choice);
+		while (choice > options.size() || choice == 0)
+		{
+			get_input(error_msg, choice);
+		}
 		return choice;
+	}
+
+	int Utilities::random_int(const int &from, const int &to)
+	{
+		return rand() % to + from;
+	};
+
+	float  Utilities::random_float(const float &from, const float &to)
+	{
+		return from + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (to - from)));
 	}

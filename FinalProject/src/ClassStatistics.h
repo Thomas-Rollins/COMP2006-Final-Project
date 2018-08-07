@@ -94,6 +94,7 @@ public:
 		// Elemental
 	void set_base_value(Elemental_Stats_ID const &stat_id, const float &base_value);
 	void set_current_value(Elemental_Stats_ID const&stat_id, const float &current_value);
+	
 
 	//Static consts
 	static const int STAT_DESC_ATTRIBUTES = 2;
@@ -110,7 +111,7 @@ public:
 	static const int BASE_STAT_INCREASE_PER_LEVEL = 5;
 
 	//Mutators
-	void reset_current_values();
+	void reset_current_values(const bool heal);
 	void set_high_stats();
 	float calculate_high_stat(const High_Level_Calculation_Ratios* stat_ratio);
 private:

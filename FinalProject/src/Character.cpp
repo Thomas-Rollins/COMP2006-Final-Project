@@ -97,42 +97,8 @@ void Character::updateAbility_State()
 	
 }
 
-const Ability* Character::get_action(const bool friendly)
-{
-	std::vector<Ability*> usable_abilities = m_abilities;
 
-	//sorts the abilities by m_usable (usable ones first)
-	std::sort(usable_abilities.begin(), usable_abilities.end(), [](Ability* ability_1, Ability* ability_2)
-	{
-		return ability_1->isUsable() > ability_2->isUsable();
-	});
 
-	// removes all unusable abilities
-	for (auto&& ability : usable_abilities)
-	{
-		if (!ability->isUsable())
-		{
-			usable_abilities.pop_back();
-		}
-	}
-
-	std::vector<std::string> options;
-	for (auto&& ability : usable_abilities)
-	{
-		// populates the vector of options with the ability name and MP/SP costs
-		if (ability->isUsable())
-		{
-			std::cout << std::endl << ability->get_mp_cost() << "\t" << ability->get_sp_cost() << std::endl;
-			std::string option = ability->get_name() + "\tMP: ";
-			option.append(std::to_string(ability->get_mp_cost()) + "\tSP: ");
-			option.append(std::to_string(ability->get_sp_cost()));
-
-			options.push_back(option);
-		}
-	}
-	std::cout << "Which ability would you like to use?" << std::endl;
-	return usable_abilities.at(Utilities::draw_menu(options) - 1);
-}
 
 void Character::print_low_stats()
 {
@@ -159,6 +125,20 @@ void Character::print_high_stats()
 		<< get_character_stats()->get_base_value(accuracy_id) << "\t\tEVD: "
 		<< get_character_stats()->get_base_value(evasion_id) << "\t\tCRT: "
 		<< get_character_stats()->get_base_value(critical_id) << std::endl;
+}
+
+void Character::print_elemental_affinities()
+{
+	std::cout << "Fire: " << get_character_stats()->get_base_value(fire_id) <<
+		"\tWind: " << get_character_stats()->get_base_value(wind_id) <<
+		"\tEarth: " << get_character_stats()->get_base_value(earth_id) << std::endl <<
+		"Water: " << get_character_stats()->get_base_value(water_id) <<
+		"\tLghtn: " << get_character_stats()->get_base_value(wind_id) <<
+		"\tHoly: " << get_character_stats()->get_base_value(wind_id) << std::endl <<
+		"Dark: " << get_character_stats()->get_base_value(wind_id) <<
+		"\tVoid: " << get_character_stats()->get_base_value(wind_id) << std::endl
+		<< std::endl;
+
 }
 
 void Character::print_abiities()

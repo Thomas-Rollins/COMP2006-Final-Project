@@ -279,5 +279,39 @@
       "execute": false,
       "restore": false
     }
+  ],
+  "affinities": [
+    {
+      "id": 0,
+      "value": 1.125
+    },
+    {
+      "id": 1,
+      "value": 1.125
+    },
+    {
+      "id": 2,
+      "value": 1.125
+    },
+    {
+      "id": 3,
+      "value": 1.125
+    },
+    {
+      "id": 4,
+      "value": 1.125
+    },
+    {
+      "id": 5,
+      "value": 1.125
+    },
+    {
+      "id": 6,
+      "value": 1.125
+    },
+    {
+      "id": 7,
+      "value": 0.01
+    }
   ]
 }

@@ -25,7 +25,13 @@ public:
 private:
 	void update_turn_order();
 	void action();
+	void execute_action(const Ability* ability, Character* target);
+	float get_modifiers(const Ability* ability);
+	float get_elemental_dmg_modifer(const Ability* ability, Character* target);
+	bool isCritAttack();
 	Character* get_target();
+	void remove_dead();
+	bool team_dead(std::vector<Character*> team);
 	
 	std::vector<Character*> m_team_1, m_team_2;
 	std::vector<Character*> m_turn_order;

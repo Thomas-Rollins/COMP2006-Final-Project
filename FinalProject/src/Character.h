@@ -32,19 +32,22 @@ public:
 	virtual double get_next_level_experience() = 0;
 	virtual double get_current_experience() = 0;
 	virtual ClassStatistics* get_character_stats() = 0;
+	//actions
+	virtual const Ability* get_action(const bool friendly) = 0;
 	
 		//Mutators
 	virtual void add_experience(const double& experience) = 0;
 	virtual void print_low_stats();
 	virtual void print_high_stats();
 	virtual void print_abiities();
+	virtual void print_elemental_affinities();
+		
 
 	//Accessors
 	const std::vector<Ability*> get_abilities() const { return m_abilities; }
 	const CharacterClass* get_character_class() const { return m_character_class; }
 	const std::string get_name() const { return m_name; }
 	const int get_character_level() const { return m_level; }
-	const Ability* get_action(const bool friendly);
 
 	//mutators
 	void set_character_level(const int &level);

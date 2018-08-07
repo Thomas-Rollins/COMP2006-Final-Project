@@ -394,19 +394,24 @@ void ClassStatistics::set_base_value(High_Stats_ID const &stat_id, const float &
 	else
 		m_high_level_stats[stat_id][base_value_id] = HIGH_STAT_MAX_VALUE;
 }
+
 void ClassStatistics::set_current_value(High_Stats_ID const&stat_id, const float &current_value)
 {
 	if (stat_id == skill_points_id)
 	{
-		if(current_value <= SP_MAX_VALUE)
-			m_high_level_stats[skill_points_id][current_value_id] = current_value;
-		else
+		if (current_value >= SP_MAX_VALUE)
 			m_high_level_stats[skill_points_id][current_value_id] = SP_MAX_VALUE;
+		else if (current_value < 0)
+			m_high_level_stats[skill_points_id][current_value_id] = 0;
+		else
+			m_high_level_stats[skill_points_id][current_value_id] = current_value;
 	}
-	else if (current_value <= HIGH_STAT_MAX_VALUE)
-		m_high_level_stats[stat_id][current_value_id] = current_value;
-	else 
+	else if (current_value >= HIGH_STAT_MAX_VALUE)
 		m_high_level_stats[stat_id][current_value_id] = HIGH_STAT_MAX_VALUE;
+	else if (current_value < 0)
+		m_high_level_stats[stat_id][current_value_id] = 0;
+	else 
+		m_high_level_stats[stat_id][current_value_id] = current_value;
 }
 	// Elemental
 void ClassStatistics::set_base_value(Elemental_Stats_ID const &stat_id, const float &base_value)
@@ -447,7 +452,7 @@ void ClassStatistics::set_current_value(Elemental_Stats_ID const&stat_id, const 
 /**
  * This method will break if the Low_Stats_ID enum is not sequential
  */
-void ClassStatistics::reset_current_values()
+void ClassStatistics::reset_current_values(const bool heal)
 {
 	for (int i = 0; i < NUM_OF_LOW_STATS; i++)
 	{
@@ -462,7 +467,28 @@ void ClassStatistics::reset_current_values()
 		float value = this->get_base_value(i_ref);
 		this->set_current_value(i_ref, value);
 	}
+	
+	if (heal)
+	{
+		for (int i = 0; i < NUM_OF_ELEMENTAL_STATS; i++)
+		{
+			Elemental_Stats_ID i_ref = static_cast<Elemental_Stats_ID> (i);
+			float value = this->get_base_value(i_ref);
+			this->set_current_value(i_ref, value);
+		}
+	}
+	else
+	{
+		for (int i = 2; i < NUM_OF_ELEMENTAL_STATS; i++)
+		{
+			Elemental_Stats_ID i_ref = static_cast<Elemental_Stats_ID> (i);
+			float value = this->get_base_value(i_ref);
+			this->set_current_value(i_ref, value);
+		}
+	}
+	
 }
+
 
 void ClassStatistics::set_high_stats()
 {
