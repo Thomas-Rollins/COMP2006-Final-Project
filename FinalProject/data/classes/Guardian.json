@@ -81,7 +81,7 @@
       "agility_bonus": 0.0,
       "accuracy_bonus": 0.0,
       "mp_cost": 0,
-      "sp_cost": 15,
+      "sp_cost": 10,
       "targets": 4,
       "element": 7,
       "level_req": 2,

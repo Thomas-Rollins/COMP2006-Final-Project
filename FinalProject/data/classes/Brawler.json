@@ -70,7 +70,7 @@
       "restore": false
     },
     {
-      "name": "Snipe",
+      "name": "Bash",
       "description": "A heavy strike dealing 150% base damage with increased accuracy",
       "base_damage": 1.5,
       "magic_damage": 0,
@@ -81,7 +81,7 @@
       "agility_bonus": 0.0,
       "accuracy_bonus": 0.3,
       "mp_cost": 0,
-      "sp_cost": 15,
+      "sp_cost": 10,
       "targets": 1,
       "element": 7,
       "level_req": 2,

@@ -12,7 +12,24 @@
 Battle::Battle(std::vector<Character*> team_1, std::vector<Character*> team_2)
 	: m_team_1(team_1), m_team_2(team_2)
 {
-	
+	main_control();
+}
+
+Battle::~Battle()
+{
+	// since team_1, team_2, and m_turn_order share pointers they can all be deleted at once.
+	for (auto&& character : m_turn_order)
+	{
+		if(character)
+			delete(character);
+	}
+	m_turn_order.clear();
+	m_team_1.clear();
+	m_team_2.clear();
+}
+
+void Battle::main_control()
+{
 	std::cout << "Team one consists of:" << std::endl;
 	for (auto&& character : m_team_1)
 	{
@@ -30,33 +47,22 @@ Battle::Battle(std::vector<Character*> team_1, std::vector<Character*> team_2)
 
 	//pre-allocate and combine
 	m_turn_order.reserve(8);
-	m_turn_order.insert(m_turn_order.end(), team_1.begin(), team_1.end());
-	m_turn_order.insert(m_turn_order.end(), team_2.begin(), team_2.end());
+	m_turn_order.insert(m_turn_order.end(), m_team_1.begin(), m_team_1.end());
+	m_turn_order.insert(m_turn_order.end(), m_team_2.begin(), m_team_2.end());
 
 	update_turn_order();
 
 	/**
-	 * the characters in m_team_x and m_turn_order share the same pointer and therefore it is
-	 * possible to use pointer comparison to link the two when handling actions
-	 */
-	/*print_turn_order();
-
-	for (auto&& character : m_team_1)
-	{
-		std::cout << character->get_character_stats()->get_current_value(agility_id) << "\t" <<
-			character << std::endl;
-	}
-	for (auto&& character : m_team_2)
-	{
-		std::cout << character->get_character_stats()->get_current_value(agility_id) << "\t" <<
-			character << std::endl;
-	}*/
-	
-
-	do 
+	* the characters in m_team_x and m_turn_order share the same pointer and therefore it is
+	* possible to use pointer comparison to link the two when handling actions
+	*/
+	do
 	{
 		action();
-		remove_dead();
+		remove_dead(m_team_1, true);
+		remove_dead(m_team_2, true);
+		remove_dead(m_turn_order, false);
+
 		std::cout << "Team one consists of:" << std::endl;
 		for (auto&& character : m_team_1)
 		{
@@ -70,34 +76,12 @@ Battle::Battle(std::vector<Character*> team_1, std::vector<Character*> team_2)
 		{
 			std::cout << character->get_name() << std::endl;
 		}
+
 		std::cout << std::endl;
-	} while ((m_team_2.size() > 0) && (m_team_1.size() > 0));
-
-	if (m_team_1.size() == 0)
-	{
-		std::cout << std::endl << std::endl << std::endl << "Your entire party has died...." << std::endl <<
-			"\tGame Over." << std::endl;
-	}
-	if (m_team_2.size() == 0)
-	{
-		std::cout << std::endl << std::endl << std::endl << "Congratulations! You have won the match." << std::endl;
-		
-	}
-	
+	} while (!check_battle_over());
 }
 
 
-Battle::~Battle()
-{
-	// since team_1, team_2, and m_turn_order share pointers they can all be deleted at once.
-	for (auto&& character : m_turn_order)
-	{
-		delete(character);
-	}
-	m_turn_order.clear();
-	m_team_1.clear();
-	m_team_2.clear();
-}
 
 //sorts by highest agility value
 void Battle::update_turn_order()
@@ -116,6 +100,7 @@ void Battle::update_turn_order()
 Character* Battle::get_target()
 {
 	std::vector<std::string> options;
+	// adds the available targets to the options vector
 	for (auto&& character : m_team_2)
 	{
 		std::string option = character->get_name() + "\tHP: ";
@@ -177,6 +162,7 @@ void Battle::action()
 	else
 		execute_action(selected_ability, m_team_2.at(Utilities::random_int(0, m_team_1.size())));
 	*/
+
 	execute_action(m_turn_order.at(0)->get_action(m_friendly), get_target());
 
 	//moves the player to the end of the turn order vector after their action.
@@ -198,8 +184,6 @@ void Battle::execute_action(const Ability* ability, Character* target)
 	actor_acc = actor->get_character_stats()->get_current_value(accuracy_id);
 	actor_crit = actor->get_character_stats()->get_current_value(critical_id);
 	
-	
-
 	float phys_resistance = target->get_character_stats()->get_current_value(def_id);
 	float mgk_resistance = target->get_character_stats()->get_current_value(mind_id);
 
@@ -261,7 +245,7 @@ void Battle::execute_action(const Ability* ability, Character* target)
 	
 
 	//updates target high stats after any possible changes
-	if (ability->isFriendly())
+	if (friendly)
 	{
 		if ((target->get_character_stats()->get_current_value(health_id) - damage)
 		> target->get_character_stats()->get_base_value(health_id))
@@ -269,21 +253,26 @@ void Battle::execute_action(const Ability* ability, Character* target)
 			target->get_character_stats()->set_current_value(health_id,
 				target->get_character_stats()->get_base_value(health_id));
 		}
-		target->get_character_stats()->set_current_value(health_id,
-			target->get_character_stats()->get_current_value(health_id) - damage);		
+		else
+		{
+			target->get_character_stats()->set_current_value(health_id,
+				target->get_character_stats()->get_current_value(health_id) - damage);
+		}
 	}
 	else
 	{
 		target->get_character_stats()->set_current_value(health_id,
 			target->get_character_stats()->get_current_value(health_id) - damage);
 	}
+
 	//sp generation
-	float percent_difference = abs(target->get_character_stats()->get_base_value(health_id) - damage) / abs(target->get_character_stats()->get_base_value(health_id));
+	float percent_difference = abs(target->get_character_stats()->get_base_value(health_id) - damage) / 2 * abs(target->get_character_stats()->get_base_value(health_id));
 	sp_gen += (int)floor(sp_gen + (percent_difference * 10));
-	std::cout << "SP Gen: " << sp_gen;
+	std::cout << "SP Gen: " << sp_gen << std::endl;
 
 	actor->get_character_stats()->set_current_value(mana_id,
-		actor->get_character_stats()->get_current_value(mana_id) - ability->get_mp_cost());
+		actor->get_character_stats()->get_current_value(mana_id) - ability->get_mp_cost()
+	);
 	actor->get_character_stats()->set_current_value(skill_points_id,
 		actor->get_character_stats()->get_current_value(skill_points_id) - ability->get_sp_cost() + sp_gen
 	);
@@ -299,7 +288,10 @@ void Battle::execute_action(const Ability* ability, Character* target)
 	float missing_mp = (target->get_character_stats()->get_current_value(mana_id)
 		- target->get_character_stats()->get_base_value(mana_id)) * -1;
 
-	std::cout << "Missing Health: " << missing_health << "\tMissing MP: " << missing_mp << std::endl;
+	float current_sp = (target->get_character_stats()->get_current_value(skill_points_id)
+		- target->get_character_stats()->get_base_value(skill_points_id));
+
+
 	if (ability->isRestore())
 	{
 		target->get_character_stats()->reset_current_values(false);
@@ -311,17 +303,19 @@ void Battle::execute_action(const Ability* ability, Character* target)
 		target->get_character_stats()->get_current_value(health_id) - missing_health);
 	target->get_character_stats()->set_current_value(mana_id,
 		target->get_character_stats()->get_current_value(mana_id) - missing_mp);
-
+	// adds the original sp back
+	target->get_character_stats()->set_current_value(skill_points_id,
+		target->get_character_stats()->get_current_value(skill_points_id) + current_sp);
 
 	if (friendly)
 	{
 		std::cout << actor->get_name() << " used " << ability->get_name() << " on " <<
-			target->get_name() << " and healed " << (int)floor(damage) * -1 << "health." << std::endl;
+			target->get_name() << " and healed " << (int)damage * -1 << " health." << std::endl;
 	}
 	else
 	{
 		std::cout << actor->get_name() << " used " << ability->get_name() << " on " <<
-			target->get_name() << " and dealt " << (int)floor(damage) << " damage." << std::endl;
+			target->get_name() << " and dealt " << (int)damage << " damage." << std::endl;
 	}
 }
 
@@ -454,53 +448,33 @@ bool Battle::isCritAttack()
 
 /**
  * This method completely removes the dead making reviving not possible.
- * Not to be used with team_dead(std::vector<Character*> team)
+ * Not to be used with team_dead(std::vector<Character*> &team)
  */
-void Battle::remove_dead()
+void Battle::remove_dead(std::vector<Character*> &team, bool broadcast)
 {
-
-	std::sort(m_team_1.begin(), m_team_1.end(), [](Character* char1, Character* char2)
-	{
-		return char1->get_character_stats()->get_current_value(health_id) >
-			char2->get_character_stats()->get_current_value(health_id);
+	// iterates through the vector and find if a a character has <= 0 Health
+	std::vector<Character*>::iterator it = std::find_if(team.begin(), team.end(),
+		[](Character* charater) {
+		if (charater->get_character_stats()->get_current_value(health_id) <= 0)
+			return true;
+		return false;
 	});
-
-	std::sort(m_team_2.begin(), m_team_2.end(), [](Character* char1, Character* char2)
+	// if a character has zero health this iterates over the vector once more to find the index of the character
+	if (it != team.end())
 	{
-		return char1->get_character_stats()->get_current_value(health_id) >
-			char2->get_character_stats()->get_current_value(health_id);
-	});
-
-	for (auto&& member : m_team_1)
-	{
-		if (member->get_character_stats()->get_current_value(health_id) <= 0)
+		std::vector<Character*>::iterator it2 = std::find(team.begin(), team.end(), *it);
+		if (it != team.end())
 		{
-			for (auto&& turn_member : m_turn_order)
-			{
-				m_turn_order.erase(std::remove(m_turn_order.begin(), m_turn_order.end(), member),
-					m_turn_order.end());
-			}
-			std::cout << m_team_1.back()->get_name() << " has died permanently and left the team." << std::endl;
-			m_team_1.pop_back();
-		}
-	}
-
-	for (auto&& member : m_team_2)
-	{
-		if (member->get_character_stats()->get_current_value(health_id) <= 0)
-		{
-			for (auto&& turn_member : m_turn_order)
-			{
-				m_turn_order.erase(std::remove(m_turn_order.begin(), m_turn_order.end(), member),
-					m_turn_order.end());
-			}
-			std::cout << m_team_2.back()->get_name() << " has died permanently and left the team." << std::endl;
-			m_team_2.pop_back();
+			// moves the element found by first iterator to the back and then deletes it.
+			move_item_to_back(team, std::distance(team.begin(), it));
+			if(broadcast)  //broadcasts death if true
+				std::cout << team.back()->get_name() << " has died and permanently left the team." << std::endl;
+			team.pop_back();
 		}
 	}
 }
 
-bool Battle::team_dead(std::vector<Character*> team)
+bool Battle::team_dead(std::vector<Character*> &team)
 {
 	// This method supports reviving
 	std::sort(team.begin(), team.end(), [](Character* char1, Character* char2)
@@ -526,21 +500,45 @@ bool Battle::team_dead(std::vector<Character*> team)
 		return false;
 }
 
-// throws the item to the back of the vector without any vector re-allocation taking place
-template <typename T>
-void Battle::move_item_to_back(std::vector<T> &v, size_t itemIndex)
+/**
+ * checks if the battle is over.
+ */
+bool Battle::check_battle_over()
 {
-	auto it = v.begin() + itemIndex;
+	if (m_team_1.size() == 0)
+	{
+		std::cout << std::endl << std::endl << std::endl << "Your entire party has died...." << std::endl <<
+			"\tGame Over." << std::endl;
+		return true;
+	}
+	if (m_team_2.size() == 0)
+	{
+		std::cout << std::endl << std::endl << std::endl << "Congratulations! You have won the match." << std::endl;
+		return true;
+	}
+	return false;
+}
+
+/**
+ * /throws the item to the back of the vector without any vector re-allocation taking place
+ */
+template <typename T>
+void Battle::move_item_to_back(std::vector<T> &v, size_t index)
+{
+	auto it = v.begin() + index;
 	std::rotate(it, it + 1, v.end());
 }
 
+/**
+ * Displays the agility and current turn order 
+ * #TODO: update print-out to make it display better
+ */
 void Battle::print_turn_order()
 {
-
 	for(auto&& character : get_turn_order() )
 	{
 		std::cout << character->get_character_stats()->get_current_value(agility_id) << "\t" <<
-			character << std::endl;
+			character->get_name() << std::endl;
 	}
 	std::cout << std::endl;
 }

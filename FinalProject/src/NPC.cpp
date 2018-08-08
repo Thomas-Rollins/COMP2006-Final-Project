@@ -168,8 +168,9 @@ void NPC::initialize_character_stats()
 
 const Ability* NPC::get_action(const bool friendly)
 {
+	//updates ability states (if unusable/etc)
+	this->updateAbility_State();
 	std::vector<Ability*> usable_abilities = this->get_abilities();
-
 	//sorts the abilities by m_usable (usable ones first)
 	std::sort(usable_abilities.begin(), usable_abilities.end(), [](Ability* ability_1, Ability* ability_2)
 	{

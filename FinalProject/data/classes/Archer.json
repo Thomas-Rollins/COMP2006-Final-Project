@@ -71,7 +71,7 @@
     },
     {
       "name": "Snipe",
-      "description": "A heavy strike dealing 150% base damage with increased accuracy",
+      "description": "A strong strike dealing 150% base damage with increased accuracy",
       "physical_damage": 1.5,
       "magic_damage": 0,
       "attack_bonus": 0.0,
@@ -82,7 +82,7 @@
       "accuracy_bonus": 0.0,
       "element": 7,
       "mp_cost": 0,
-      "sp_cost": 15,
+      "sp_cost": 10,
       "targets": 1,
       "level_req": 2,
       "friendly": false,
