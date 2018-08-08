@@ -340,7 +340,7 @@ float Battle::get_modifiers(const Ability* ability)
 		crit_mod = 1.0f;
 	
 
-	float rand_modifier = Utilities::random_float(0.85f, 1.00f);
+	float rand_modifier = Utilities::random_float(0.84f, 1.01f);
 	
 	modifiers = target_mod * crit_mod * rand_modifier;
 	

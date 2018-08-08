@@ -87,43 +87,47 @@ int main()
 	team_1.reserve(4);
 	team_2.reserve(4);
 
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	std::cout << "Player " << i+1 << " out of 4 creation." << std::endl;
-	//	std::string name;
-	//	Class_id class_id;
-	//	Utilities::get_input("Please enter your name:\t", name);
-	//	std::cout << "Please select your class" << std::endl;
-	//	std::vector<std::string> options = {
-	//		"Archer", "Assassin", "Brawler", "Guardian", "Magic Swordsman", "Necromancer", "Priest", "Sage", "Scout", "Swordsman", "Warrior", "Wizard"
-	//	};
-	//	class_id = static_cast<Class_id>(Utilities::draw_menu(options));
-	//	std::cout << std::endl;
-	//	team_1.push_back(Character::make_character(false, class_id, name, 5));
-	//}
+	/**
+	 * Primary start location
+	 */
+/*
+	for (int i = 0; i < 4; i++)
+	{
+		std::cout << "Player " << i+1 << " out of 4 creation." << std::endl;
+		std::string name;
+		Class_id class_id;
+		Utilities::get_input("Please enter your name:\t", name);
+		std::cout << "Please select your class" << std::endl;
+		std::vector<std::string> options = {
+			"Archer", "Assassin", "Brawler", "Guardian", "Magic Swordsman", "Necromancer", "Priest", "Sage", "Scout", "Swordsman", "Warrior", "Wizard"
+		};
+		class_id = static_cast<Class_id>(Utilities::draw_menu(options));
+		std::cout << std::endl;
+		team_1.push_back(Character::make_character(false, class_id, name, 5));
+	}
 
-	//int npc_class_id_1, npc_class_id_2, npc_class_id_3, npc_class_id_4;
-	//npc_class_id_1 = Utilities::random_int(1, 12);
-	//npc_class_id_2 = Utilities::random_int(1, 12);
-	//npc_class_id_3 = Utilities::random_int(1, 12);
-	//npc_class_id_4 = Utilities::random_int(1, 12);
+	int npc_class_id_1, npc_class_id_2, npc_class_id_3, npc_class_id_4;
+	npc_class_id_1 = Utilities::random_int(1, 12);
+	npc_class_id_2 = Utilities::random_int(1, 12);
+	npc_class_id_3 = Utilities::random_int(1, 12);
+	npc_class_id_4 = Utilities::random_int(1, 12);
 
-	//while (npc_class_id_2 == npc_class_id_1)
-	//{
-	//	npc_class_id_2 = Utilities::random_int(1, 12);
-	//}
-	//while (npc_class_id_3 == npc_class_id_2 || npc_class_id_3 == npc_class_id_1)
-	//{
-	//	npc_class_id_3 = Utilities::random_int(1, 12);
-	//}
-	//while (npc_class_id_4 == npc_class_id_1 || npc_class_id_4 == npc_class_id_2 || npc_class_id_4 == npc_class_id_3)
-	//{
-	//	npc_class_id_4 = Utilities::random_int(1, 12);
-	//}
-	//team_2.push_back(Character::make_character(true, npc_class_id_1, get_npc_name(npc_class_id_1), 5));
-	//team_2.push_back(Character::make_character(true, npc_class_id_2, get_npc_name(npc_class_id_2), 5));
-	//team_2.push_back(Character::make_character(true, npc_class_id_3, get_npc_name(npc_class_id_3), 5));
-	//team_2.push_back(Character::make_character(true, npc_class_id_4, get_npc_name(npc_class_id_4), 5));
+	while (npc_class_id_2 == npc_class_id_1)
+	{
+		npc_class_id_2 = Utilities::random_int(1, 12);
+	}
+	while (npc_class_id_3 == npc_class_id_2 || npc_class_id_3 == npc_class_id_1)
+	{
+		npc_class_id_3 = Utilities::random_int(1, 12);
+	}
+	while (npc_class_id_4 == npc_class_id_1 || npc_class_id_4 == npc_class_id_2 || npc_class_id_4 == npc_class_id_3)
+	{
+		npc_class_id_4 = Utilities::random_int(1, 12);
+	}
+	team_2.push_back(Character::make_character(true, npc_class_id_1, get_npc_name(npc_class_id_1), 5));
+	team_2.push_back(Character::make_character(true, npc_class_id_2, get_npc_name(npc_class_id_2), 5));
+	team_2.push_back(Character::make_character(true, npc_class_id_3, get_npc_name(npc_class_id_3), 5));
+	team_2.push_back(Character::make_character(true, npc_class_id_4, get_npc_name(npc_class_id_4), 5));
 	
 		
 
@@ -148,57 +152,10 @@ int main()
 	team_2.push_back(new_character6);
 	team_2.push_back(new_character7);
 	team_2.push_back(new_character8);
+*/
 
 
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	double damage;
-	//	double actor_atk = Utilities::random_int(1, 100);
-	//	double phys_resistance = Utilities::random_int(1, 100);
 
-	//	double phys_reduction = (actor_atk - phys_resistance) /
-	//		((phys_resistance + actor_atk) / 2);
-
-	//	double damage_reduction = ((phys_resistance - actor_atk) * phys_reduction);
-
-	//	double modifier;
-	//	double type_effect = 1;
-	//	double power = actor_atk * 1;
-
-	//	modifier = 1 * 1 * 0.85 * type_effect;
-
-	//	damage = (
-	//		(
-	//		(
-	//			((2 * 5 / 5) + 2) * 
-	//			(power * actor_atk / phys_resistance)) / 50)				
-	//			+ 2) * modifier;
-
-	//	/*if (phys_resistance - actor_atk >= 0)
-	//	{
-	//		damage = actor_atk - ((phys_resistance - actor_atk) * (phys_reduction));
-	//	}
-	//	else if (phys_resistance - actor_atk < 0)
-	//	{
-	//		damage = actor_atk - ((phys_resistance - actor_atk) * (phys_reduction));
-	//	}
-	//	if (damage < 0)
-	//		damage = 0;*/
-
-	//	std::cout << "actor attack: " << actor_atk << std::endl;
-	//	std::cout << "target def: " << phys_resistance << std::endl;
-	//	//std::cout << "percent difference: " << phys_reduction << std::endl;
-	//	std::cout << "Damage: " << damage << std::endl;
-	//	std::cout << "Difference in def-att: " << phys_resistance - actor_atk << std::endl << std::endl;
-	//	//std::cout << "Damage Reduction: " << damage_reduction << std::endl;
-	//	
-	//	//std::cout << "Difference in atk-damage: " << actor_atk - damage << std::endl << std::endl;
-
-	//}
-
-	
-
-	
 	Battle battle{ team_1, team_2 };
 
 	for (auto character : characters)

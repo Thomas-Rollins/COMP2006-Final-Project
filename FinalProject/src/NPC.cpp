@@ -210,6 +210,6 @@ const Ability* NPC::get_action(const bool friendly)
 
 void NPC::add_experience(const double& experience)
 {
-	//throw NotImplemented();
+	throw NotImplemented();
 }
 
