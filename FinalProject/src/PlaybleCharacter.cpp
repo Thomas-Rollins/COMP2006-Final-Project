@@ -34,19 +34,32 @@ bool PlaybleCharacter::experience_req_met()
 void PlaybleCharacter::add_experience(const double& experience)
 {
 	m_experience += experience;
+	std::cout << this->get_name() << " has gained " << std::to_string(floor(experience)) << ".";
 	level_up();
 }
 
 
 void PlaybleCharacter::level_up()
 {
+	bool show_stats = false;
 	while (experience_req_met())
 	{
-		set_character_level(get_character_level() + 1);
-		level_base_stats();
-		set_next_level_experience();
+		if (get_character_level() + 1 < MAX_LEVEL)
+		{
+			set_character_level(get_character_level() + 1);
+			level_base_stats();
+			set_next_level_experience();
+			show_stats = Utilities::get_input(this->get_name() + " has leveled up!" 
+				+ "Would you like to view your stats?");
+			if (show_stats)
+			{
+				this->print_low_stats();
+				this->print_high_stats();
+			}	
+		}
+		else
+			set_character_level(MAX_LEVEL);
 	}
-	
 }
 
 void PlaybleCharacter::character_action()

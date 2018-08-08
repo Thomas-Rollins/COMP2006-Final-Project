@@ -23,8 +23,7 @@ public:
 	const std::vector<Character*> get_turn_order() const { return m_turn_order; }
 
 	void print_turn_order();
-
-
+	bool main_control();
 
 	template <typename T>
 	void move_item_to_back(std::vector<T> &vector, size_t itemIndex);
@@ -32,9 +31,8 @@ public:
 	int find_vector_index(std::vector<T> &vector, T element);
 
 private:
-	void main_control();
+	
 	void update_turn_order();
-	void action();
 	void apply_buffs_debuffs(Character* target, const Ability* ability, bool friendly);
 	void execute_action(const Ability* ability, Character* target);
 	float get_modifiers(const Ability* ability);

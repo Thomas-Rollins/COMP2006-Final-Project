@@ -10,6 +10,22 @@
 		std::getline(std::cin, input);
 	}
 
+	bool Utilities::get_input(const std::string &question)
+	{
+		std::cout << question << std::endl;
+		char choice = 'z';
+		do {
+			char choice = std::cin.get();
+			if (choice == 'Y' || choice == 'y')
+				return true;
+			if (choice == 'N' || choice == 'n')
+				return false;
+			else
+				std::cout << std::endl << "Please enter only 'y' or 'n'" << std::endl;
+		} while (choice != 'y' || choice != 'Y' || choice != 'n' || choice != 'N');
+		
+	}
+
 	void Utilities::get_input(const std::string &question, int &input)
 	{
 		while (true)

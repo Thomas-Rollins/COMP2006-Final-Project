@@ -186,25 +186,25 @@ const Ability* NPC::get_action(const bool friendly)
 		}
 	}
 
-	std::vector<std::string> options;
-	for (auto&& ability : usable_abilities)
-	{
-		// populates the vector of options with the ability name and MP/SP costs
-		if (ability->isUsable())
-		{
-			std::string option = ability->get_name() + "\tMP: ";
-			option.append(std::to_string(ability->get_mp_cost()) + "\tSP: ");
-			option.append(std::to_string(ability->get_sp_cost()));
+	//std::vector<std::string> options;
+	//for (auto&& ability : usable_abilities)
+	//{
+	//	// populates the vector of options with the ability name and MP/SP costs
+	//	if (ability->isUsable())
+	//	{
+	//		std::string option = ability->get_name() + "\tMP: ";
+	//		option.append(std::to_string(ability->get_mp_cost()) + "\tSP: ");
+	//		option.append(std::to_string(ability->get_sp_cost()));
 
-			options.push_back(option);
-		}
-	}
+	//		options.push_back(option);
+	//	}
+	//}
 
-	std::cout << "Which ability would you like to use?" << std::endl;
-	return usable_abilities.at(Utilities::draw_menu(options) - 1);
+	/*std::cout << "Which ability would you like to use?" << std::endl;
+	return usable_abilities.at(Utilities::draw_menu(options) - 1);*/
 
 	// Very simple NPC control for them to select an ability.
-	//return usable_abilities.at(Utilities::random_int(0, usable_abilities.size()));
+	return usable_abilities.at(Utilities::random_int(0, usable_abilities.size()));
 }
 
 

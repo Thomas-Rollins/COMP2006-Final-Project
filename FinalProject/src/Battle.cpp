@@ -11,10 +11,7 @@
 
 
 Battle::Battle(std::vector<Character*> team_1, std::vector<Character*> team_2)
-	: m_team_1(team_1), m_team_2(team_2)
-{
-	main_control();
-}
+	: m_team_1(team_1), m_team_2(team_2) { }
 
 Battle::~Battle()
 {
@@ -29,7 +26,7 @@ Battle::~Battle()
 	m_team_2.clear();
 }
 
-void Battle::main_control()
+bool Battle::main_control()
 {
 	std::cout << "Team one consists of:" << std::endl;
 	for (auto&& character : m_team_1)
@@ -59,27 +56,15 @@ void Battle::main_control()
 	*/
 	do
 	{
-		action();
-			
-		execute_action(m_turn_order.at(0)->get_action(m_friendly_target), get_target());
-		/*std::cout << "Team one consists of:" << std::endl;
-		for (auto&& character : m_team_1)
-		{
-			std::cout << character->get_name() << std::endl;
-		}
 		std::cout << std::endl;
-
-		std::cout << "Team two consists of:" << std::endl;
-		for (auto&& character : m_team_2)
-		{
-			std::cout << character->get_name() << std::endl;
-		}
-
-		std::cout << std::endl;*/
+		execute_action(m_turn_order.at(0)->get_action(m_friendly_target), get_target());
+		move_item_to_back(m_turn_order, 0);
 	} while (!check_battle_over());
+
+	if (m_team_1.size() == 0)
+		return false;
+	return true;
 }
-
-
 
 //sorts by highest agility value
 void Battle::update_turn_order()
@@ -196,24 +181,6 @@ Character* Battle::get_target(std::vector<Character*> team, std::vector<Characte
 	}
 	else
 		return nullptr;
-}
-
-void Battle::action()
-{
-	//Character* target = get_target();
-	//std::cout << m_turn_order.at(0)->get_name() << " " m_turn_order.at(0)->get_action(m_friendly)->get_name() <<
-		//" used against: " << target->get_name() << std::endl;
-	/*const Ability* selected_ability = m_turn_order.at(0)->get_action(m_friendly);
-	if (selected_ability->isFriendly())
-		execute_action(selected_ability, m_team_2.at(Utilities::random_int(0, m_team_2.size())));
-	else
-		execute_action(selected_ability, m_team_2.at(Utilities::random_int(0, m_team_1.size())));
-	*/
-
-	
-
-	//moves the player to the end of the turn order vector after their action.
-	move_item_to_back(m_turn_order, 0);
 }
 
 void Battle::execute_action(const Ability* ability, Character* oringinal_target)
@@ -670,6 +637,8 @@ bool Battle::check_battle_over()
 	}
 	return false;
 }
+
+
 
 /**
  * returns the index of the element passed
