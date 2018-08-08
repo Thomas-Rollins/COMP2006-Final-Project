@@ -80,239 +80,215 @@ const std::string* ClassStatistics::ELEMENTAL_STAT_DESCRIPTIONS[NUM_OF_ELEMENTAL
 const High_Level_Calculation_Ratios* ClassStatistics::HP_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	10.00f,
+	HP_VIT_RATIO,
 	// STR
-	3.400f,
+	HP_STR_RATIO,
 	// AGI
-	0.000f,
+	HP_AGI_RATIO,
 	// DEX
-	0.000f,
+	HP_DEX_RATIO,
 	// TEC
-	0.000f,
+	HP_TEC_RATIO,
 	// INT
-	0.000f,
+	HP_INT_RATIO,
 	// WIS
-	0.000f,
+	HP_WIS_RATIO,
 	// FCS
-	0.500f,
+	HP_FOCUS_RATIO,
 	// LUK
-	0.000f
+	HP_LUCK_RATIO,
 };
 const High_Level_Calculation_Ratios* ClassStatistics::MP_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	0.000f,
+	MP_VIT_RATIO,
 	// STR
-	0.000f,
+	MP_STR_RATIO,
 	// AGI
-	0.000f,
+	MP_AGI_RATIO,
 	// DEX
-	0.000f,
+	MP_DEX_RATIO,
 	// TEC
-	0.000f,
+	MP_TEC_RATIO,
 	// INT
-	10.000f,
+	MP_INT_RATIO,
 	// WIS
-	6.100f,
+	MP_WIS_RATIO,
 	// FCS
-	0.500f,
+	MP_FOCUS_RATIO,
 	// LUK
-	0.000f,
-
+	MP_LUCK_RATIO
 };
 // the SP_RATIO is used differently. It effects the generation of SP per turn/action not the max which is 
 // always 100.
 const High_Level_Calculation_Ratios* ClassStatistics::SP_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	0.000f,
+	SP_VIT_RATIO,
 	// STR
-	0.000f,
+	SP_STR_RATIO,
 	// AGI
-	0.000f,
+	SP_AGI_RATIO,
 	// DEX
-	0.000f,
+	SP_DEX_RATIO,
 	// TEC
-	0.000f,
+	SP_TEC_RATIO,
 	// INT
-	0.000f,
+	SP_INT_RATIO,
 	// WIS
-	0.000f,
+	SP_WIS_RATIO,
 	// FCS
-	0.500f,
+	SP_FOCUS_RATIO,
 	// LUK
-	0.000f,
+	SP_LUCK_RATIO,
 };
 const High_Level_Calculation_Ratios* ClassStatistics::ATK_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	0.000f,
+	ATK_VIT_RATIO,
 	// STR
-	2.000f,
+	ATK_STR_RATIO,
 	// AGI
-	0.600f,
+	ATK_AGI_RATIO,
 	// DEX
-	0.000f,
+	ATK_DEX_RATIO,
 	// TEC
-	0.040f,
+	ATK_TEC_RATIO,
 	// INT
-	-0.205f,
+	-ATK_INT_RATIO,
 	// WIS
-	-0.300f,
+	-ATK_WIS_RATIO,
 	// FCS
-	-0.300f,
+	-ATK_FOCUS_RATIO,
 	// LUK
-	0.000f,
+	ATK_LUCK_RATIO
 };
 const High_Level_Calculation_Ratios* ClassStatistics::DEF_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	2.000f,
+	DEF_VIT_RATIO,
 	// STR
-	0.080f,
+	DEF_STR_RATIO,
 	// AGI
-	0.000f,
+	DEF_AGI_RATIO,
 	// DEX
-	0.000f,
+	DEF_DEX_RATIO,
 	// TEC
-	0.020f,
+	DEF_TEC_RATIO,
 	// INT
-	0.000f,
+	DEF_INT_RATIO,
 	// WIS
-	0.000f,
+	DEF_WIS_RATIO,
 	// FCS
-	0.000f,
+	DEF_FOCUS_RATIO,
 	// LUK
-	0.000f,
+	DEF_LUCK_RATIO,
 };
 const High_Level_Calculation_Ratios* ClassStatistics::MGK_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	0.000f,
+	MGK_VIT_RATIO,
 	// STR
-	-0.550f,
+	MGK_STR_RATIO,
 	// AGI
-	0.000f,
+	MGK_AGI_RATIO,
 	// DEX
-	0.000f,
+	MGK_DEX_RATIO,
 	// TEC
-	0.030f,
+	MGK_TEC_RATIO,
 	// INT
-	2.700f,
+	MGK_INT_RATIO,
 	// WIS
-	0.800f,
+	MGK_WIS_RATIO,
 	// FCS
-	0.020f,
+	MGK_FOCUS_RATIO,
 	// LUK
-	0.000f,
+	MGK_LUCK_RATIO,
 };
 const High_Level_Calculation_Ratios* ClassStatistics::MND_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	0.080f,
+	MND_VIT_RATIO,
 	// STR
-	-0.050f,
+	MND_STR_RATIO,
 	// AGI
-	0.000f,
+	MND_AGI_RATIO,
 	// DEX
-	0.000f,
+	MND_DEX_RATIO,
 	// TEC
-	0.020f,
+	MND_TEC_RATIO,
 	// INT
-	0.800f,
+	MND_INT_RATIO,
 	// WIS
-	2.800f,
+	MND_WIS_RATIO,
 	// FCS
-	0.010f,
+	MND_FOCUS_RATIO,
 	// LUK
-	0.000f,
+	MND_LUCK_RATIO
 };
 const High_Level_Calculation_Ratios* ClassStatistics::ACC_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	-0.010f,
+	ACC_VIT_RATIO,
 	// STR
-	-0.030f,
+	ACC_STR_RATIO,
 	// AGI
-	0.080f,
+	ACC_AGI_RATIO,
 	// DEX
-	0.500f,
+	ACC_DEX_RATIO,
 	// TEC
-	0.040f,
+	ACC_TEC_RATIO,
 	// INT
-	0.000f,
+	ACC_INT_RATIO,
 	// WIS
-	0.020f,
+	ACC_WIS_RATIO,
 	// FCS
-	0.050f,
+	ACC_FOCUS_RATIO,
 	// LUK
-	0.800f,
+	ACC_LUCK_RATIO
 };
 const High_Level_Calculation_Ratios* ClassStatistics::EVD_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	-0.300f,
+	EVD_VIT_RATIO,
 	// STR
-	0.000f,
+	EVD_STR_RATIO,
 	// AGI
-	0.300f,
+	EVD_AGI_RATIO,
 	// DEX
-	0.080f,
+	EVD_DEX_RATIO,
 	// TEC
-	0.010f,
+	EVD_TEC_RATIO,
 	// INT
-	-0.010f,
+	EVD_INT_RATIO,
 	// WIS
-	0.000f,
+	EVD_WIS_RATIO,
 	// FCS
-	0.040f,
+	EVD_FOCUS_RATIO,
 	// LUK
-	0.800f,
+	EVD_LUCK_RATIO
 };
 const High_Level_Calculation_Ratios* ClassStatistics::CRT_RATIO = new High_Level_Calculation_Ratios
 {
 	// VIT
-	-0.080f,
+	CRT_VIT_RATIO,
 	// STR
-	0.000f,
+	CRT_STR_RATIO,
 	// AGI
-	0.040f,
+	CRT_AGI_RATIO,
 	// DEX
-	0.500f,
+	CRT_DEX_RATIO,
 	// TEC
-	0.080f,
+	CRT_TEC_RATIO,
 	// INT
-	0.200f,
+	CRT_INT_RATIO,
 	// WIS
-	0.000f,
+	CRT_WIS_RATIO,
 	// FCS
-	0.010f,
+	CRT_FOCUS_RATIO,
 	// LUK
-	0.500f,
+	CRT_LUCK_RATIO
 };
-// Trated differently as it is actually a low stat.
-const High_Level_Calculation_Ratios* ClassStatistics::LUK_RATIO = new High_Level_Calculation_Ratios
-{
-	// VIT
-	0.000f,
-	// STR
-	0.000f,
-	// AGI
-	0.000f,
-	// DEX
-	0.000f,
-	// TEC
-	0.000f,
-	// INT
-	0.000f,
-	// WIS
-	0.000f,
-	// FCS
-	0.000f,
-	// LUK
-	0.000f,
-};
-
 // End of Static Assignment
 
 ClassStatistics::ClassStatistics() 
@@ -409,6 +385,15 @@ void ClassStatistics::set_current_value(High_Stats_ID const&stat_id, const float
 		else
 			m_high_level_stats[skill_points_id][current_value_id] = current_value;
 	}
+	else if (stat_id == health_id || stat_id == mana_id)
+	{
+		if (current_value > get_base_value(stat_id))
+			m_high_level_stats[stat_id][current_value_id] = get_base_value(stat_id);
+		else if (current_value < 0)
+			m_high_level_stats[stat_id][current_value_id] = 0;
+		else
+			m_high_level_stats[stat_id][current_value_id] = current_value;
+	}
 	else if (current_value >= HIGH_STAT_MAX_VALUE)
 		m_high_level_stats[stat_id][current_value_id] = HIGH_STAT_MAX_VALUE;
 	else if (current_value < 0)
@@ -424,6 +409,7 @@ void ClassStatistics::set_base_value(Elemental_Stats_ID const &stat_id, const fl
 	else
 		m_elemental_stats[stat_id][base_value_id] = ELEMENTAL_STAT_MAX_VALUE;
 }
+
 void ClassStatistics::set_current_value(Elemental_Stats_ID const&stat_id, const float &current_value)
 {
 	if (current_value <= ELEMENTAL_STAT_MAX_VALUE)

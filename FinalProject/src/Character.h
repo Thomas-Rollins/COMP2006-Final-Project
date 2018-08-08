@@ -24,8 +24,8 @@ public:
 	//Statics
 	static Character* make_character(bool npc, const int &class_id, const std::string &name, const int &level);
 
-	void operator+(const int health);
-	void operator-(const int health);
+	void operator+(const float &health);
+	void operator-(const float &health);
 
 	// Pure Virtuals
 		//Accessors

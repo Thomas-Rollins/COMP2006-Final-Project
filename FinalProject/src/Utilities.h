@@ -4,6 +4,12 @@
 #include <vector>
 #include <iostream>
 
+#ifndef NULL_INDEX
+#define NULL_INDEX -1
+#endif
+
+#define FILL_WIDTH 30
+#define FILL_CHAR '='
 
 
 class Utilities

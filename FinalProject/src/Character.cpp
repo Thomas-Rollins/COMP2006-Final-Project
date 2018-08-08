@@ -54,15 +54,15 @@ Character::~Character()
 }
 
 // overloaded operators ...added cause friends aren't happening.
-void Character::operator+(const int health)
+void Character::operator+(const float &health)
 {
-	float current = (float) m_character_stats->get_current_value(health_id);
+	float current = m_character_stats->get_current_value(health_id);
 	m_character_stats->set_current_value(health_id, current + health);
 }
 
-void Character::operator-(const int health)
+void Character::operator-(const float &health)
 {
-	float current = (float) m_character_stats->get_current_value(health_id);
+	float current = m_character_stats->get_current_value(health_id);
 	m_character_stats->set_current_value(health_id, current - health);
 }
 
@@ -86,7 +86,8 @@ void Character::updateAbility_State()
 	for (auto&& ability : get_abilities())
 	{
 		if (this->get_character_level() < ability->get_level_requirement() ||
-			this->get_character_stats()->get_current_value(mana_id) < ability->get_mp_cost() || this->get_character_stats()->get_current_value(skill_points_id) <
+			this->get_character_stats()->get_current_value(mana_id) < ability->get_mp_cost() ||
+			this->get_character_stats()->get_current_value(skill_points_id) <
 			ability->get_sp_cost())
 		{
 			ability->setUsable(false);
@@ -96,9 +97,6 @@ void Character::updateAbility_State()
 	}
 	
 }
-
-
-
 
 void Character::print_low_stats()
 {

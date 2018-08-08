@@ -7,7 +7,12 @@ class Ability
 public:
 	Ability() = delete;
 
-	Ability(const std::string& name, const std::string& desc, const float& phys_damage, const float& mgk_damage, const float& atk_bonus, const float& mgk_bonus, const float& def_bonus, const float& mnd_bonus, const float& agi_bonus, const float& acc_bonus, const Elemental_Stats_ID& element, int mp_cost, const int sp_cost, const int num_of_targets, const int level_req, const bool isFriendly, const bool isStun, const bool isExecute, const bool isRestore);
+	Ability(const std::string& name, const std::string& desc, const float& phys_damage,
+		const float& mgk_damage, const float& atk_bonus, const float& mgk_bonus,
+		const float& def_bonus, const float& mnd_bonus, const float& agi_bonus,
+		const float& acc_bonus, const Elemental_Stats_ID& element, int mp_cost, const int sp_cost,
+		const int num_of_targets, const int level_req, const bool isFriendly, const bool isStun,
+		const bool isExecute, const bool isRestore);
 
 	~Ability();
 
@@ -17,7 +22,7 @@ public:
 	const float get_physical_damage() const { return m_physical_damage; }
 	const float get_magic_damage() const { return m_magic_damage; }
 	const float get_attack_bonus() const { return m_attack_bonus; }
-	const float get_magic_bonus() const { return m_magic_damage; }
+	const float get_magic_bonus() const { return m_magic_bonus; }
 	const float get_defense_bonus() const { return m_defense_bonus; }
 	const float get_mind_bonus() const { return m_mind_bonus; }
 	const float get_agility_bonus() const { return m_agility_bonus; }

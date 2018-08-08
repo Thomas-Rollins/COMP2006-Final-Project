@@ -70,6 +70,27 @@
       "restore": false
     },
     {
+      "name": "Hamstring",
+      "description": "A quick attack which reduces the target's agility.",
+      "physical_damage": 0.5,
+      "magic_damage": 0,
+      "attack_bonus": 0.0,
+      "magic_bonus": 0.0,
+      "defense_bonus": 0.0,
+      "mind_bonus": 0.0,
+      "agility_bonus": 0.2,
+      "accuracy_bonus": 0.0,
+      "element": 7,
+      "mp_cost": 0,
+      "sp_cost": 15,
+      "targets": 1,
+      "level_req": 2,
+      "friendly": false,
+      "stun": false,
+      "execute": false,
+      "restore": false
+    },
+    {
       "name": "Ambush",
       "description": "A heavy strike dealing 150% base damage with increased accuracy",
       "physical_damage": 1.5,

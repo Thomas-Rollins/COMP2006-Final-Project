@@ -32,9 +32,9 @@
 	void Utilities::draw_message(const std::string message)
 	{
 		std::cout << "\n" << std::endl;
-		std::cout << std::setfill('=') << std::setw(30) << "\n";
+		std::cout << std::setfill(FILL_CHAR) << std::setw(FILL_WIDTH) << "\n";
 		std::cout << message << "\n";
-		std::cout << std::setfill('=') << std::setw(30) << "\n";
+		std::cout << std::setfill(FILL_CHAR) << std::setw(FILL_WIDTH) << "\n";
 		std::cout << "\n" << std::endl;
 	}
 
@@ -48,7 +48,7 @@
 		}
 
 		std::cout << "\n" << std::endl;
-		std::cout << std::setfill('=') << std::setw(30) << "\n";
+		std::cout << std::setfill(FILL_CHAR) << std::setw(FILL_WIDTH) << "\n";
 		std::cout << std::endl;
 
 		int choice;

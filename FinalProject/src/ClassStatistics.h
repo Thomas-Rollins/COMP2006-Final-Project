@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#include "BalancingDefinitions.h"
+
 enum Description_Attribute_ID : const int 
 {
 	desc_id, short_form_id

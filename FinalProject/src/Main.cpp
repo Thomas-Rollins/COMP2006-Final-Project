@@ -84,8 +84,8 @@ int main()
 	//}
 
 	std::vector<Character*> team_1, team_2;
-	team_1.reserve(4);
-	team_2.reserve(4);
+	/*team_1.reserve(4);
+	team_2.reserve(4);*/
 
 	/**
 	 * Primary start location
@@ -130,12 +130,12 @@ int main()
 	team_2.push_back(Character::make_character(true, npc_class_id_4, get_npc_name(npc_class_id_4), 5));
 	
 		
-
+		*/
 
 	// All npcs
-	Character* new_character1 = Character::make_character(true, archer_id, "Player 1", 10);
-	Character* new_character2 = Character::make_character(true, warrior_id, "Player 2", 12);
-	Character* new_character3 = Character::make_character(true, magic_swordsman_id, "Player 3", 15);
+	Character* new_character1 = Character::make_character(true, priest_id, "Player 1", 10);
+	Character* new_character2 = Character::make_character(true, priest_id, "Player 2", 12);
+	Character* new_character3 = Character::make_character(true, priest_id, "Player 3", 15);
 	Character* new_character4 = Character::make_character(true, priest_id, "Player 4", 13);
 	team_1.push_back(new_character1);
 	team_1.push_back(new_character2);
@@ -147,12 +147,12 @@ int main()
 	Character* new_character5 = Character::make_character(true, assassin_id, "Player 5", 50);
 	Character* new_character6 = Character::make_character(true, guardian_id, "Player 6", 54);
 	Character* new_character7 = Character::make_character(true, wizard_id, "Player 7", 56);
-	Character* new_character8 = Character::make_character(true, brawler_id, "Player 8", 49);
+	Character* new_character8 = Character::make_character(true, necromancer_id, "Player 8", 49);
 	team_2.push_back(new_character5);
 	team_2.push_back(new_character6);
 	team_2.push_back(new_character7);
 	team_2.push_back(new_character8);
-*/
+
 
 
 
