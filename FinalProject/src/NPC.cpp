@@ -5,12 +5,9 @@
 
 #include "NPC.h"
 #include "../include/jsoncpp/json/json.h"
-
 #include "logging/Log.h"
 #include "Custom_Exception.cpp"
 
-//Balancing Variable
-const float NPC::STAT_MULTIPLIER = 1.3f;
 
 //Constructor
 NPC::NPC(const std::string &name, const int class_id, const int &level)
@@ -29,7 +26,6 @@ double NPC::get_current_experience()
 {
 	return round((4 * (pow(get_character_level() + 1, 3))) / 5);
 }
-
 
 void NPC::initialize_character_stats()
 {
@@ -102,9 +98,9 @@ void NPC::initialize_character_stats()
 				i_ref, (int)floor(
 					base_stats[i_ref]["base"].asInt() +
 					(floor((get_character_stats()->get_growth_value(i_ref) *
-						this->get_character_stats()->BASE_STAT_INCREASE_PER_LEVEL) *
+						BASE_STAT_INCREASE_PER_LEVEL) *
 						(this->get_character_level() - 1)))
-					* STAT_MULTIPLIER)
+					* NPC_STAT_MULTIPLIER)
 			);
 		}
 		this->get_character_stats()->set_high_stats();
@@ -125,7 +121,6 @@ void NPC::initialize_character_stats()
 		const Json::Value& abilities = obj["abilities"];
 		for (int i = 0; i < obj["abilities"].size(); i++)
 		{
-
 			Ability* newAbility = new Ability(
 				abilities[i]["name"].asString(),
 				abilities[i]["description"].asString(),
@@ -151,10 +146,8 @@ void NPC::initialize_character_stats()
 		}
 		//updates the isUsable state.
 		this->updateAbility_State();
-		
 	}
 }
-
 
 Ability* NPC::get_action()
 {
@@ -175,24 +168,6 @@ Ability* NPC::get_action()
 			usable_abilities.pop_back();
 		}
 	}
-
-	//std::vector<std::string> options;
-	//for (auto&& ability : usable_abilities)
-	//{
-	//	// populates the vector of options with the ability name and MP/SP costs
-	//	if (ability->isUsable())
-	//	{
-	//		std::string option = ability->get_name() + "\tMP: ";
-	//		option.append(std::to_string(ability->get_mp_cost()) + "\tSP: ");
-	//		option.append(std::to_string(ability->get_sp_cost()));
-
-	//		options.push_back(option);
-	//	}
-	//}
-
-	/*std::cout << "Which ability would you like to use?" << std::endl;
-	return usable_abilities.at(Utilities::draw_menu(options) - 1);*/
-
 	// Very simple NPC control for them to select an ability.
 	return usable_abilities.at(Utilities::random_int(0, usable_abilities.size()));
 }

@@ -5,7 +5,6 @@
 #include <sstream>
 
 
-
 	void Utilities::get_input(const std::string &question, std::string &input)
 	{
 		std::string response = "";
@@ -14,7 +13,6 @@
 		{
 			std::getline(std::cin, response);
 		}
-		
 		input = trim(response, TRIM_CHARS);
 	}
 
@@ -48,7 +46,6 @@
 			{
 				break;
 			}
-
 			std::cout << "Please enter an integer." << std::endl;
 		}
 	}

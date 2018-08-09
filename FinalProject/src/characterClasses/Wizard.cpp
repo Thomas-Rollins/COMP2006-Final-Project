@@ -5,11 +5,7 @@ const std::string Wizard::m_class_description = "Wizard Description Here";
 const Class_id Wizard::m_class_id = wizard_id;
 
 Wizard::Wizard(const int &level)
-	:  CharacterClass(level)
-{
-	
-}
+	:  CharacterClass(level) { }
 
-Wizard::~Wizard()
-{
-}
+
+Wizard::~Wizard() { }

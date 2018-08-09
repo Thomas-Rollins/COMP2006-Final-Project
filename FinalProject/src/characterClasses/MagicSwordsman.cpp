@@ -5,12 +5,7 @@ const std::string MagicSwordsman::m_class_description = "Magic Swordsman Descrip
 const Class_id MagicSwordsman::m_class_id = magic_swordsman_id;
 
 MagicSwordsman::MagicSwordsman(const int &level)
-	: CharacterClass(level)
-{
-
-}
+	: CharacterClass(level) { }
 
 
-MagicSwordsman::~MagicSwordsman()
-{
-}
+MagicSwordsman::~MagicSwordsman() { }

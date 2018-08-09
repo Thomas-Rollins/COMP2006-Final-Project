@@ -11,47 +11,49 @@
 #include "Swordsman.h"
 #include "Wizard.h"
 #include "Warrior.h"
+#include "../BalancingDefinitions.h"
+
 
 CharacterClass* CharacterClass::make_character_class(const int &class_id)
 {
 	switch (class_id)
 	{
 	case archer_id:
-		return new Archer(1);
+		return new Archer(STARTING_LEVEL);
 		break;
 	case assassin_id:
-		return new Assassin(1);
+		return new Assassin(STARTING_LEVEL);
 		break;
 	case brawler_id:
-		return new Brawler(1);
+		return new Brawler(STARTING_LEVEL);
 		break;
 	case guardian_id:
-		return new Guardian(1);
+		return new Guardian(STARTING_LEVEL);
 		break;
 	case magic_swordsman_id:
-		return new MagicSwordsman(1);
+		return new MagicSwordsman(STARTING_LEVEL);
 		break;
 	case necromancer_id:
-		return new Necromancer(1);
+		return new Necromancer(STARTING_LEVEL);
 		break;
 	case priest_id:
-		return new Priest(1);
+		return new Priest(STARTING_LEVEL);
 		break;
 	case sage_id:
-		return new Sage(1);
+		return new Sage(STARTING_LEVEL);
 		break;
 	case scout_id:
-		return new Scout(1);
+		return new Scout(STARTING_LEVEL);
 		break;
 	case swordsman_id:
-		return new Swordsman(1);
+		return new Swordsman(STARTING_LEVEL);
 		break;
 	case wizard_id:
-		return new Wizard(1);
+		return new Wizard(STARTING_LEVEL);
 		break;
 	case warrior_id:
 	default:
-		return new Warrior(1);
+		return new Warrior(STARTING_LEVEL);
 		break;
 	}
 }
@@ -68,5 +70,5 @@ CharacterClass::~CharacterClass()
 
 const std::string CharacterClass::get_class_name() const
 {
-	return "Default Class";
+	return "Default Class container";
 }

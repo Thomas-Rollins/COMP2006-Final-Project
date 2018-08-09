@@ -1,11 +1,10 @@
-#include "Character.h"
-#include "NPC.h"
-#include "PlayableCharacter.h"
-
-
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+
+#include "Character.h"
+#include "NPC.h"
+#include "PlayableCharacter.h"
 
 
 Character* Character::make_character(bool npc, const int &class_id, const std::string &name, const int &level)
@@ -19,8 +18,6 @@ Character* Character::make_character(bool npc, const int &class_id, const std::s
 		return new PlaybleCharacter(name, class_id);
 	}
 }
-
-
 
 Character::Character(const std::string &name, const int &class_id, const bool isNPC)
 	:m_name(name), m_npc(isNPC)
@@ -44,7 +41,8 @@ Character::~Character()
 	//deletes the pointers contained in the array
 	for (auto&& ability : m_abilities)
 	{
-		delete(ability);
+		if(ability != nullptr)
+			delete(ability);
 	}
 	m_abilities.clear();
 }
@@ -69,7 +67,15 @@ ClassStatistics* Character::get_character_stats()
 
 void Character::set_character_level(const int &level)
 {
-	m_level = level;
+	if (level < STARTING_LEVEL)
+		m_level = STARTING_LEVEL;
+	else
+	{
+		if (level > MAX_LEVEL)
+			m_level = MAX_LEVEL;
+		else
+			m_level = level;
+	}
 }
 
 void Character::addAbility(Ability* newAbility)
@@ -90,8 +96,7 @@ void Character::updateAbility_State()
 		}
 		else
 			ability->setUsable(true);
-	}
-	
+	}	
 }
 
 void Character::print_low_stats()

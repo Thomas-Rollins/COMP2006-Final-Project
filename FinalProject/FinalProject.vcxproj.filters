@@ -24,9 +24,6 @@
     <ClCompile Include="include\jsoncpp\jsoncpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\logging\Log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\characterClasses\CharacterClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -96,9 +93,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\jsoncpp\json\json-forwards.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\logging\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\characterClasses\CharacterClass.h">

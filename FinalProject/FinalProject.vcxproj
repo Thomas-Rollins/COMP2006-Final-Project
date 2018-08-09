@@ -154,7 +154,6 @@
     <ClCompile Include="src\characterClasses\CharacterClass.cpp" />
     <ClCompile Include="include\jsoncpp\jsoncpp.cpp" />
     <ClCompile Include="src\Custom_Exception.cpp" />
-    <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\characterClasses\Swordsman.cpp" />
     <ClCompile Include="src\characterClasses\Warrior.cpp" />
@@ -181,7 +180,6 @@
     <ClInclude Include="include\jsoncpp\json\json-forwards.h" />
     <ClInclude Include="include\jsoncpp\json\json.h" />
     <ClInclude Include="src\characterClasses\abilities\Ability.h" />
-    <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\characterClasses\Swordsman.h" />
     <ClInclude Include="src\characterClasses\Warrior.h" />
     <ClInclude Include="src\characterClasses\Wizard.h" />

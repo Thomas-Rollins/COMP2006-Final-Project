@@ -55,7 +55,6 @@ std::string get_npc_name(const int class_id)
 	default:
 		return "NPC NullClass";
 		break;
-
 	}
 }
 
@@ -137,26 +136,6 @@ int main()
 {
 	srand(static_cast <unsigned> (time(nullptr)));
 
-	//for (int i = 0; i < 256; i++)
-	//{
-	//	std::cout << "Level " << i << ": ";
-	//	std::cout << round((4 * (pow(i + 1, 3))) / 5) << std::endl;
-	//}
-
-	/*for (int i = 0; i < 12; i++)
-	{
-		int rand_class = (int)(Utilities::random_int(1, 12));
-		bool rand_type = (bool)(Utilities::random_int(1, 10) % 2);
-		Character* new_character = Character::make_character(true, i+1, "Name", 100);
-
-		characters.push_back(new_character);
-	}*/
-
-	//for (auto&& character : characters)
-	//{
-	//	character->print_abiities();
-	//}
-
 	std::cout << "Welcome to the ForeverLost Arena RPG\n\t- This is a typically a 4v4 battle\n\t- NPCs will always have 4 per team, however, the player team could potentially have less.\n\t- The player team persists each round.\n\t- Death is Permanent.\n\t- At the end of each round all stats will be restored.\n\t- You can attack/heal/buff/debuff anyone, although you may not want to heal/buff your enemies.\n\t- You earn experience points at the end of each round.\n\t- EXP earned scales heavily by your current streak of rounds.\n Please follow the below prompts to play...\n" << std::endl;
 
 	std::vector<Character*> team_1, team_2;
@@ -164,7 +143,6 @@ int main()
 	/**
 	 * Primary start location
 	 */
-
 	for (int i = 0; i < 4; i++)
 	{
 		std::cout << "Player " << i + 1 << " out of 4 creation." << std::endl;
@@ -181,43 +159,7 @@ int main()
 		team_1.back()->print_low_stats();
 		team_1.back()->print_high_stats();
 	}
-	/*
-	int npc_class_id_1, npc_class_id_2, npc_class_id_3, npc_class_id_4;
-	npc_class_id_1 = Utilities::random_int(1, 12);
-	npc_class_id_2 = Utilities::random_int(1, 12);
-	npc_class_id_3 = Utilities::random_int(1, 12);
-	npc_class_id_4 = Utilities::random_int(1, 12);
-
-	while (npc_class_id_2 == npc_class_id_1)
-	{
-		npc_class_id_2 = Utilities::random_int(1, 12);
-	}
-	while (npc_class_id_3 == npc_class_id_2 || npc_class_id_3 == npc_class_id_1)
-	{
-		npc_class_id_3 = Utilities::random_int(1, 12);
-	}
-	while (npc_class_id_4 == npc_class_id_1 || npc_class_id_4 == npc_class_id_2 || npc_class_id_4 == npc_class_id_3)
-	{
-		npc_class_id_4 = Utilities::random_int(1, 12);
-	}
-	team_2.push_back(Character::make_character(true, npc_class_id_1, get_npc_name(npc_class_id_1), 5));
-	team_2.push_back(Character::make_character(true, npc_class_id_2, get_npc_name(npc_class_id_2), 5));
-	team_2.push_back(Character::make_character(true, npc_class_id_3, get_npc_name(npc_class_id_3), 5));
-	team_2.push_back(Character::make_character(true, npc_class_id_4, get_npc_name(npc_class_id_4), 5));
 	
-	*/
-
-	// All npcs
-	/*Character* new_character1 = Character::make_character(true, priest_id, "Player 1", 10);
-	Character* new_character2 = Character::make_character(true, priest_id, "Player 2", 12);
-	Character* new_character3 = Character::make_character(true, priest_id, "Player 3", 15);
-	Character* new_character4 = Character::make_character(true, priest_id, "Player 4", 13);
-	team_1.push_back(new_character1);
-	team_1.push_back(new_character2);
-	team_1.push_back(new_character3);
-	team_1.push_back(new_character4);*/
-
-
 	bool again = false;
 	bool can_continue = true;
 	
@@ -254,8 +196,6 @@ int main()
 	team_1.clear();
 	team_2.clear();
 		
-	
-
 	Utilities::draw_message("\tThanks for Playing!");
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

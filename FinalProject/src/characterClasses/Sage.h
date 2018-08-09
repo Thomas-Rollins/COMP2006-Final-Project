@@ -1,5 +1,6 @@
 #pragma once
 #include "CharacterClass.h"
+
 class Sage :
 	public CharacterClass
 {

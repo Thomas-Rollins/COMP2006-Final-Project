@@ -10,7 +10,6 @@
 #include "Utilities.h"
 
 
-
 class Character
 {
 public:

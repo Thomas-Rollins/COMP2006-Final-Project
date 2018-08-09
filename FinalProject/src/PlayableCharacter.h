@@ -1,7 +1,6 @@
 #pragma once
 //C includes
 
-
 //Intra Includes
 #include "Character.h"
 
@@ -30,7 +29,6 @@ public:
 	void initialize_character_stats();
 	void level_base_stats();
 	void add_experience(const double& experience);
-	void character_action();
 
 private:
 	double m_experience;

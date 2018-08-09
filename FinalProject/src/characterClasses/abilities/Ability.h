@@ -64,5 +64,4 @@ private:
 	
 	bool m_usable;
 
-
 };

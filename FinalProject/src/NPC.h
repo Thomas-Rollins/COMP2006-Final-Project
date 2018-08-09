@@ -22,18 +22,11 @@ public:
 	std::vector<Ability*> get_abilities() {	return Character::get_abilities(); }
 	
 		//Mutators
-
-
 	Ability* get_action();
 	
-	//Unimplemented
+		//Unimplemented
 	void add_experience(const double& experience);
-	
-	// End of Interface Methods
-
-	static const float STAT_MULTIPLIER;
 
 private:
 	void initialize_character_stats();
-
 };

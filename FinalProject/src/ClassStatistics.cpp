@@ -1,4 +1,5 @@
 #include "ClassStatistics.h"
+#include "BalancingDefinitions.h"
 
 #include <iostream>
 
@@ -15,9 +16,6 @@ const std::string* ClassStatistics::LOW_STAT_DESCRIPTIONS[NUM_OF_LOW_STATS][STAT
 	{ (std::string*)	"Vitality Description Here",		(std::string*) "VIT" },
 	{ (std::string*)	"Wisdom Description Here",			(std::string*) "WIS" }
 };
-	//max value for any high_level stat: 9 999 999 999
-const float ClassStatistics::HIGH_STAT_MAX_VALUE = 9999999999.000f;
-const float ClassStatistics::SP_MAX_VALUE = 100.00f;
 
 const std::string* ClassStatistics::HIGH_STAT_DESCRIPTIONS[NUM_OF_HIGH_LEVEL_STATS][STAT_DESC_ATTRIBUTES] =
 {
@@ -62,7 +60,6 @@ const std::string* ClassStatistics::HIGH_STAT_DESCRIPTIONS[NUM_OF_HIGH_LEVEL_STA
 	}
 };
 
-const float ClassStatistics::ELEMENTAL_STAT_MAX_VALUE = 500.00f;
 const std::string* ClassStatistics::ELEMENTAL_STAT_DESCRIPTIONS[NUM_OF_ELEMENTAL_STATS][STAT_DESC_ATTRIBUTES] =
 {
 	{ (std::string*) "Represents your ability to utilize and resist the element of fire.",		(std::string*) "FIRE"	},
@@ -291,12 +288,9 @@ const High_Level_Calculation_Ratios* ClassStatistics::CRT_RATIO = new High_Level
 };
 // End of Static Assignment
 
-ClassStatistics::ClassStatistics() 
-{
-	
-}
+ClassStatistics::ClassStatistics() { }
 
-ClassStatistics::~ClassStatistics() {}
+ClassStatistics::~ClassStatistics() { }
 // Accessors
 	// Low Level
 const int ClassStatistics::get_base_value(Low_Stats_ID const &stat_id) const
@@ -418,26 +412,6 @@ void ClassStatistics::set_current_value(Elemental_Stats_ID const&stat_id, const 
 		m_elemental_stats[stat_id][current_value_id] = ELEMENTAL_STAT_MAX_VALUE;
 }
 
-// Old Incrementors
-//void ClassStatistics::increment_base_value(Low_Stats_ID const &stat_id, const int &value)
-//{
-//	if (value <= LOW_STAT_MAX_VALUE)
-//		m_low_level_stats[stat_id][base_value_id] += value;
-//}
-//
-//void ClassStatistics::increment_current_value(Low_Stats_ID const &stat_id, const int &value)
-//{
-//	if (value <= LOW_STAT_MAX_VALUE)
-//		m_low_level_stats[stat_id][current_value_id] += value;
-//}
-//
-//void ClassStatistics::increment_growth_value(Low_Stats_ID const &stat_id, const float &value)
-//{
-//	if (value <= LOW_STAT_MAX_VALUE)
-//		m_low_level_stats[stat_id][growth_value_id] += value;
-//}
-
-
 /**
  * This method will break if the Low_Stats_ID enum is not sequential
  */
@@ -478,9 +452,7 @@ void ClassStatistics::reset_current_values(const bool heal)
 			this->set_current_value(i_ref, value);
 		}
 	}
-	
 }
-
 
 void ClassStatistics::set_high_stats()
 {

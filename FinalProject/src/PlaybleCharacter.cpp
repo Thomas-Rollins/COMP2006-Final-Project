@@ -19,7 +19,6 @@ PlaybleCharacter::PlaybleCharacter(const std::string &name, const int class_id)
 		this->add_experience(m_exp_required_for_next_level - m_experience);
 	}
 }
-
 //Destructor
 PlaybleCharacter::~PlaybleCharacter() { }
 
@@ -45,9 +44,7 @@ void PlaybleCharacter::add_experience(const double& experience)
 			<< (int)floor(this->get_next_level_experience() - m_experience) << " more to level up.\n";
 		level_up(true);
 	}
-		
 }
-
 
 void PlaybleCharacter::level_up(bool broadcast)
 {
@@ -64,7 +61,6 @@ void PlaybleCharacter::level_up(bool broadcast)
 				show_stats = Utilities::get_input(this->get_name() + " has leveled up!"
 					+ " Would you like to view your stats? (y/n)");
 			}
-	
 			if (show_stats)
 			{
 				this->print_low_stats();
@@ -75,11 +71,6 @@ void PlaybleCharacter::level_up(bool broadcast)
 		else
 			set_character_level(MAX_LEVEL);
 	}
-}
-
-void PlaybleCharacter::character_action()
-{
-	//#TODO: add Action code
 }
 
 void PlaybleCharacter::initialize_character_stats()
@@ -196,7 +187,6 @@ void PlaybleCharacter::initialize_character_stats()
 		//updates the isUsable state.
 		this->updateAbility_State();
 	}
-	
 }
 
 /**
@@ -213,7 +203,7 @@ void PlaybleCharacter::level_base_stats()
 			this->get_character_stats()->get_base_value(i_ref) +
 			(int)floor(
 			(this->get_character_stats()->get_growth_value(i_ref) *
-				this->get_character_stats()->BASE_STAT_INCREASE_PER_LEVEL)
+				BASE_STAT_INCREASE_PER_LEVEL)
 			)
 		);
 		this->get_character_stats()->set_high_stats();

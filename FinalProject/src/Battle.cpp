@@ -34,7 +34,8 @@ bool Battle::main_control()
 	for (auto&& character : m_team_1)
 	{
 		std::cout << "Level " << character->get_character_level() << 
-			" " << character->get_character_class()->get_class_name() << ": " << character->get_name() << std::endl;
+			" " << character->get_character_class()->get_class_name() <<
+			": " << character->get_name() << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -67,7 +68,6 @@ bool Battle::main_control()
 		{
 			execute_action(m_turn_order.at(0)->get_action(), get_target());
 		}
-		
 		move_item_to_back(m_turn_order, 0);
 	} while (!check_battle_over());
 
@@ -201,7 +201,7 @@ Character* Battle::get_target()
 	int team_2_size = m_team_2.size();
 	if (choice > team_2_size)
 	{
-		 //offset cause I don't care if you attack your own team.. or even yourself.
+		 //static offset cause I don't care if you attack your own team.. or even yourself.
 		return m_team_1.at(choice - (1 + team_2_size));
 	}
 	else
@@ -209,7 +209,7 @@ Character* Battle::get_target()
 		return m_team_2.at(choice - 1);
 	}
 }
-
+// For multi-targeting abilities
 Character* Battle::get_target(std::vector<Character*> team, std::vector<Character*> original_targets, bool isNPC)
 {
 	std::vector<std::string> options;
@@ -300,7 +300,7 @@ void Battle::execute_action(const Ability* ability, Character* oringinal_target)
 				 else
 				 {
 					 targets.push_back(get_target(m_team_1, targets, actor->isNPC()));
-					 // the above can return a nullptr in the case where the above check - tree fails
+					 // the above can return a nullptr in the case where the above check-tree fails
 					 if (targets.back() == nullptr)
 					 {
 						 targets.pop_back();
@@ -485,14 +485,6 @@ void Battle::apply_buffs_debuffs(Character* target, const Ability* ability, bool
 		}
 		move_item_to_back(m_turn_order, index);
 		m_message_queue.push_back(target->get_name() + " was stunned!\n");
-		/*std::vector<Character*>::iterator it = std::find(m_turn_order.begin(), m_turn_order.end(), target);
-
-		if (it != m_turn_order.end())
-		{
-			int index = std::distance(m_turn_order.begin(), it);
-			move_item_to_back(m_turn_order, index);
-			m_message_queue.push_back(target->get_name() + " was stunned!\n");
-		}*/
 	}
 
 	if (buffs_applied)
@@ -546,6 +538,7 @@ float Battle::get_modifiers(const Ability* ability)
 	
 	return modifiers;
 }
+
 /**
 * 0 = ineffective (no damage)
 * 0.25-0.5 (not very effective)
@@ -559,7 +552,6 @@ float Battle::get_elemental_dmg_modifer(const Ability* ability, Character* targe
 	float actor_ele_afin;
 	float target_ele_afin[ClassStatistics::NUM_OF_ELEMENTAL_STATS];
 	
-
 	for (int i = 0; i < ClassStatistics::NUM_OF_ELEMENTAL_STATS; i++)
 	{
 		target_ele_afin[i] = target->get_character_stats()->get_current_value(static_cast<Elemental_Stats_ID> (i));
@@ -641,14 +633,12 @@ bool Battle::isCritAttack()
 {
 	float chance = abs((CRIT_CHANCE_UPPER_BOUND - m_turn_order.at(0)->get_character_stats()
 		->get_current_value(critical_id)) - CRIT_CHANCE_UPPER_BOUND) / CRIT_CHANCE_DIVISOR;
-	/*std::cout << "CRT value: " << m_turn_order.at(0)->get_character_stats()->get_current_value(critical_id) << std::endl;
-	std::cout << "crit chance: " << chance  << "%" << std::endl;*/
+
 	bool crit = Utilities::random_float(CRIT_CHANCE_RAND_MOD_LOWER_BOUND, CRIT_CHANCE_RAND_MOD_UPPER_BOUND) < chance;
 	if (crit)
 		m_message_queue.push_back("Critical strike! ");
 	return crit;
 }
-
 
 /**
  * This method completely removes the dead making reviving not possible.
@@ -681,8 +671,9 @@ void Battle::remove_dead(std::vector<Character*> &team, bool broadcast)
 
 bool Battle::team_dead(std::vector<Character*> &team)
 {
+	throw(NotImplemented());
 	// This method supports reviving
-	std::sort(team.begin(), team.end(), [](Character* char1, Character* char2)
+	/*std::sort(team.begin(), team.end(), [](Character* char1, Character* char2)
 	{
 		return char1->get_character_stats()->get_current_value(health_id) >
 			char2->get_character_stats()->get_current_value(health_id);
@@ -702,7 +693,7 @@ bool Battle::team_dead(std::vector<Character*> &team)
 	if (team.size() == 0)
 		return true;
 	else
-		return false;
+		return false;*/
 }
 
 /**

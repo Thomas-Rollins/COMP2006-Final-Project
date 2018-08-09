@@ -5,11 +5,6 @@ const std::string Necromancer::m_class_description = "Necromancer Description He
 const Class_id Necromancer::m_class_id = necromancer_id;
 
 Necromancer::Necromancer(const int &level)
-	: CharacterClass(level)
-{
+	: CharacterClass(level) { }
 
-}
-
-Necromancer::~Necromancer()
-{
-}
+Necromancer::~Necromancer() { }

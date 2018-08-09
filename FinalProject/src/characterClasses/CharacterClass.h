@@ -27,8 +27,6 @@ public:
 	virtual const Class_id get_class_id() const = 0;
 
 private:
-	
-	
 
 };
 

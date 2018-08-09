@@ -11,15 +11,10 @@ Ability::Ability(const std::string& name, const std::string& desc, const float& 
 	m_attack_bonus(atk_bonus), m_magic_bonus(mgk_bonus), m_defense_bonus(def_bonus),
 	m_mind_bonus(mnd_bonus), m_agility_bonus(agi_bonus), m_accuracy_bonus(acc_bonus), m_element(element),
 	m_mp_cost(mp_cost), m_sp_cost(sp_cost), m_num_of_targets(num_of_targets), m_level_requirement(level_req),
-	m_friendly(isFriendly), m_stun(isStun), m_execute(isExecute), m_restore(isRestore)
-{
-	
-}
+	m_friendly(isFriendly), m_stun(isStun), m_execute(isExecute), m_restore(isRestore) { }
 
-Ability::~Ability()
-{
+Ability::~Ability() { }
 
-}
 
 void Ability::setUsable(bool usable)
 {

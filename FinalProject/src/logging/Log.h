@@ -4,5 +4,5 @@
 template<typename T>
 void Log(T input)
 {
-	std::cout << input << std::endl;
+	std::clog << input << std::endl;
 }
