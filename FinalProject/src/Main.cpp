@@ -136,7 +136,7 @@ int main()
 {
 	srand(static_cast <unsigned> (time(nullptr)));
 
-	std::cout << "Welcome to the ForeverLost Arena RPG\n\t- This is a typically a 4v4 battle\n\t- NPCs will always have 4 per team, however, the player team could potentially have less.\n\t- The player team persists each round.\n\t- Death is Permanent.\n\t- At the end of each round all stats will be restored.\n\t- You can attack/heal/buff/debuff anyone, although you may not want to heal/buff your enemies.\n\t- You earn experience points at the end of each round.\n\t- EXP earned scales heavily by your current streak of rounds.\n Please follow the below prompts to play...\n" << std::endl;
+	std::cout << "Welcome to the ForeverLost's Balancing Not Required Arena RPG\n\t- This is a typically a 4v4 battle\n\t- NPCs will always have 4 per team, however, the player team could potentially have less.\n\t- The player team persists each round.\n\t- Death is Permanent.\n\t- At the end of each round all stats will be restored.\n\t- You can attack/heal/buff/debuff anyone, although you may not want to heal/buff your enemies.\n\t- You earn experience points at the end of each round.\n\t- EXP earned scales heavily by your current streak of rounds.\n Please follow the below prompts to play...\n" << std::endl;
 
 	std::vector<Character*> team_1, team_2;
 	

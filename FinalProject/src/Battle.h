@@ -52,6 +52,5 @@ private:
 	std::vector<Character*> m_turn_order;
 	std::vector<Character*> targets;
 	std::vector<std::string> m_message_queue;
-	bool m_friendly_target;
 };
 

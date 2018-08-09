@@ -375,8 +375,6 @@ void Battle::execute_action(const Ability* ability, Character* oringinal_target)
 			std::string message = actor->get_name() + " used " + ability->get_name() + " on " +
 				target->get_name() + " and dealt " + std::to_string((int)damage) + " damage.";
 			m_message_queue.push_back(message);
-			/*std::cout << actor->get_name() << " used " << ability->get_name() << " on " <<
-			target->get_name() << " and dealt " << (int)damage << " damage." << std::endl;*/
 
 			apply_buffs_debuffs(target, ability, false);
 		}
@@ -385,7 +383,6 @@ void Battle::execute_action(const Ability* ability, Character* oringinal_target)
 		float percent_difference = abs(target->get_character_stats()->get_base_value(health_id) - damage)
 			/ abs(target->get_character_stats()->get_base_value(health_id));
 		sp_gen += (int)(percent_difference * SP_DIFFERENCE_MULTIPLIER);
-		/*std::cout << "SP Gen: " << sp_gen << std::endl;*/
 
 		actor->get_character_stats()->set_current_value(mana_id,
 			actor->get_character_stats()->get_current_value(mana_id) - ability->get_mp_cost()
