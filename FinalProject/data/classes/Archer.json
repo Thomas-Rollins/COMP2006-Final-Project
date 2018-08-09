@@ -105,7 +105,7 @@
       "mp_cost": 0,
       "sp_cost": 30,
       "targets": 3,
-      "level_req": 5,
+      "level_req": 3,
       "friendly": false,
       "stun": false,
       "execute": false,

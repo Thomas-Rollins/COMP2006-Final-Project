@@ -39,7 +39,8 @@ private:
 	float get_elemental_dmg_modifer(const Ability* ability, Character* target);
 	bool isCritAttack();
 	Character* get_target();
-	Character* get_target(std::vector<Character*> team, std::vector<Character*> original_targets);
+	Character* get_target(const Ability* ability);
+	Character* get_target(std::vector<Character*> team, std::vector<Character*> original_targets, bool isNPC);
 	bool check_battle_over();
 
 	void print_messages();

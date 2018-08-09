@@ -1,5 +1,6 @@
 #pragma once
 
+#define STARTING_LEVEL 3
 #define MAX_LEVEL 100
 #define MAX_LEVEL_DIFFERENCE 5
 
@@ -25,8 +26,8 @@
 #define MP_AGI_RATIO	0.000f
 #define MP_DEX_RATIO	0.000f
 #define MP_TEC_RATIO	0.000f
-#define MP_INT_RATIO	10.00f
-#define MP_WIS_RATIO	6.100f
+#define MP_INT_RATIO	6.000f
+#define MP_WIS_RATIO	3.000f
 #define MP_FOCUS_RATIO  0.500f
 #define MP_LUCK_RATIO	0.000f
 

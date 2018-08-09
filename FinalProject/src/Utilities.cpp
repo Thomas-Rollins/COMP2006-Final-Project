@@ -1,13 +1,21 @@
 #include "utilities.h"
+
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 
 
+
 	void Utilities::get_input(const std::string &question, std::string &input)
 	{
+		std::string response = "";
 		std::cout << question << std::endl;
-		std::getline(std::cin, input);
+		while (trim(response, TRIM_CHARS) == "")
+		{
+			std::getline(std::cin, response);
+		}
+		
+		input = trim(response, TRIM_CHARS);
 	}
 
 	bool Utilities::get_input(const std::string &question)
@@ -23,7 +31,7 @@
 			else
 				std::cout << std::endl << "Please enter only 'y' or 'n'" << std::endl;
 		} while (choice != 'y' || choice != 'Y' || choice != 'n' || choice != 'N');
-		
+		return false;
 	}
 
 	void Utilities::get_input(const std::string &question, int &input)
@@ -86,4 +94,21 @@
 	float  Utilities::random_float(const float &from, const float &to)
 	{
 		return from + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (to - from)));
+	}
+
+	std::string& Utilities::ltrim(std::string& str, const std::string& chars)
+	{
+		str.erase(0, str.find_first_not_of(chars));
+		return str;
+	}
+
+	std::string& Utilities::rtrim(std::string& str, const std::string& chars)
+	{
+		str.erase(str.find_last_not_of(chars) + 1);
+		return str;
+	}
+
+	std::string& Utilities::trim(std::string& str, const std::string& chars)
+	{
+		return ltrim(rtrim(str, chars), chars);
 	}

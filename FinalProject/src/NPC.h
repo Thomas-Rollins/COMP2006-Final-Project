@@ -22,9 +22,9 @@ public:
 	std::vector<Ability*> get_abilities() {	return Character::get_abilities(); }
 	
 		//Mutators
-	void character_action();
 
-	const Ability* get_action(const bool friendly);
+
+	Ability* get_action();
 	
 	//Unimplemented
 	void add_experience(const double& experience);

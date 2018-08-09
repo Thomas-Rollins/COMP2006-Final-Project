@@ -10,16 +10,18 @@
 
 //Constructor
 PlaybleCharacter::PlaybleCharacter(const std::string &name, const int class_id)
-	: Character(name, class_id) 
+	: Character(name, class_id, false) 
 {
 	initialize_character_stats();
+	if (STARTING_LEVEL > 1)
+	{
+		while (this->get_character_level() < STARTING_LEVEL)
+		this->add_experience(m_exp_required_for_next_level - m_experience);
+	}
 }
 
 //Destructor
-PlaybleCharacter::~PlaybleCharacter()
-{
-	std::cout << "PlayableCharacter entity Deleted" << std::endl;
-}
+PlaybleCharacter::~PlaybleCharacter() { }
 
 void PlaybleCharacter::set_next_level_experience()
 {
@@ -34,27 +36,40 @@ bool PlaybleCharacter::experience_req_met()
 void PlaybleCharacter::add_experience(const double& experience)
 {
 	m_experience += experience;
-	std::cout << this->get_name() << " has gained " << std::to_string(floor(experience)) << ".";
-	level_up();
+	if (STARTING_LEVEL > 1 && this->get_character_level() < STARTING_LEVEL)
+		level_up(false);
+	else
+	{
+		std::cout << this->get_name() << " has gained " << 
+			std::to_string((int)floor(experience)) << " experience points. You require "
+			<< (int)floor(this->get_next_level_experience() - m_experience) << " more to level up.\n";
+		level_up(true);
+	}
+		
 }
 
 
-void PlaybleCharacter::level_up()
+void PlaybleCharacter::level_up(bool broadcast)
 {
 	bool show_stats = false;
 	while (experience_req_met())
 	{
-		if (get_character_level() + 1 < MAX_LEVEL)
+		if (get_character_level() + 1 <= MAX_LEVEL)
 		{
 			set_character_level(get_character_level() + 1);
 			level_base_stats();
 			set_next_level_experience();
-			show_stats = Utilities::get_input(this->get_name() + " has leveled up!" 
-				+ "Would you like to view your stats?");
+			if (broadcast)
+			{
+				show_stats = Utilities::get_input(this->get_name() + " has leveled up!"
+					+ " Would you like to view your stats? (y/n)");
+			}
+	
 			if (show_stats)
 			{
 				this->print_low_stats();
 				this->print_high_stats();
+				std::cout.flush();
 			}	
 		}
 		else
@@ -151,8 +166,9 @@ void PlaybleCharacter::initialize_character_stats()
 		this->get_character_stats()->reset_current_values(true);
 
 		// #TODO: deal with signed/unsigned mismatch case
+		this->get_abilities().reserve(5);
 		const Json::Value& abilities = obj["abilities"];
-		for (int i = 0; i < obj.size(); i++)
+		for (int i = 0; i < obj["abilities"].size(); i++)
 		{
 			Ability* newAbility = new Ability(
 				abilities[i]["name"].asString(),
@@ -175,8 +191,10 @@ void PlaybleCharacter::initialize_character_stats()
 				abilities[i]["execute"].asBool(),
 				abilities[i]["restore"].asBool()
 			);
-			this->get_abilities().push_back(newAbility);
+			this->addAbility(newAbility);
 		}
+		//updates the isUsable state.
+		this->updateAbility_State();
 	}
 	
 }
@@ -203,12 +221,13 @@ void PlaybleCharacter::level_base_stats()
 	}
 }
 
-const Ability* PlaybleCharacter::get_action(const bool friendly)
+Ability* PlaybleCharacter::get_action()
 {
+	this->updateAbility_State();
 	std::vector<Ability*> usable_abilities = this->get_abilities();
-
 	//sorts the abilities by m_usable (usable ones first)
-	std::sort(usable_abilities.begin(), usable_abilities.end(), [](Ability* ability_1, Ability* ability_2)
+	std::sort(usable_abilities.begin(), usable_abilities.end(), [](Ability* ability_1,
+		Ability* ability_2)
 	{
 		return ability_1->isUsable() > ability_2->isUsable();
 	});

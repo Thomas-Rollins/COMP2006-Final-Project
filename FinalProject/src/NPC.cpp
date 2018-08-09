@@ -14,22 +14,13 @@ const float NPC::STAT_MULTIPLIER = 1.3f;
 
 //Constructor
 NPC::NPC(const std::string &name, const int class_id, const int &level)
-	: Character(name, class_id, level)
+	: Character(name, class_id, level, true)
 {
-	
 	initialize_character_stats();
 }
 
 //Destructor
-NPC::~NPC()
-{
-	std::cout << "NPC entity Deleted" << std::endl;
-}
-
-void NPC::character_action()
-{
-	//#TODO: add Action code
-}
+NPC::~NPC() { }
 
 double NPC::get_next_level_experience() { return 0; }
 
@@ -162,11 +153,10 @@ void NPC::initialize_character_stats()
 		this->updateAbility_State();
 		
 	}
-	this->print_elemental_affinities();
 }
 
 
-const Ability* NPC::get_action(const bool friendly)
+Ability* NPC::get_action()
 {
 	//updates ability states (if unusable/etc)
 	this->updateAbility_State();

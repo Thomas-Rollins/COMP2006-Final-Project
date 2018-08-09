@@ -15,11 +15,13 @@ Battle::Battle(std::vector<Character*> team_1, std::vector<Character*> team_2)
 
 Battle::~Battle()
 {
-	// since team_1, team_2, and m_turn_order share pointers they can all be deleted at once.
-	for (auto&& character : m_turn_order)
+	if (m_turn_order.size() > 0)
 	{
-		if(character)
-			delete(character);
+		for (int i = 0; i = m_team_2.size(); i++)
+		{
+			Character* character = m_team_2.at(i);
+			delete character;
+		}
 	}
 	m_turn_order.clear();
 	m_team_1.clear();
@@ -31,15 +33,16 @@ bool Battle::main_control()
 	std::cout << "Team one consists of:" << std::endl;
 	for (auto&& character : m_team_1)
 	{
-		std::cout << character->get_name() << std::endl;
+		std::cout << "Level " << character->get_character_level() << 
+			" " << character->get_character_class()->get_class_name() << ": " << character->get_name() << std::endl;
 	}
 	std::cout << std::endl;
-
 
 	std::cout << "Team two consists of:" << std::endl;
 	for (auto&& character : m_team_2)
 	{
-		std::cout << character->get_name() << std::endl;
+		std::cout << "Level: " << character->get_character_level() <<
+			" " << character->get_name() << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -50,14 +53,21 @@ bool Battle::main_control()
 
 	update_turn_order();
 
-	/**
-	* the characters in m_team_x and m_turn_order share the same pointer and therefore it is
-	* possible to use pointer comparison to link the two when handling actions
-	*/
+	// Primary Battle control loop
 	do
 	{
 		std::cout << std::endl;
-		execute_action(m_turn_order.at(0)->get_action(m_friendly_target), get_target());
+		if (m_turn_order.at(0)->isNPC())
+		{
+			Ability* ability = m_turn_order.at(0)->get_action();
+			Character* target = get_target(ability);
+			execute_action(ability, target);
+		}
+		else
+		{
+			execute_action(m_turn_order.at(0)->get_action(), get_target());
+		}
+		
 		move_item_to_back(m_turn_order, 0);
 	} while (!check_battle_over());
 
@@ -76,9 +86,54 @@ void Battle::update_turn_order()
 	});
 }
 
+// Very simple NPC decision tree...
+Character* Battle::get_target(const Ability* ability)
+{
+	if (ability->isFriendly())
+	{
+		if (ability->get_magic_damage() > 0)
+		{
+			// iterates through the vector and find if a a character is missing health
+			std::vector<Character*>::iterator it = std::find_if(m_team_2.begin(), m_team_2.end(),
+				[](Character* charater) {
+				if (charater->get_character_stats()->get_current_value(health_id) < 
+					charater->get_character_stats()->get_base_value(health_id))
+					return true;
+				return false;
+			});
+			// if a character is missing health this iterates over the vector once more to
+			// find the index of the character
+			if (it != m_team_2.end())
+			{
+				int index = find_vector_index(m_team_2, *it);
+				if (index == NULL_INDEX)
+					throw (MemberDoesNotExist());
+				else
+				{
+					return m_team_2.at(index);
+				}
+			}
+			else
+			{
+				// simply returns the first member of the team (sure to exist and be valid)
+				// #TODO: create a more robust decision tree
+				return m_team_2.at(0);
+			}
+		}
+		else
+		{
+			return m_team_2.at(Utilities::random_int(0, m_team_2.size()));
+		}
+	}
+	else
+	{
+		// very... very simple decision tree.
+		return m_team_1.at(Utilities::random_int(0, m_team_2.size()));
+	}
+}
+
 /**
- * This code is kind of replicated redundantly. It's only purpose is to ensure the offsets
- * match up. This is static for simplicity.
+ * Gets the target for the action ability.
  */
 Character* Battle::get_target()
 {
@@ -86,35 +141,57 @@ Character* Battle::get_target()
 	// adds the available targets to the options vector
 	for (auto&& character : m_team_2)
 	{
-		std::string option = character->get_name() + "\tHP: ";
-		option.append(std::to_string( (int) character->get_character_stats()->get_current_value(health_id))
-			+ "/" + std::to_string( (int) character->get_character_stats()->get_base_value(health_id)));
+		std::string player_name = character->get_name();
+		if (player_name.length() < 5)
+			player_name.append("\t\t\t");
+		else
+		{
+			if (player_name.length() < 13)
+				player_name.append("\t\t");
+			else
+				player_name.append("\t");
+		}
 
-		option.append("\tMP: ");
-		option.append(std::to_string((int)character->get_character_stats()->get_current_value(mana_id))
-			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(mana_id)));
+		std::string option_prt_1 = "HP: " + std::to_string( (int) character->
+			get_character_stats()->get_current_value(health_id)) + "/" + std::to_string(
+			(int) character->get_character_stats()->get_base_value(health_id));
 
-		option.append("\tSP: ");
-		option.append(std::to_string((int)character->get_character_stats()->get_current_value(skill_points_id))
-			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(skill_points_id)));
+		std::string option_prt_2 = "\tMP: " + std::to_string((int)character->
+			get_character_stats()->get_current_value(mana_id)) + "/" + std::to_string(
+			(int)character->get_character_stats()->get_base_value(mana_id));
 
-		options.push_back(option);
+		std::string option_prt_3 = "\tSP: " + std::to_string((int)character->
+			get_character_stats()->get_current_value(skill_points_id)) + "/" + std::to_string(
+			(int)character->get_character_stats()->get_base_value(skill_points_id));
+
+		options.push_back(player_name + option_prt_1 + option_prt_2 + option_prt_3);
 	}
 	for (auto&& character : m_team_1)
 	{
-		std::string option = character->get_name() + "\tHP: ";
-		option.append(std::to_string( (int) character->get_character_stats()->get_current_value(health_id))
-			+ "/" + std::to_string( (int) character->get_character_stats()->get_base_value(health_id)));
+		std::string player_name = character->get_name();
+		if (player_name.length() < 5)
+			player_name.append("\t\t\t");
+		else
+		{
+			if (player_name.length() < 13)
+				player_name.append("\t\t");
+			else
+				player_name.append("\t");
+		}
+		
+		std::string option_prt_1 = "HP: " + std::to_string((int)character->
+			get_character_stats()->get_current_value(health_id)) + "/" + std::to_string(
+			(int)character->get_character_stats()->get_base_value(health_id));
 
-		option.append("\tMP: ");
-		option.append(std::to_string((int)character->get_character_stats()->get_current_value(mana_id))
-			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(mana_id)));
+		std::string option_prt_2 = "\tMP: " + std::to_string((int)character->
+			get_character_stats()->get_current_value(mana_id)) + "/" + std::to_string(
+			(int)character->get_character_stats()->get_base_value(mana_id));
 
-		option.append("\tSP: ");
-		option.append(std::to_string((int)character->get_character_stats()->get_current_value(skill_points_id))
-			+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(skill_points_id)));
+		std::string option_prt_3 = "\tSP: " + std::to_string((int)character->
+			get_character_stats()->get_current_value(skill_points_id)) + "/" + std::to_string(
+			(int)character->get_character_stats()->get_base_value(skill_points_id));
 
-		options.push_back(option);
+		options.push_back(player_name + option_prt_1 + option_prt_2 + option_prt_3);
 	}
 
 	std::cout << m_turn_order.at(0)->get_name() << " who would you like to target?" << std::endl;
@@ -131,10 +208,9 @@ Character* Battle::get_target()
 	{	
 		return m_team_2.at(choice - 1);
 	}
-		
 }
 
-Character* Battle::get_target(std::vector<Character*> team, std::vector<Character*> original_targets)
+Character* Battle::get_target(std::vector<Character*> team, std::vector<Character*> original_targets, bool isNPC)
 {
 	std::vector<std::string> options;
 	for (Character* target : original_targets)
@@ -156,28 +232,35 @@ Character* Battle::get_target(std::vector<Character*> team, std::vector<Characte
 	}
 	if (!team.empty())
 	{
-		// adds the available targets to the options vector
-		for (auto&& character : team)
+		if (isNPC)
 		{
-			std::string option = character->get_name() + "\tHP: ";
-			option.append(std::to_string((int)character->get_character_stats()->get_current_value(health_id))
-				+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(health_id)));
-
-			option.append("\tMP: ");
-			option.append(std::to_string((int)character->get_character_stats()->get_current_value(mana_id))
-				+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(mana_id)));
-
-			option.append("\tSP: ");
-			option.append(std::to_string((int)character->get_character_stats()->get_current_value(skill_points_id))
-				+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(skill_points_id)));
-
-			options.push_back(option);
+			return team.at(Utilities::random_int(0, team.size()));
 		}
+		else
+		{
+			// adds the available targets to the options vector
+			for (auto&& character : team)
+			{
+				std::string option = character->get_name() + "\tHP: ";
+				option.append(std::to_string((int)character->get_character_stats()->get_current_value(health_id))
+					+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(health_id)));
 
-		std::cout << m_turn_order.at(0)->get_name() << " who else would you like to target?" << std::endl;
+				option.append("\tMP: ");
+				option.append(std::to_string((int)character->get_character_stats()->get_current_value(mana_id))
+					+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(mana_id)));
 
-		int choice = Utilities::draw_menu(options);
-		return team.at(choice - 1);
+				option.append("\tSP: ");
+				option.append(std::to_string((int)character->get_character_stats()->get_current_value(skill_points_id))
+					+ "/" + std::to_string((int)character->get_character_stats()->get_base_value(skill_points_id)));
+
+				options.push_back(option);
+			}
+
+			std::cout << m_turn_order.at(0)->get_name() << " who else would you like to target?\n" << std::endl;
+
+			int choice = Utilities::draw_menu(options);
+			return team.at(choice - 1);
+		}
 	}
 	else
 		return nullptr;
@@ -216,7 +299,13 @@ void Battle::execute_action(const Ability* ability, Character* oringinal_target)
 				 }
 				 else
 				 {
-					 targets.push_back(get_target(m_team_1, targets));
+					 targets.push_back(get_target(m_team_1, targets, actor->isNPC()));
+					 // the above can return a nullptr in the case where the above check - tree fails
+					 if (targets.back() == nullptr)
+					 {
+						 targets.pop_back();
+						 break;
+					 }
 					 num_of_targets--;
 				 }
 			 }
@@ -232,7 +321,13 @@ void Battle::execute_action(const Ability* ability, Character* oringinal_target)
 					 }
 					 else
 					 {
-						 targets.push_back(get_target(m_team_2, targets));
+						 targets.push_back(get_target(m_team_2, targets, actor->isNPC()));
+						 // the above can return a nullptr in the case where the above check-tree fails
+						 if (targets.back() == nullptr)
+						 {
+							 targets.pop_back();
+							 break;
+						 }
 						 num_of_targets--;
 					 }
 				 }
@@ -252,9 +347,9 @@ void Battle::execute_action(const Ability* ability, Character* oringinal_target)
 
 		if (friendly)
 		{
-			damage = ((actor_magic * MGK_HEAL_RATIO) + (actor->get_character_stats()->
+			damage = floor(((actor_magic * MGK_HEAL_RATIO) + (actor->get_character_stats()->
 				get_current_value(mind_id)) * MIND_HEAL_RATIO) * ability->get_magic_damage()
-				* get_elemental_dmg_modifer(ability, target);
+				* get_elemental_dmg_modifer(ability, target));
 
 			*target + damage;
 
@@ -267,12 +362,13 @@ void Battle::execute_action(const Ability* ability, Character* oringinal_target)
 		}
 		else
 		{
-			damage = (
-				((
+			damage = floor(
+				(
+					((
 				((BASE_LEVEL_MULTIPLIER * actor->get_character_level() / DMG_LEVEL_DIVISOR) + DMG_LEVEL_INCREMENT) *
 					(power * actor_atk / phys_resistance)
 					) / DMG_DIVISOR)
-				+ DMG_INCREMENT) * get_modifiers(ability) * get_elemental_dmg_modifer(ability, target);
+				+ DMG_INCREMENT) * get_modifiers(ability) * get_elemental_dmg_modifer(ability, target));
 
 			*target - damage;
 
@@ -536,7 +632,8 @@ float Battle::get_elemental_dmg_modifer(const Ability* ability, Character* targe
 		elemental_mod += ELEMENTAL_NEUTRAL_MOD * (actor_ele_afin - target_ele_afin[void_id]);
 		break;
 	}
-	std::cout << "Elemental Mod: " << elemental_mod << std::endl;
+	if (elemental_mod < 0)
+		elemental_mod = 0;
 	return elemental_mod;
 }
 
@@ -637,8 +734,6 @@ bool Battle::check_battle_over()
 	}
 	return false;
 }
-
-
 
 /**
  * returns the index of the element passed

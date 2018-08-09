@@ -29,7 +29,7 @@ std::string get_npc_name(const int class_id)
 		return "NPC Guardian";
 		break;
 	case magic_swordsman_id:
-		return "NPC Magic_Swordsman";
+		return "NPC Magic-Swordsman";
 		break;
 	case necromancer_id:
 		return "NPC Necromancer";
@@ -90,9 +90,10 @@ std::vector<Character*> generate_NPC_team(const int avg_level)
 	if (rounds_won < 2)
 	{
 		min_level = rounds_won + 1;
-		max_level = rounds_won + 1;
+		max_level = rounds_won + 2;
 	}
 
+	//prevents 2 NPCs from having the same class
 	while (npc_class_id_2 == npc_class_id_1)
 	{
 		npc_class_id_2 = Utilities::random_int(1, 12);
@@ -125,17 +126,16 @@ void give_exp(std::vector<Character*> team)
 	for (auto&& member : team)
 	{
 		double experience =
-			pow(rounds_won * XP_ROUNDS_WON_BASE_MULTIPLIER, XP_EXPONENT) *
+			pow(1 + rounds_won * XP_ROUNDS_WON_BASE_MULTIPLIER, XP_EXPONENT) *
 			Utilities::random_float(XP_RAND_MODIFIER_LOWER_BOUND, XP_RAND_MODIFIER_UPPER_BOUND);
 		member->add_experience(experience);
+		member->get_character_stats()->reset_current_values(true);
 	}
 }
 
 int main()
 {
 	srand(static_cast <unsigned> (time(nullptr)));
-	
-	std::vector<Character*> characters;
 
 	//for (int i = 0; i < 256; i++)
 	//{
@@ -157,17 +157,17 @@ int main()
 	//	character->print_abiities();
 	//}
 
-	std::vector<Character*> team_1, team_2;
-	/*team_1.reserve(4);
-	team_2.reserve(4);*/
+	std::cout << "Welcome to the ForeverLost Arena RPG\n\t- This is a typically a 4v4 battle\n\t- NPCs will always have 4 per team, however, the player team could potentially have less.\n\t- The player team persists each round.\n\t- Death is Permanent.\n\t- At the end of each round all stats will be restored.\n\t- You can attack/heal/buff/debuff anyone, although you may not want to heal/buff your enemies.\n\t- You earn experience points at the end of each round.\n\t- EXP earned scales heavily by your current streak of rounds.\n Please follow the below prompts to play...\n" << std::endl;
 
+	std::vector<Character*> team_1, team_2;
+	
 	/**
 	 * Primary start location
 	 */
 
 	for (int i = 0; i < 4; i++)
 	{
-		std::cout << "Player " << i+1 << " out of 4 creation." << std::endl;
+		std::cout << "Player " << i + 1 << " out of 4 creation." << std::endl;
 		std::string name;
 		Class_id class_id;
 		Utilities::get_input("Please enter your name:\t", name);
@@ -177,7 +177,9 @@ int main()
 		};
 		class_id = static_cast<Class_id>(Utilities::draw_menu(options));
 		std::cout << std::endl;
-		team_1.push_back(Character::make_character(false, class_id, name, 5));
+		team_1.push_back(Character::make_character(false, class_id, name, STARTING_LEVEL));
+		team_1.back()->print_low_stats();
+		team_1.back()->print_high_stats();
 	}
 	/*
 	int npc_class_id_1, npc_class_id_2, npc_class_id_3, npc_class_id_4;
@@ -216,41 +218,47 @@ int main()
 	team_1.push_back(new_character4);*/
 
 
-	Battle battle{ team_1, generate_NPC_team(get_average_level(team_1)) };
+	bool again = false;
+	bool can_continue = true;
 	
-	bool can_continue = battle.main_control();
-	if (can_continue)
-	{
-		rounds_won++;
-		give_exp(team_1);
-		bool again = Utilities::get_input("You have won " + std::to_string(rounds_won) + 
-			" Would you like to play another round? Note: You're team member's will not be replenished. (y/n)?");
-		if (again)
-			Battle battle{ team_1, generate_NPC_team(get_average_level(team_1)) };
-	}
-	
-	std::cin.get();
-	for (auto character : characters)
-	{
-		/*double rand_exp = (double)random_int(1000, 800000000);
-		try {
-			character->add_experience(rand_exp);
+	do 
+	{	
+		if (rounds_won > 0)
+		{
+			give_exp(team_1);
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
-		catch (NotImplemented e) {}		*/
-		//
-		//std::cout << character->get_character_class()->get_class_name() << std::endl;
-		//std::cout << "Level: " << character->get_character_level() << std::endl;
-		//std::cout << "Current xp: " << character->get_current_experience() << std::endl;
-		//std::cout << "Exp for next Level: " << character->get_next_level_experience() << std::endl;
-		//character->print_low_stats();
-		//character->print_high_stats();
-		////character->print_abiities();
+		
+		Battle battle{ team_1, generate_NPC_team(get_average_level(team_1)) };
+		can_continue = battle.main_control();
+		if (can_continue)
+			rounds_won++;
+					
+		again = Utilities::get_input("\nYou have won " + std::to_string(rounds_won) +
+				" rounds. Would you like to play another round? (y/n)" +
+				"\nNote: Your team member's will not be replenished.");
 
-		delete (character);
-		/*std::cout << std::endl;*/
+	} while (again);
+
+	for (auto&& memeber : team_1)
+	{
+		if (memeber != nullptr)
+			delete memeber;
 	}
+	for (auto&& memeber : team_2)
+	{
+		if (memeber != nullptr)
+			delete memeber;
+	}
+	team_1.clear();
+	team_2.clear();
+		
+	
 
-	characters.clear();
+	Utilities::draw_message("\tThanks for Playing!");
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
 	return(0);
 }

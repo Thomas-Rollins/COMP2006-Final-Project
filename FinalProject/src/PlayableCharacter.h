@@ -16,7 +16,7 @@ public:
 	
 	//Flag checks
 	bool experience_req_met();
-	const Ability* get_action(const bool friendly);
+	Ability* get_action();
 
 	//Accessors
 	double get_next_level_experience() { return m_exp_required_for_next_level; }
@@ -26,7 +26,7 @@ public:
 
 	//Mutators
 	void set_next_level_experience();
-	void level_up();
+	void level_up(bool broadcast);
 	void initialize_character_stats();
 	void level_base_stats();
 	void add_experience(const double& experience);

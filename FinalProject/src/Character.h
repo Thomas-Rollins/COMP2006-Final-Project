@@ -15,9 +15,9 @@ class Character
 {
 public:
 	//Constructor
-	Character();
-	Character(const std::string &name, const int &class_id);
-	Character(const std::string &name, const int &class_id, const int &level);
+	Character() = delete;
+	Character(const std::string &name, const int &class_id, const bool isNPC);
+	Character(const std::string &name, const int &class_id, const int &level, const bool isNPC);
 	//Virtual Destructor
 	virtual ~Character();
 
@@ -33,7 +33,7 @@ public:
 	virtual double get_current_experience() = 0;
 	virtual ClassStatistics* get_character_stats() = 0;
 	//actions
-	virtual const Ability* get_action(const bool friendly) = 0;
+	virtual Ability* get_action() = 0;
 	
 		//Mutators
 	virtual void add_experience(const double& experience) = 0;
@@ -44,7 +44,8 @@ public:
 		
 
 	//Accessors
-	const std::vector<Ability*> get_abilities() const { return m_abilities; }
+	const bool isNPC() const { return m_npc; }
+	std::vector<Ability*> get_abilities() const { return m_abilities; }
 	const CharacterClass* get_character_class() const { return m_character_class; }
 	const std::string get_name() const { return m_name; }
 	const int get_character_level() const { return m_level; }
@@ -60,5 +61,6 @@ private:
 	std::vector<Ability*> m_abilities;
 	CharacterClass* m_character_class;
 	ClassStatistics* m_character_stats;
+	const bool m_npc;
 
 };
