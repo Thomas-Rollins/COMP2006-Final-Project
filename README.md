@@ -1,2 +1,2 @@
-# COMP2006-Final-Project
-COMP2006 Intro to C++ Final Project
+# Unbalanced Fight Arena 
+## BALANCING NOT REQUIRED
